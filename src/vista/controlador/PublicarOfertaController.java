@@ -27,6 +27,7 @@ public class PublicarOfertaController {
     }
 
     public void instanciaOferta(){
+        oferta = new Oferta();
         oferta.setTitulo(txtTitulo.getText());
         oferta.setDescripcion(txtDescripcion.getText());
         oferta.setPrecio(txtPrecio.getText());

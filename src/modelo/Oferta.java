@@ -10,6 +10,10 @@ public class Oferta extends Publicacion{
         this.precio = precio;
     }
 
+    public Oferta() {
+        super();
+    }
+
     public String getVinculo() {
         return vinculo;
     }

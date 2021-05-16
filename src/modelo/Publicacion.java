@@ -12,6 +12,10 @@ public abstract class Publicacion {
     private EstadoPublicacion estado;
     private Categoria categoria;
 
+    public Publicacion() {
+
+    }
+
     public String getTitulo() {
         return titulo;
     }
@@ -90,8 +94,6 @@ public abstract class Publicacion {
                 ", categoria=" + categoria +
                 '}';
     }
-
-
 
     public boolean estaCompleta(){
         return this.titulo != null && this.descripcion != null && this.fechaInicio != null && this.fechaFin != null && this.categoria != null;
