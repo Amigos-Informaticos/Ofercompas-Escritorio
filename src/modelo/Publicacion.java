@@ -22,6 +22,10 @@ public abstract class Publicacion {
 
     }
 
+    public Publicacion() {
+
+    }
+
     public String getTitulo() {
         return titulo;
     }
