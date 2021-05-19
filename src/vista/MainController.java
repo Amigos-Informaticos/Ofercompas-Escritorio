@@ -99,7 +99,7 @@ public class MainController extends Application {
 	}
 	
 	public static void loadSizes() {
-		tamanios.put(Sizes.SMALL, new double[] {310.0, 450.0});
+		tamanios.put(Sizes.SMALL, new double[] {345.0, 435.0});
 		tamanios.put(Sizes.MID, new double[] {620.0, 440.0});
 		tamanios.put(Sizes.LARGE, new double[] {750.0, 760.0});
 	}

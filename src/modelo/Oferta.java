@@ -1,5 +1,9 @@
 package modelo;
 
+import datos.API;
+
+import java.util.HashMap;
+
 public class Oferta extends Publicacion{
     private String vinculo;
     private String precio;
@@ -38,11 +42,32 @@ public class Oferta extends Publicacion{
                 '}';
     }
 
-    public void publicar(){
-        System.out.println(this.toString());
+    public int publicar(){
+        API api = new API();
+        api.setURL("http://127.0.0.1");
+        api.setPort(5000);
+
+        HashMap respuesta = api.connect("POST","ofertas",null, this.obtenerHashmap());
+        return (int) respuesta.get("status");
+    }
+
+    public HashMap obtenerHashmap(){
+        HashMap<String ,String> oferta = new HashMap<String, String>();
+        oferta.put("titulo",this.titulo);
+        oferta.put("descripcion",this.descripcion);
+        oferta.put("fechaCreacion",this.fechaCreacion);
+        oferta.put("fechaFin",this.fechaFin);
+        oferta.put("categoria", String.valueOf(this.categoria.getIndice()));
+        oferta.put("vinculo",this.getVinculo());
+        oferta.put("precio",this.precio);
+        oferta.put("publicador", String.valueOf(this.idPublicador));
+
+        return oferta;
     }
 
     public boolean estaCompleta(){
         return super.estaCompleta() && this.vinculo != null && this.precio != null;
     }
+
+
 }

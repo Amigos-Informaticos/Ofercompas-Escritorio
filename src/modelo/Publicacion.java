@@ -1,16 +1,22 @@
 package modelo;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 public abstract class Publicacion {
-    private String titulo;
-    private String descripcion;
-    private String fechaInicio;
-    private String fechaFin;
-    private int puntuacion;
-    private EstadoPublicacion estado;
-    private Categoria categoria;
+    protected String titulo;
+    protected String descripcion;
+    protected String fechaCreacion;
+    protected String fechaFin;
+    protected int puntuacion;
+    protected EstadoPublicacion estado;
+    protected Categoria categoria;
+    protected int idPublicador;
+
+    public int getIdPublicador() {
+        return idPublicador;
+    }
+
+    public void setIdPublicador(int idPublicador) {
+        this.idPublicador = idPublicador;
+    }
 
     public Publicacion() {
 
@@ -32,12 +38,12 @@ public abstract class Publicacion {
         this.descripcion = descripcion;
     }
 
-    public String getFechaInicio() {
-        return fechaInicio;
+    public String getFechaCreacion() {
+        return fechaCreacion;
     }
 
-    public void setFechaInicio(String fechaInicio) {
-        this.fechaInicio = fechaInicio;
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 
     public String getFechaFin() {
@@ -75,7 +81,7 @@ public abstract class Publicacion {
     public Publicacion(String titulo, String descripcion, String fechaInicio, String fechaFin, int puntuacion, EstadoPublicacion estado, Categoria categoria) {
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.fechaInicio = fechaInicio;
+        this.fechaCreacion = fechaInicio;
         this.fechaFin = fechaFin;
         this.puntuacion = puntuacion;
         this.estado = estado;
@@ -87,7 +93,7 @@ public abstract class Publicacion {
         return "Publicacion{" +
                 "titulo='" + titulo + '\'' +
                 ", descripcion='" + descripcion + '\'' +
-                ", fechaInicio='" + fechaInicio + '\'' +
+                ", fechaCreacion='" + fechaCreacion + '\'' +
                 ", fechaFin='" + fechaFin + '\'' +
                 ", puntuacion=" + puntuacion +
                 ", estado=" + estado +
@@ -96,6 +102,36 @@ public abstract class Publicacion {
     }
 
     public boolean estaCompleta(){
-        return this.titulo != null && this.descripcion != null && this.fechaInicio != null && this.fechaFin != null && this.categoria != null;
+        return this.titulo != null && this.descripcion != null && this.fechaCreacion != null && this.fechaFin != null && this.categoria != null;
+    }
+
+    public void setCategoriaCmbBox(String categoria){
+        switch (categoria){
+            case "Tecnologia":
+                this.categoria = Categoria.TECNOLOGIA;
+                break;
+            case "Moda de mujer":
+                this.categoria = Categoria.MODAMUJER;
+                break;
+            case "Moda de hombre":
+                this.categoria = Categoria.MODAHOMBRE;
+                break;
+            case "Hogar":
+                this.categoria = Categoria.HOGAR;
+                break;
+            case "Mascotas":
+                this.categoria = Categoria.MASCOTAS;
+                break;
+            case "Viaje":
+                this.categoria = Categoria.VIAJE;
+                break;
+            case "Comida y bebida":
+                this.categoria = Categoria.COMIDABEBIDA;
+                break;
+            default:
+                this.categoria = Categoria.TECNOLOGIA;
+                break;
+        }
+
     }
 }
