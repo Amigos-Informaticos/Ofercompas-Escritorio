@@ -42,7 +42,7 @@ public class InicioCodigosController {
         CodigoDescuento codigoDescuento;
         for (int i = 0; i < 10; i++) {
             codigoDescuento = new CodigoDescuento();
-            codigoDescuento.setTitulo("Oferta " + i);
+            codigoDescuento.setTitulo("Codigo " + i);
             codigos.add(codigoDescuento);
         }
         return codigos;
