@@ -9,11 +9,13 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.InicioOfertasController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.InicioCodigosController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -21,7 +23,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Ofercompas" textFill="WHITE">
+                        <Label text="Ofercódigos" textFill="WHITE">
                            <font>
                               <Font name="System Bold Italic" size="25.0" />
                            </font>
@@ -49,7 +51,7 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </MenuButton>
-                  <Button mnemonicParsing="false" prefWidth="150.0" styleClass="add-btn" text="Ir a Códigos">
+                  <Button mnemonicParsing="false" prefWidth="150.0" styleClass="add-btn" text="Ir a Ofertas">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -65,7 +67,12 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                      <content>
-                        <VBox fx:id="vbox" prefHeight="298.0" prefWidth="388.0" />
+                        <GridPane fx:id="grid" prefHeight="338.0" prefWidth="395.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                        </GridPane>
                      </content>
                   </ScrollPane>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0">

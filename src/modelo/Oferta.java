@@ -7,22 +7,16 @@ import java.util.HashMap;
 public class Oferta extends Publicacion {
     private String vinculo;
     private String precio;
-    private API api;
+
 
     public Oferta(String titulo, String descripcion, String fechaInicio, String fechaFin, int puntuacion, EstadoPublicacion estado, Categoria categoria, String vinculo, String precio) {
         super(titulo, descripcion, fechaInicio, fechaFin, puntuacion, estado, categoria);
         this.vinculo = vinculo;
         this.precio = precio;
-        api = new API();
-        this.api.setURL("http://127.0.0.1");
-        api.setPort(5000);
     }
 
     public Oferta() {
         super();
-        api = new API();
-        this.api.setURL("http://127.0.0.1");
-        api.setPort(5000);
     }
 
     public String getVinculo() {
