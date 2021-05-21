@@ -30,9 +30,6 @@ public class InicioOfertasController {
     @FXML
     private ScrollPane scroll;
 
-    //@FXML
-    //private GridPane grid;
-
     @FXML
     private VBox vbox;
 
@@ -55,30 +52,15 @@ public class InicioOfertasController {
     public void initialize() {
         this.llenarComboCategorias();
         ofertas.addAll(this.getData());
-        //int columna = 0;
-        //int fila = 0;
         try {
             for (int i = 0; i < ofertas.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/vista/item.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
-
-
-                ItemController itemController = fxmlLoader.getController();
-                itemController.setData(ofertas.get(i));
-
-
-                /*
-                grid.add(anchorPane, columna, fila); //Quizá aquíu deba iniciar con 1
-                GridPane.setMargin(anchorPane,new Insets(10));
-                fila ++;
-
-                 */
-
+                ItemOfertasController itemOfertasController = fxmlLoader.getController();
+                itemOfertasController.setData(ofertas.get(i));
                 vbox.getChildren().add(anchorPane);
                 VBox.setMargin(anchorPane, new Insets(10));
-
-
             }
         } catch (IOException e) {
             e.printStackTrace();

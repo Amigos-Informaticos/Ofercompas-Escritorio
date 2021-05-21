@@ -3,6 +3,7 @@ package vista.controlador;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import modelo.CodigoDescuento;
 import modelo.Oferta;
 
 public class ItemCodigosController {
@@ -10,20 +11,13 @@ public class ItemCodigosController {
     private Label lblTitulo;
 
     @FXML
-    private Label lblPrecio;
+    private ImageView imgTienda;
 
-    @FXML
-    private Label lblPuntuacion;
+    private CodigoDescuento codigoDescuento;
 
-    @FXML
-    private ImageView imgProducto;
+    public void setData(CodigoDescuento codigo) {
+        this.codigoDescuento = codigo;
+        lblTitulo.setText(codigoDescuento.getTitulo());
 
-    private Oferta oferta;
-
-    public void setData(Oferta oferta) {
-        this.oferta = oferta;
-        lblTitulo.setText(oferta.getTitulo());
-        lblPrecio.setText("$" + oferta.getPrecio());
-        lblPuntuacion.setText(oferta.getFechaCreacion());
     }
 }
