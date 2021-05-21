@@ -74,6 +74,6 @@ public class PublicarOfertaController {
     }
 
     public void clicAtras(){
-        MainController.activate("InicioV2","Inicio",MainController.Sizes.MID);
+        MainController.activate("InicioOfertas","Inicio",MainController.Sizes.MID);
     }
 }

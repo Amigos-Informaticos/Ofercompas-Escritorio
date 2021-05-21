@@ -1,5 +1,7 @@
 package modelo;
 
+import datos.API;
+
 public abstract class Publicacion {
     protected String titulo;
     protected String descripcion;
@@ -9,6 +11,7 @@ public abstract class Publicacion {
     protected EstadoPublicacion estado;
     protected Categoria categoria;
     protected int idPublicador;
+    protected API api;
 
     public int getIdPublicador() {
         return idPublicador;
@@ -16,9 +19,15 @@ public abstract class Publicacion {
 
     public void setIdPublicador(int idPublicador) {
         this.idPublicador = idPublicador;
+        api = new API();
+        this.api.setURL("http://127.0.0.1");
+        api.setPort(5000);
     }
 
     public Publicacion() {
+        api = new API();
+        this.api.setURL("http://127.0.0.1");
+        api.setPort(5000);
 
     }
 

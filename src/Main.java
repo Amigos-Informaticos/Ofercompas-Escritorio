@@ -7,6 +7,6 @@ import vista.MainController;
 
 public class Main{
     public static void main(String[] args) {
-        MainController.hit("InicioV2","Jajaja",MainController.Sizes.MID);
+        MainController.hit("InicioCodigos","Jajaja",MainController.Sizes.MID);
     }
 }
