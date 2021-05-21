@@ -1,4 +1,4 @@
-package vista;
+package vista.controlador;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,9 +9,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import modelo.Oferta;
-import vista.controlador.ItemController;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
+import modelo.CodigoDescuento;
+import vista.MainController;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,53 +31,53 @@ public class InicioCodigosController {
     @FXML
     private ScrollPane scroll;
 
-    //@FXML
-    //private GridPane grid;
-
     @FXML
-    private VBox vbox;
+    private GridPane grid;
 
-    private List<Oferta> ofertas = new ArrayList<>();
+    private List<CodigoDescuento> codigosDescuento = new ArrayList<>();
 
 
-    public List<Oferta> getData() {
-        List<Oferta> ofertas = new ArrayList<>();
-        Oferta oferta;
+    public List<CodigoDescuento> getData() {
+        List<CodigoDescuento> codigos = new ArrayList<>();
+        CodigoDescuento codigoDescuento;
         for (int i = 0; i < 10; i++) {
-            oferta = new Oferta();
-            oferta.setTitulo("Oferta " + i);
-            oferta.setPrecio("200");
-            oferta.setFechaCreacion("2021-05-20");
-            ofertas.add(oferta);
+            codigoDescuento = new CodigoDescuento();
+            codigoDescuento.setTitulo("Oferta " + i);
+            codigos.add(codigoDescuento);
         }
-        return ofertas;
+        return codigos;
     }
 
     public void initialize() {
         this.llenarComboCategorias();
-        ofertas.addAll(this.getData());
-        //int columna = 0;
-        //int fila = 0;
+        codigosDescuento.addAll(this.getData());
+        int columna = 0;
+        int fila = 0;
         try {
-            for (int i = 0; i < ofertas.size(); i++) {
+            for (int i = 0; i < codigosDescuento.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/vista/item.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/vista/itemCodigo.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
 
+                ItemCodigosController itemCodigosController = fxmlLoader.getController();
+                itemCodigosController.setData(codigosDescuento.get(i));
 
-                ItemController itemController = fxmlLoader.getController();
-                itemController.setData(ofertas.get(i));
+                if (columna == 2) {
+                    columna = 0;
+                    fila++;
+                }
+
+                grid.add(anchorPane, columna++, fila);
+                grid.setMinWidth(Region.USE_COMPUTED_SIZE);
+                grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
+                grid.setMaxWidth(Region.USE_PREF_SIZE);
 
 
-                /*
-                grid.add(anchorPane, columna, fila); //Quizá aquíu deba iniciar con 1
-                GridPane.setMargin(anchorPane,new Insets(10));
-                fila ++;
+                grid.setMinHeight(Region.USE_COMPUTED_SIZE);
+                grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
+                grid.setMaxHeight(Region.USE_PREF_SIZE);
 
-                 */
-
-                vbox.getChildren().add(anchorPane);
-                VBox.setMargin(anchorPane, new Insets(10));
+                GridPane.setMargin(anchorPane, new Insets(10));
 
 
             }
