@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="200.0" prefWidth="252.0" stylesheets="@estilo/estilo.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.ItemCodigosController">
+<AnchorPane minHeight="150.0" minWidth="180.0" prefHeight="150.0" prefWidth="180.0" stylesheets="@estilo/estilo.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.ItemCodigosController">
    <children>
       <BorderPane layoutX="57.0" prefHeight="200.0" prefWidth="361.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -28,15 +28,15 @@
                </children>
             </HBox>
          </top>
-         <bottom>
-            <ImageView fx:id="imgTienda" fitHeight="140.0" fitWidth="245.0" pickOnBounds="true" preserveRatio="true" styleClass="image" BorderPane.alignment="CENTER">
-               <image>
-                  <Image url="@imagenes/mercadolibre.png" />
-               </image>
-            </ImageView>
-         </bottom>
          <center>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="imgTienda" fitHeight="69.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true" styleClass="image">
+                     <image>
+                        <Image url="@imagenes/mercadolibre.png" />
+                     </image>
+                  </ImageView>
+               </children></VBox>
          </center>
       </BorderPane>
    </children>

@@ -16,6 +16,10 @@
     -fx-background-color: #00AE07;
 }
 
+.right-bar-codigos{
+    -fx-background-color: #f5aa42;
+}
+
 .shadow{
     -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);
 }
