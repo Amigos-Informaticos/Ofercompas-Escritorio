@@ -10,7 +10,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.RegistrarMiembroController">
    <children>
       <Button layoutX="235.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#registrar" prefHeight="25.0" prefWidth="130.0" text="Registrarse" />
-      <Button layoutX="33.0" layoutY="22.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Atrás" />
+      <Button layoutX="33.0" layoutY="22.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Atrás" onMouseClicked="#regresar"/>
       <Label layoutX="482.0" layoutY="5.0" text="Regístrate" textAlignment="RIGHT">
          <font>
             <Font name="System Italic" size="24.0" />

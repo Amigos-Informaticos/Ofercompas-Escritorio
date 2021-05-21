@@ -3,6 +3,7 @@ package vista.controlador;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import modelo.MiembroOfercompas;
 import vista.MainController;
 
@@ -56,5 +57,9 @@ public class RegistrarMiembroController {
 
     public boolean verificarContrasenia() {
         return txtContrasenia.getText().equals(txtRepetirContrasenia.getText());
+    }
+
+    public void regresar(MouseEvent mouseEvent) {
+        MainController.activate("Login","Login",MainController.Sizes.SMALL);
     }
 }
