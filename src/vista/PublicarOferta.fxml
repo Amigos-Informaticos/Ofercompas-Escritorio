@@ -20,7 +20,7 @@
       <Button layoutX="281.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#publicar" prefHeight="25.0" prefWidth="130.0" text="Publicar" />
       <Button layoutX="62.0" layoutY="178.0" mnemonicParsing="false" text="Buscar Imagen" />
       <Button layoutX="62.0" layoutY="224.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Buscar Video" />
-      <Button layoutX="33.0" layoutY="22.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Atrás" />
+      <Button layoutX="33.0" layoutY="22.0" mnemonicParsing="false" onAction="#clicAtras" prefHeight="25.0" prefWidth="76.0" text="Atrás" />
       <Label layoutX="417.0" layoutY="5.0" text="Publicar Oferta">
          <font>
             <Font name="System Italic" size="24.0" />

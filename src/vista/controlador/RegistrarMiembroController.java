@@ -30,7 +30,7 @@ public class RegistrarMiembroController {
                 if (miembro.registrar() == 201){
                     MainController.alert(Alert.AlertType.INFORMATION,
                             "Registro Exitoso",
-                            "Publicación registrada exitosamente");
+                            "¡Te has registrado en Ofercompas!");
                 }else{
                     MainController.alert(Alert.AlertType.ERROR,
                             "Error del servidor",

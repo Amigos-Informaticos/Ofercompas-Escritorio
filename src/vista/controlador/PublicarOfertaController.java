@@ -72,4 +72,8 @@ public class PublicarOfertaController {
                     "Llene todos los campos correctamente");
         }
     }
+
+    public void clicAtras(){
+        MainController.activate("InicioV2","Inicio",MainController.Sizes.MID);
+    }
 }

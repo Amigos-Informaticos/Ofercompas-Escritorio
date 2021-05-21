@@ -14,13 +14,13 @@ public class pruebasOferta {
 
     public void instanciaOferta(){
         ofertaPrueba = new Oferta();
-        ofertaPrueba.setTitulo("Pizza");
-        ofertaPrueba.setDescripcion("Rica pizza");
-        ofertaPrueba.setPrecio("20");
+        ofertaPrueba.setTitulo("Funki Punki");
+        ofertaPrueba.setDescripcion("Volvieron!");
+        ofertaPrueba.setPrecio("14");
         ofertaPrueba.setVinculo("ofercompas.shop.com");
         ofertaPrueba.setFechaCreacion("2021-05-17");
         ofertaPrueba.setFechaFin("2021-05-30");
-        ofertaPrueba.setCategoria(Categoria.COMIDABEBIDA);
+        ofertaPrueba.setCategoria(Categoria.TECNOLOGIA);
         ofertaPrueba.setIdPublicador(7);
     }
 
