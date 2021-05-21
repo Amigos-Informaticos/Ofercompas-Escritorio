@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import modelo.Oferta;
 
-public class ItemOfertasController {
+public class ItemCodigosController {
     @FXML
     private Label lblTitulo;
 

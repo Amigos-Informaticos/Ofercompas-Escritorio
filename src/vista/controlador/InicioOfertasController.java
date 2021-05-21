@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InicioController {
+public class InicioOfertasController {
     @FXML
     private ComboBox<String> cmbCategoria;
 
