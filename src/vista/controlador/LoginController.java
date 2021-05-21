@@ -26,20 +26,20 @@ public class LoginController {
     public void clicIniciarSesion(){
         if(instanciaMiembroOfercomas()){
             HashMap resultado  =this.miembroOfercompas.logear();
-            String status = (String) resultado.get("status");
+            int status = (int) resultado.get("status");
 
-            if(status.equals("200")){
+            if(status == 200){
                 HashMap payLoad = (HashMap) resultado.get("json");
                 MiembroOfercompas miembroOfercompas = new MiembroOfercompas();
-                miembroOfercompas.setIdMiembro((Integer) payLoad.get("idMiembro"));
-                miembroOfercompas.setTipoMiembro((Integer) payLoad.get("tipoMiembro"));
+                miembroOfercompas.setIdMiembro((double) payLoad.get("idMiembro"));
+                miembroOfercompas.setTipoMiembro((double) payLoad.get("tipoMiembro"));
                 miembroOfercompas.setNickname((String) payLoad.get("nickname"));
                 String token = (String) payLoad.get("token");
                 MainController.save("miembroLogeado", miembroOfercompas);
                 MainController.save("token", token);
                 MainController.activate("InicioOfertas","Inicio",MainController.Sizes.MID);
 
-            }else if(status.equals("404")) {
+            }else if(status == 404) {
                 MainController.alert(Alert.AlertType.WARNING,
                         "Usuario no encontrado",
                         "Verifica la información ingresada");
@@ -79,12 +79,19 @@ public class LoginController {
             }
         }else {
             MainController.alert(Alert.AlertType.WARNING,
-                    "Información Incorrecta",
-                    "Email invalido");
+                    "Campos Vacios",
+                    "Por favor ingrese un email");
         }
 
-        if(campoEmailValido && !this.txtContrasenia.getText().isEmpty()){
-            camposValidos = true;
+        if(campoEmailValido ){
+            if(!this.txtContrasenia.getText().isEmpty()){
+                camposValidos = true;
+            }else{
+                MainController.alert(Alert.AlertType.WARNING,
+                        "Campos Vacios",
+                        "Por favor ingrese una contraseña");
+            }
+
         }
 
         return camposValidos;

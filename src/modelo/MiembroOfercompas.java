@@ -9,8 +9,8 @@ public class MiembroOfercompas {
     private String email;
     private String nickname;
     private String contrasenia;
-    private int idMiembro;
-    private int tipoMiembro;
+    private double idMiembro;
+    private double tipoMiembro;
 
     public MiembroOfercompas(String email, String nickname, String contrasenia) {
         this.email = email;
@@ -22,16 +22,20 @@ public class MiembroOfercompas {
 
     }
 
-    public int getIdMiembro() {
+    public double getIdMiembro() {
         return idMiembro;
     }
 
-    public void setIdMiembro(int idMiembro) {
+    public void setIdMiembro(double idMiembro) {
         this.idMiembro = idMiembro;
     }
 
-    public int getTipoMiembro() {
+    public double getTipoMiembro() {
         return tipoMiembro;
+    }
+
+    public void setTipoMiembro(double tipoMiembro) {
+        this.tipoMiembro = tipoMiembro;
     }
 
     public void setTipoMiembro(int tipoMiembro) {
