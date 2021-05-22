@@ -23,7 +23,7 @@ public class LoginController {
     public void clicRegistrarse() {
         MainController.activate("RegistrarMiembro", "Regístrate", MainController.Sizes.MID);
     }
-
+    //componer
     public void clicIniciarSesion() {
         if (instanciaMiembroOfercomas()) {
             HashMap resultado = null;
