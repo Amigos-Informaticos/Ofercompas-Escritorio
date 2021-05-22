@@ -1,24 +1,34 @@
 package modelo;
 
+import com.google.gson.annotations.SerializedName;
 import datos.API;
 
 public abstract class Publicacion {
+    @SerializedName("titulo")
     protected String titulo;
+    @SerializedName("descripcion")
     protected String descripcion;
+    @SerializedName("fechaCreacion")
     protected String fechaCreacion;
+    @SerializedName("fechaFin")
     protected String fechaFin;
+    @SerializedName("puntuacion")
     protected int puntuacion;
+    @SerializedName("estado")
     protected EstadoPublicacion estado;
+    @SerializedName("categria")
     protected Categoria categoria;
-    protected int idPublicador;
+    @SerializedName("idPublicacion")
+    protected int idPublicacion;
+
     protected API api;
 
-    public int getIdPublicador() {
-        return idPublicador;
+    public int getIdPublicacion() {
+        return idPublicacion;
     }
 
-    public void setIdPublicador(int idPublicador) {
-        this.idPublicador = idPublicador;
+    public void setIdPublicacion(int idPublicacion) {
+        this.idPublicacion = idPublicacion;
         api = new API();
         this.api.setURL("http://127.0.0.1");
         api.setPort(5000);

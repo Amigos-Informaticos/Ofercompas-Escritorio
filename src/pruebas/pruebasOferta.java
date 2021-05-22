@@ -5,6 +5,7 @@ import modelo.Categoria;
 import modelo.Oferta;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.net.ConnectException;
 import java.util.HashMap;
 
@@ -23,7 +24,7 @@ public class pruebasOferta {
         ofertaPrueba.setFechaCreacion("2021-05-17");
         ofertaPrueba.setFechaFin("2021-05-30");
         ofertaPrueba.setCategoria(Categoria.TECNOLOGIA);
-        ofertaPrueba.setIdPublicador(7);
+        ofertaPrueba.setIdPublicacion(7);
     }
 
     @Test
@@ -34,8 +35,8 @@ public class pruebasOferta {
         HashMap respuesta = null;
         try {
             respuesta = api.connect("GET","miembros");
-        } catch (ConnectException connectException) {
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         HashMap jason = (HashMap) respuesta.get("json");
         System.out.println(jason.get("nickname"));
@@ -49,7 +50,7 @@ public class pruebasOferta {
         instanciaOferta();
         try {
             assertEquals(ofertaPrueba.publicar(),201);
-        } catch (ConnectException connectException) {
+        } catch (IOException connectException) {
 
         }
     }
@@ -61,7 +62,7 @@ public class pruebasOferta {
             Oferta[] ofertas = ofertaPrueba.obtenerOfertas(1,-1);
             ofertas[0].toString();
             assertNotNull(ofertas[0].getTitulo());
-        } catch (ConnectException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());;
         }
     }

@@ -1,5 +1,6 @@
 package modelo;
 
+import java.io.IOException;
 import java.net.ConnectException;
 import java.util.HashMap;
 
@@ -23,7 +24,7 @@ public class CodigoDescuento extends Publicacion{
         this.codigo = codigo;
     }
 
-    public int publicar() throws ConnectException {
+    public int publicar() throws IOException {
         HashMap respuesta = this.api.connect("POST", "ofertas", null, this.obtenerHashmap());
         return (int) respuesta.get("status");
     }
@@ -35,7 +36,7 @@ public class CodigoDescuento extends Publicacion{
         codigo.put("fechaCreacion", this.fechaCreacion);
         codigo.put("fechaFin", this.fechaFin);
         codigo.put("categoria", String.valueOf(this.categoria.getIndice()));
-        codigo.put("publicador", String.valueOf(this.idPublicador));
+        codigo.put("publicador", String.valueOf(this.idPublicacion));
         codigo.put("codigo", this.codigo);
 
         return codigo;
@@ -45,7 +46,7 @@ public class CodigoDescuento extends Publicacion{
         return super.estaCompleta() && this.codigo != null;
     }
 
-    public Oferta[] obtenerCodigos(int pagina, int categoria) throws ConnectException {
+    public Oferta[] obtenerCodigos(int pagina, int categoria) throws Exception {
         HashMap<String, String> parametros = new HashMap();
         parametros.put("pagina", String.valueOf(pagina));
         parametros.put("categoria", String.valueOf(categoria));
@@ -63,13 +64,13 @@ public class CodigoDescuento extends Publicacion{
         return oferta;
     }
 
-    public Oferta[] obtenerCodigos(int pagina) throws ConnectException {
+    public Oferta[] obtenerCodigos(int pagina) throws Exception {
         HashMap<String, String> parametros = new HashMap();
         parametros.put("pagina", String.valueOf(pagina));
         return getCodigos(parametros);
     }
 
-    private Oferta[] getCodigos(HashMap<String, String> parametros) throws ConnectException {
+    private Oferta[] getCodigos(HashMap<String, String> parametros) throws Exception {
         HashMap respuesta = this.api.connect("GET", "codigos", parametros);
         Oferta[] ofertasConvertidas = new Oferta[0];
         if (respuesta.get("status").equals("200")) {

@@ -22,7 +22,7 @@
                         <Font size="29.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="5.0" />
+                        <Insets left="10.0" top="10.0" />
                      </HBox.margin>
                   </Label>
                </children>
