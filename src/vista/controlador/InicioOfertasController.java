@@ -14,6 +14,7 @@ import modelo.Oferta;
 import vista.MainController;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,12 @@ public class InicioOfertasController {
     public List<Oferta> cargarOfertas() {
         List<Oferta> ofertas = new ArrayList<>();
         Oferta oferta = new Oferta();
-        Oferta[] ofertasArray = oferta.obtenerOfertas(1,-1);
+        Oferta[] ofertasArray = new Oferta[0];
+        try {
+            ofertasArray = oferta.obtenerOfertas(1,-1);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());;
+        }
         for (int i = 0; i < ofertasArray.length; i++) {
             ofertas.add(ofertasArray[i]);
             ofertasArray[i].toString();

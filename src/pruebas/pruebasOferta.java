@@ -9,6 +9,7 @@ import java.net.ConnectException;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class pruebasOferta {
     private Oferta ofertaPrueba;
@@ -50,6 +51,18 @@ public class pruebasOferta {
             assertEquals(ofertaPrueba.publicar(),201);
         } catch (ConnectException connectException) {
 
+        }
+    }
+
+    @Test
+    public void obtenerOfertas(){
+        try {
+            instanciaOferta();
+            Oferta[] ofertas = ofertaPrueba.obtenerOfertas(1,-1);
+            ofertas[0].toString();
+            assertNotNull(ofertas[0].getTitulo());
+        } catch (ConnectException e) {
+            System.out.println(e.getMessage());;
         }
     }
 

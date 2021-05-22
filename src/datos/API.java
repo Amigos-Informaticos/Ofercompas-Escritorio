@@ -33,19 +33,29 @@ public class API {
 		this.port = port;
 	}
 
-	public HashMap connect(String metodo, String recurso)throws ConnectException {
-		return this.connect(metodo, recurso, null, null);
+	public HashMap connect(String metodo, String recurso) throws ConnectException{
+		return this.connect(metodo, recurso, null);
 	}
 
-	public HashMap connect(String metodo, String recurso, HashMap<String, String> parametros)throws ConnectException {
+	public HashMap connect(String metodo, String recurso, HashMap<String, String> parametros) throws ConnectException{
 		return this.connect(metodo, recurso, parametros, null);
 	}
 
-	public HashMap connect(String metodo, String recurso, HashMap<String, String> parametros, HashMap<String, String> payload) throws ConnectException {
+	public HashMap connect(String metodo, String recurso, HashMap<String, String> parametros, HashMap<String, String> payload) throws ConnectException{
+		return this.connect(metodo, recurso, parametros, payload, null, false);
+	}
+
+	public HashMap connect(String metodo, String recurso, HashMap<String, String> params,
+						   HashMap<String, String> payload, HashMap<String, String> headers, boolean isArray) throws ConnectException {
 		HashMap<String, Object> resultados = new HashMap();
 		try {
-			URL url = new URL(this.buildURL(recurso, parametros));
+			URL url = new URL(this.buildURL(recurso, params));
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			if (headers != null) {
+				for (Map.Entry<String, String> entry: headers.entrySet()) {
+					connection.setRequestProperty(entry.getKey(), entry.getValue());
+				}
+			}
 			if (!metodo.equals("GET") && !metodo.equals("get")) {
 				String jsonString = new Gson().toJson(payload);
 				connection.setDoOutput(true);
@@ -69,11 +79,16 @@ public class API {
 			}
 			connection.disconnect();
 			if (!retorno.toString().equals("")) {
-				HashMap mapaRetorno = new Gson().fromJson(retorno.toString(), HashMap.class);
-				resultados.put("json", mapaRetorno);
+				if (!isArray) {
+					HashMap mapaRetorno = new Gson().fromJson(retorno.toString(), HashMap.class);
+					resultados.put("json", mapaRetorno);
+				} else {
+					HashMap[] mapaRetorno = new Gson().fromJson(retorno.toString(), HashMap[].class);
+					resultados.put("json", mapaRetorno);
+				}
 			}
 		} catch (IOException exception) {
-
+			exception.printStackTrace();
 		}
 		return resultados;
 	}
@@ -84,15 +99,15 @@ public class API {
 			completeUrl.append("/").append(recurso);
 		}
 		int parametrosSize = 0;
-		if (parametros != null && parametros.isEmpty()) {
+		if (parametros != null && !parametros.isEmpty()) {
 			completeUrl.append("?");
 			for (Map.Entry<String, String> parametro: parametros.entrySet()) {
 				completeUrl.append(parametro.getKey()).append("=").append(parametro.getValue());
+				if (parametrosSize < parametros.size()) {
+					completeUrl.append("&");
+				}
+				parametrosSize++;
 			}
-			if (parametrosSize < parametros.size()) {
-				completeUrl.append("&");
-			}
-			parametrosSize++;
 		}
 		return completeUrl.toString();
 	}
