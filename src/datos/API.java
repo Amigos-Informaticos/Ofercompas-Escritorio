@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -32,15 +33,15 @@ public class API {
 		this.port = port;
 	}
 
-	public HashMap connect(String metodo, String recurso) {
+	public HashMap connect(String metodo, String recurso)throws ConnectException {
 		return this.connect(metodo, recurso, null, null);
 	}
 
-	public HashMap connect(String metodo, String recurso, HashMap<String, String> parametros) {
+	public HashMap connect(String metodo, String recurso, HashMap<String, String> parametros)throws ConnectException {
 		return this.connect(metodo, recurso, parametros, null);
 	}
 
-	public HashMap connect(String metodo, String recurso, HashMap<String, String> parametros, HashMap<String, String> payload) {
+	public HashMap connect(String metodo, String recurso, HashMap<String, String> parametros, HashMap<String, String> payload) throws ConnectException {
 		HashMap<String, Object> resultados = new HashMap();
 		try {
 			URL url = new URL(this.buildURL(recurso, parametros));
@@ -72,7 +73,7 @@ public class API {
 				resultados.put("json", mapaRetorno);
 			}
 		} catch (IOException exception) {
-			exception.printStackTrace();
+
 		}
 		return resultados;
 	}
