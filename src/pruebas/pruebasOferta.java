@@ -17,9 +17,9 @@ public class pruebasOferta {
 
     public void instanciaOferta(){
         ofertaPrueba = new Oferta();
-        ofertaPrueba.setTitulo("Funki Punki");
+        ofertaPrueba.setTitulo("Galletas");
         ofertaPrueba.setDescripcion("Volvieron!");
-        ofertaPrueba.setPrecio("14");
+        ofertaPrueba.setPrecio("18");
         ofertaPrueba.setVinculo("ofercompas.shop.com");
         ofertaPrueba.setFechaCreacion("2021-05-17");
         ofertaPrueba.setFechaFin("2021-05-30");

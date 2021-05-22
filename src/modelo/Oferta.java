@@ -62,8 +62,10 @@ public class Oferta extends Publicacion {
         oferta.put("vinculo", this.getVinculo());
         oferta.put("precio", this.precio);
         oferta.put("publicador", String.valueOf(this.idPublicacion));
+        System.out.println(oferta.toString());
 
         return oferta;
+
     }
 
     public boolean estaCompleta() {
