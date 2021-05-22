@@ -1,5 +1,6 @@
 package modelo;
 
+import java.net.ConnectException;
 import java.util.HashMap;
 
 public class CodigoDescuento extends Publicacion{
@@ -22,7 +23,7 @@ public class CodigoDescuento extends Publicacion{
         this.codigo = codigo;
     }
 
-    public int publicar() {
+    public int publicar() throws ConnectException {
         HashMap respuesta = this.api.connect("POST", "ofertas", null, this.obtenerHashmap());
         return (int) respuesta.get("status");
     }
@@ -44,7 +45,7 @@ public class CodigoDescuento extends Publicacion{
         return super.estaCompleta() && this.codigo != null;
     }
 
-    public Oferta[] obtenerCodigos(int pagina, int categoria) {
+    public Oferta[] obtenerCodigos(int pagina, int categoria) throws ConnectException {
         HashMap<String, String> parametros = new HashMap();
         parametros.put("pagina", String.valueOf(pagina));
         parametros.put("categoria", String.valueOf(categoria));
@@ -62,13 +63,13 @@ public class CodigoDescuento extends Publicacion{
         return oferta;
     }
 
-    public Oferta[] obtenerCodigos(int pagina) {
+    public Oferta[] obtenerCodigos(int pagina) throws ConnectException {
         HashMap<String, String> parametros = new HashMap();
         parametros.put("pagina", String.valueOf(pagina));
         return getCodigos(parametros);
     }
 
-    private Oferta[] getCodigos(HashMap<String, String> parametros) {
+    private Oferta[] getCodigos(HashMap<String, String> parametros) throws ConnectException {
         HashMap respuesta = this.api.connect("GET", "codigos", parametros);
         Oferta[] ofertasConvertidas = new Oferta[0];
         if (respuesta.get("status").equals("200")) {

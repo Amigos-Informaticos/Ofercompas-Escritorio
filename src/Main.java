@@ -5,8 +5,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import vista.MainController;
 
+//Holi
 public class Main{
     public static void main(String[] args) {
-        MainController.hit("Login","Login",MainController.Sizes.MID);
+        MainController.hit("Login","Login",MainController.Sizes.SMALL);
     }
 }

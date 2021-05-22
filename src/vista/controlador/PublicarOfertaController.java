@@ -7,6 +7,8 @@ import javafx.scene.control.*;
 import modelo.Oferta;
 import vista.MainController;
 
+import java.net.ConnectException;
+
 public class PublicarOfertaController {
     @FXML
     private TextField txtTitulo;
@@ -57,11 +59,17 @@ public class PublicarOfertaController {
     public void publicar() {
         instanciaOferta();
         if (oferta.estaCompleta()) {
-            if(oferta.publicar() == 201) {
-                MainController.alert(Alert.AlertType.INFORMATION,
-                        "Registro Exitoso",
-                        "Publicación registrada exitosamente");
-            }else {
+            try {
+                if(oferta.publicar() == 201) {
+                    MainController.alert(Alert.AlertType.INFORMATION,
+                            "Registro Exitoso",
+                            "Publicación registrada exitosamente");
+                }else {
+                    MainController.alert(Alert.AlertType.ERROR,
+                            "Error del servidor",
+                            "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
+                }
+            } catch (ConnectException connectException) {
                 MainController.alert(Alert.AlertType.ERROR,
                         "Error del servidor",
                         "No se pudo establecer conexión con el servidor. Inténtalo más tarde");

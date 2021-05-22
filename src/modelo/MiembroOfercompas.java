@@ -2,6 +2,7 @@ package modelo;
 
 import datos.API;
 
+import java.net.ConnectException;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
@@ -79,7 +80,7 @@ public class MiembroOfercompas {
                 '}';
     }
 
-    public int registrar(){
+    public int registrar() throws ConnectException {
         API api = new API();
         api.setURL("http://127.0.0.1");
         api.setPort(5000);
@@ -87,7 +88,7 @@ public class MiembroOfercompas {
         HashMap respuesta = api.connect("POST","miembros",null, this.obtenerHashmap());
         return (int) respuesta.get("status");
     }
-    public HashMap logear(){
+    public HashMap logear() throws ConnectException{
         API api = new API();
         api.setURL("http://127.0.0.1");
         api.setPort(5000);
