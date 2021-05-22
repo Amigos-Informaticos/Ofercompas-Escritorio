@@ -35,23 +35,20 @@ public class InicioOfertasController {
 
     private List<Oferta> ofertas = new ArrayList<>();
 
-
-    public List<Oferta> getData() {
+    public List<Oferta> cargarOfertas() {
         List<Oferta> ofertas = new ArrayList<>();
-        Oferta oferta;
-        for (int i = 0; i < 10; i++) {
-            oferta = new Oferta();
-            oferta.setTitulo("Oferta " + i);
-            oferta.setPrecio("200");
-            oferta.setFechaCreacion("2021-05-20");
-            ofertas.add(oferta);
+        Oferta oferta = new Oferta();
+        Oferta[] ofertasArray = oferta.obtenerOfertas(1,-1);
+        for (int i = 0; i < ofertasArray.length; i++) {
+            ofertas.add(ofertasArray[i]);
+            ofertasArray[i].toString();
         }
         return ofertas;
     }
 
     public void initialize() {
         this.llenarComboCategorias();
-        ofertas.addAll(this.getData());
+        ofertas.addAll(this.cargarOfertas());
         try {
             for (int i = 0; i < ofertas.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
