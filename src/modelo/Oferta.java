@@ -2,6 +2,7 @@ package modelo;
 
 import datos.API;
 
+import java.net.ConnectException;
 import java.util.HashMap;
 
 public class Oferta extends Publicacion {
@@ -43,7 +44,7 @@ public class Oferta extends Publicacion {
                 '}';
     }
 
-    public int publicar() {
+    public int publicar() throws ConnectException {
         HashMap respuesta = this.api.connect("POST", "ofertas", null, this.obtenerHashmap());
         return (int) respuesta.get("status");
     }
@@ -66,7 +67,7 @@ public class Oferta extends Publicacion {
         return super.estaCompleta() && this.vinculo != null && this.precio != null;
     }
 
-    public Oferta[] obtenerOfertas(int pagina, int categoria) {
+    public Oferta[] obtenerOfertas(int pagina, int categoria) throws ConnectException {
         HashMap<String, String> parametros = new HashMap();
         parametros.put("pagina", String.valueOf(pagina));
         parametros.put("categoria", String.valueOf(categoria));
@@ -84,13 +85,13 @@ public class Oferta extends Publicacion {
         return oferta;
     }
 
-    public Oferta[] obtenerOfertas(int pagina) {
+    public Oferta[] obtenerOfertas(int pagina) throws ConnectException {
         HashMap<String, String> parametros = new HashMap();
         parametros.put("pagina", String.valueOf(pagina));
         return getOfertas(parametros);
     }
 
-    private Oferta[] getOfertas(HashMap<String, String> parametros) {
+    private Oferta[] getOfertas(HashMap<String, String> parametros) throws ConnectException {
         HashMap respuesta = this.api.connect("GET", "ofertas", parametros);
         Oferta[] ofertasConvertidas = new Oferta[0];
         if (respuesta.get("status").equals("200")) {

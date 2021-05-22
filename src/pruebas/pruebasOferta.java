@@ -5,6 +5,7 @@ import modelo.Categoria;
 import modelo.Oferta;
 import org.junit.jupiter.api.Test;
 
+import java.net.ConnectException;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,7 +30,12 @@ public class pruebasOferta {
         API api = new API();
         api.setURL("http://127.0.0.1");
         api.setPort(5000);
-        HashMap respuesta = api.connect("GET","miembros");
+        HashMap respuesta = null;
+        try {
+            respuesta = api.connect("GET","miembros");
+        } catch (ConnectException connectException) {
+
+        }
         HashMap jason = (HashMap) respuesta.get("json");
         System.out.println(jason.get("nickname"));
         assertEquals(respuesta.get("status"),200);
@@ -40,7 +46,11 @@ public class pruebasOferta {
     @Test
     public void registrarOferta(){
         instanciaOferta();
-        assertEquals(ofertaPrueba.publicar(),201);
+        try {
+            assertEquals(ofertaPrueba.publicar(),201);
+        } catch (ConnectException connectException) {
+
+        }
     }
 
 }
