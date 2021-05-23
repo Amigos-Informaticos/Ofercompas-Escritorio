@@ -1,11 +1,9 @@
 package modelo;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
-import java.net.ConnectException;
 import java.util.HashMap;
 
 public class Oferta extends Publicacion {
