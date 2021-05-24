@@ -70,12 +70,7 @@ public class Oferta extends Publicacion {
         return super.estaCompleta() && this.vinculo != null && this.precio != null;
     }
 
-    public Oferta[] obtenerOfertas(int pagina, int categoria) throws IOException {
-        HashMap<String, String> parametros = new HashMap();
-        parametros.put("pagina", String.valueOf(pagina));
-        parametros.put("categoria", String.valueOf(categoria));
-        return getOfertas(parametros);
-    }
+
 
     public Oferta deJsonAObjeto(JsonObject ofertaJson) {
         Oferta oferta = new Oferta();
@@ -91,6 +86,13 @@ public class Oferta extends Publicacion {
     public Oferta[] obtenerOfertas(int pagina) throws IOException {
         HashMap<String, String> parametros = new HashMap();
         parametros.put("pagina", String.valueOf(pagina));
+        return getOfertas(parametros);
+    }
+
+    public Oferta[] obtenerOfertas(int pagina, int categoria) throws IOException {
+        HashMap<String, String> parametros = new HashMap();
+        parametros.put("pagina", String.valueOf(pagina));
+        parametros.put("categoria", String.valueOf(categoria));
         return getOfertas(parametros);
     }
 

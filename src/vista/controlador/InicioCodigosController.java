@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import modelo.CodigoDescuento;
+import modelo.Oferta;
 import vista.MainController;
 
 import java.io.IOException;
@@ -48,9 +49,25 @@ public class InicioCodigosController {
         return codigos;
     }
 
+    public List<CodigoDescuento> cargarCodigos() {
+        List<CodigoDescuento> codigoDescuentos = new ArrayList<>();
+        CodigoDescuento codigoDescuento = new CodigoDescuento();
+        CodigoDescuento[] codigosArray = new CodigoDescuento[0];
+        try {
+            codigosArray = codigoDescuento.obtenerCodigos(1,-1);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        for (int i = 0; i < codigosArray.length; i++) {
+            codigoDescuentos.add(codigosArray[i]);
+            codigosArray[i].toString();
+        }
+        return codigoDescuentos;
+    }
+
     public void initialize() {
         this.llenarComboCategorias();
-        codigosDescuento.addAll(this.getData());
+        codigosDescuento.addAll(this.cargarCodigos());
         int columna = 0;
         int fila = 0;
         try {

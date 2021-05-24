@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.PublicarOfertaController">
+   <children>
+      <TextField fx:id="txtTitulo" layoutX="140.0" layoutY="47.0" prefHeight="25.0" prefWidth="291.0" promptText="Titulo" />
+      <TextArea fx:id="txtDescripcion" layoutX="140.0" layoutY="86.0" prefHeight="92.0" prefWidth="291.0" promptText="Descripcion" />
+      <ComboBox fx:id="cmbCategoria" layoutX="140.0" layoutY="291.0" prefHeight="25.0" prefWidth="121.0" promptText="Categoria" />
+      <DatePicker fx:id="fechaCreacion" layoutX="71.0" layoutY="252.0" promptText="Cuando inicia" />
+      <DatePicker fx:id="fechaFin" layoutX="300.0" layoutY="252.0" promptText="Cuando termina" />
+      <Button layoutX="185.0" layoutY="338.0" mnemonicParsing="false" onMouseClicked="#publicar" prefHeight="35.0" prefWidth="193.0" text="Publicar" />
+      <Button layoutX="33.0" layoutY="22.0" mnemonicParsing="false" onAction="#clicAtras" prefHeight="25.0" prefWidth="76.0" text="Atrás" />
+      <Label layoutX="417.0" layoutY="5.0" text="Publicar Código">
+         <font>
+            <Font name="System Italic" size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtVinculo" alignment="CENTER" layoutX="140.0" layoutY="194.0" prefHeight="35.0" prefWidth="291.0" promptText="Escribe el Código aquí">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <MenuButton layoutX="296.0" layoutY="291.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Tienda">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
+   </children>
+</AnchorPane>

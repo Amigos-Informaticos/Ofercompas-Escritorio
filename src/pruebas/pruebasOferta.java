@@ -3,10 +3,10 @@ package pruebas;
 import datos.API;
 import modelo.Categoria;
 import modelo.Oferta;
+import modelo.Oferta;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.net.ConnectException;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,13 +17,13 @@ public class pruebasOferta {
 
     public void instanciaOferta(){
         ofertaPrueba = new Oferta();
-        ofertaPrueba.setTitulo("Galletas");
-        ofertaPrueba.setDescripcion("Volvieron!");
+        ofertaPrueba.setTitulo("Volovanes");
+        ofertaPrueba.setDescripcion("De Don volo");
         ofertaPrueba.setPrecio("18");
         ofertaPrueba.setVinculo("ofercompas.shop.com");
         ofertaPrueba.setFechaCreacion("2021-05-17");
         ofertaPrueba.setFechaFin("2021-05-30");
-        ofertaPrueba.setCategoria(Categoria.TECNOLOGIA);
+        ofertaPrueba.setCategoria(Categoria.COMIDABEBIDA);
         ofertaPrueba.setIdPublicacion(7);
     }
 
@@ -42,8 +42,6 @@ public class pruebasOferta {
         System.out.println(jason.get("nickname"));
         assertEquals(respuesta.get("status"),200);
     }
-
-
 
     @Test
     public void registrarOferta(){
