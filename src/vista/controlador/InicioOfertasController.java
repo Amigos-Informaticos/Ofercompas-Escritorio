@@ -11,7 +11,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import modelo.Oferta;
+import modelo.Oferta;
 import vista.MainController;
+import vista.MyListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,38 +35,50 @@ public class InicioOfertasController {
     @FXML
     private VBox vbox;
 
-    private List<Oferta> ofertas = new ArrayList<>();
+    private MyListener myListener;
 
+    private List<Oferta> ofertas = new ArrayList<modelo.Oferta>();
 
-    public List<Oferta> getData() {
+    public List<Oferta> cargarOfertas(int pagina) {
         List<Oferta> ofertas = new ArrayList<>();
-        Oferta oferta;
-        for (int i = 0; i < 10; i++) {
-            oferta = new Oferta();
-            oferta.setTitulo("Oferta " + i);
-            oferta.setPrecio("200");
-            oferta.setFechaCreacion("2021-05-20");
-            ofertas.add(oferta);
+        Oferta oferta = new Oferta();
+        Oferta[] ofertasArray = new modelo.Oferta[0];
+        try {
+            ofertasArray = oferta.obtenerOfertas(pagina,-1);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        for (int i = 0; i < ofertasArray.length; i++) {
+            ofertas.add(ofertasArray[i]);
+            ofertasArray[i].toString();
         }
         return ofertas;
     }
 
     public void initialize() {
         this.llenarComboCategorias();
-        ofertas.addAll(this.getData());
+        myListener = new MyListener() {
+            @Override
+            public void onClickListener(Oferta oferta) {
+                verOferta(oferta);
+            }
+        };
+        ofertas.addAll(this.cargarOfertas(1));
         try {
             for (int i = 0; i < ofertas.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/vista/item.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
                 ItemOfertasController itemOfertasController = fxmlLoader.getController();
-                itemOfertasController.setData(ofertas.get(i));
+                itemOfertasController.setData(ofertas.get(i), myListener);
                 vbox.getChildren().add(anchorPane);
                 VBox.setMargin(anchorPane, new Insets(10));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 
     public void llenarComboCategorias() {
@@ -84,5 +98,8 @@ public class InicioOfertasController {
         MainController.activate("PublicarOferta","Regístrate",MainController.Sizes.MID);
     }
 
-
+    public void verOferta(Oferta oferta){
+        MainController.save("oferta",oferta);
+        MainController.activate("VerOferta","Ver Oferta",MainController.Sizes.MID);
+    }
 }
