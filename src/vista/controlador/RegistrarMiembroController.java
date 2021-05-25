@@ -5,7 +5,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import modelo.MiembroOfercompas;
-import utils.LimitadorTextfield;
+import utils.LimitadorTextField;
 import vista.MainController;
 
 import java.net.ConnectException;
@@ -24,9 +24,9 @@ public class RegistrarMiembroController {
 
     public void initialize() {
         miembro = new MiembroOfercompas();
-        LimitadorTextfield.limitarTamanio(txtEmail,40);
-        LimitadorTextfield.limitarTamanio(txtNickname,20);
-        LimitadorTextfield.limitarTamanio(txtContrasenia,20);
+        LimitadorTextField.limitarTamanio(txtEmail,40);
+        LimitadorTextField.limitarTamanio(txtNickname,20);
+        LimitadorTextField.limitarTamanio(txtContrasenia,20);
     }
 
 

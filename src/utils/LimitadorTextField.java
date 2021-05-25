@@ -5,7 +5,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-public class LimitadorTextfield {
+public class LimitadorTextField {
 
     public static void limitarTamanio(TextField textField, int tamanio) {
         textField.setOnKeyTyped(event -> {
@@ -31,19 +31,19 @@ public class LimitadorTextfield {
     }
 
     public static void soloNumeros(TextField textField) {
-        textField.addEventHandler(KeyEvent.KEY_TYPED, LimitadorTextfield::soloNumerosEnterosEvent);
+        textField.addEventHandler(KeyEvent.KEY_TYPED, LimitadorTextField::soloNumerosEnterosEvent);
     }
 
     public static void soloCaracteres(TextField textField) {
-        textField.addEventHandler(KeyEvent.KEY_TYPED, LimitadorTextfield::soloCaracteresEvent);
+        textField.addEventHandler(KeyEvent.KEY_TYPED, LimitadorTextField::soloCaracteresEvent);
     }
 
     public static void soloTexto(TextField textField) {
-        textField.addEventHandler(KeyEvent.KEY_TYPED, LimitadorTextfield::soloTextoEvent);
+        textField.addEventHandler(KeyEvent.KEY_TYPED, LimitadorTextField::soloTextoEvent);
     }
 
     public static void soloTextoArea(TextArea textArea) {
-        textArea.addEventHandler(KeyEvent.KEY_TYPED, LimitadorTextfield::soloTextoEvent);
+        textArea.addEventHandler(KeyEvent.KEY_TYPED, LimitadorTextField::soloTextoEvent);
     }
 
     public static void soloNumerosEnterosEvent(KeyEvent keyEvent) {
