@@ -6,11 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import modelo.Oferta;
 import modelo.Oferta;
 import vista.MainController;
 import vista.MyListener;
@@ -35,9 +35,15 @@ public class InicioOfertasController {
     @FXML
     private VBox vbox;
 
+    @FXML
+    private Label lblPagina;
+
+
+    int pagina = 1;
+
     private MyListener myListener;
 
-    private List<Oferta> ofertas = new ArrayList<modelo.Oferta>();
+    private List<Oferta> ofertas = new ArrayList();
 
     public List<Oferta> cargarOfertas(int pagina) {
         List<Oferta> ofertas = new ArrayList<>();
@@ -55,15 +61,8 @@ public class InicioOfertasController {
         return ofertas;
     }
 
-    public void initialize() {
-        this.llenarComboCategorias();
-        myListener = new MyListener() {
-            @Override
-            public void onClickListener(Oferta oferta) {
-                verOferta(oferta);
-            }
-        };
-        ofertas.addAll(this.cargarOfertas(1));
+    public void llenarPagina(){
+        ofertas.addAll(this.cargarOfertas(pagina));
         try {
             for (int i = 0; i < ofertas.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -77,8 +76,17 @@ public class InicioOfertasController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
-
+    public void initialize() {
+        this.llenarComboCategorias();
+        myListener = new MyListener() {
+            @Override
+            public void onClickListener(Oferta oferta) {
+                verOferta(oferta);
+            }
+        };
+        llenarPagina();
     }
 
     public void llenarComboCategorias() {
@@ -101,5 +109,27 @@ public class InicioOfertasController {
     public void verOferta(Oferta oferta){
         MainController.save("oferta",oferta);
         MainController.activate("VerOferta","Ver Oferta",MainController.Sizes.MID);
+    }
+
+    public void avanzarPagina(){
+        this.pagina ++;
+        this.ofertas.clear();
+        vbox.getChildren().clear();
+        llenarPagina();
+        this.lblPagina.setText(String.valueOf(this.pagina));
+        System.out.println(pagina);
+        System.out.println(ofertas);
+    }
+
+    public void retrcoderPagina(){
+        this.pagina --;
+        this.ofertas.clear();
+        vbox.getChildren().clear();
+        llenarPagina();
+
+    }
+
+    public void cambiarACodigos(){
+        MainController.activate("InicioCodigos","Códigos", MainController.Sizes.MID);
     }
 }

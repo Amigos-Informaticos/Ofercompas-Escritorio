@@ -49,7 +49,7 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </MenuButton>
-                  <Button mnemonicParsing="false" prefWidth="150.0" styleClass="add-btn" text="Ir a Códigos">
+                  <Button mnemonicParsing="false" onAction="#cambiarACodigos" prefWidth="150.0" styleClass="add-btn" text="Ir a Códigos">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -70,13 +70,13 @@
                   </ScrollPane>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Anterior">
+                        <Button fx:id="btnAnterior" mnemonicParsing="false" onAction="#retrcoderPagina" prefHeight="25.0" prefWidth="70.0" text="Anterior">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
                         </Button>
-                        <Label text="1" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Siguiente">
+                        <Label fx:id="lblPagina" text="1" />
+                        <Button fx:id="btnSiguiente" mnemonicParsing="false" onAction="#avanzarPagina" prefHeight="25.0" prefWidth="70.0" text="Siguiente">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
