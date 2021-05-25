@@ -38,7 +38,6 @@ public class InicioOfertasController {
     @FXML
     private Label lblPagina;
 
-
     int pagina = 1;
 
     private MyListener myListener;

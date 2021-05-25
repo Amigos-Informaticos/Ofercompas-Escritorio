@@ -82,7 +82,7 @@ public class Oferta extends Publicacion {
         return oferta;
     }
 
-    public Oferta[] obtenerOfertas(int pagina) throws IOException {
+    public Oferta[] obtenerOfertasSinCategoria(int pagina) throws IOException {
         HashMap<String, String> parametros = new HashMap();
         parametros.put("pagina", String.valueOf(pagina));
         return getOfertas(parametros);
@@ -106,6 +106,13 @@ public class Oferta extends Publicacion {
             }
         }
         return ofertasConvertidas;
+    }
+
+    public Oferta[] obtenerOfertasPorPublicador(int pagina, int idPublicador) throws IOException {
+        HashMap<String, String> parametros = new HashMap();
+        parametros.put("pagina", String.valueOf(pagina));
+        parametros.put("idPublicador", String.valueOf(idPublicador));
+        return getOfertas(parametros);
     }
 
 

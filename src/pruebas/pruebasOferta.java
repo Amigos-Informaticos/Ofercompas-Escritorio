@@ -61,7 +61,19 @@ public class pruebasOferta {
             ofertas[0].toString();
             assertNotNull(ofertas[0].getTitulo());
         } catch (IOException e) {
-            System.out.println(e.getMessage());;
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void obtenerOfertasPorPublicasdor(){
+        try {
+            instanciaOferta();
+            Oferta[] ofertas = ofertaPrueba.obtenerOfertasPorPublicador(1, 12);
+            System.out.println(ofertas[0].toString());
+            assertNotNull(ofertas[0].getTitulo());
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
         }
     }
 
