@@ -79,6 +79,7 @@ public class Oferta extends Publicacion {
         oferta.setFechaFin(String.valueOf(ofertaJson.get("fechaFin")));
         oferta.setPrecio(String.valueOf(ofertaJson.get("precio")));
         oferta.setVinculo(String.valueOf(ofertaJson.get("vinculo")));
+        oferta.setPuntuacion(Integer.parseInt(String.valueOf(ofertaJson.get("puntuacion"))));
         return oferta;
     }
 
