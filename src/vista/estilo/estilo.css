@@ -54,6 +54,11 @@
     -fx-background-radius: 30;
 }
 
+.comentario-item{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+}
+
 .image{
     -fx-background-radius: 30;
 }

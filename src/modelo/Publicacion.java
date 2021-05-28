@@ -110,6 +110,7 @@ public abstract class Publicacion {
     @Override
     public String toString() {
         return "Publicacion{" +
+                "ID " + idPublicacion + '\'' +
                 "titulo='" + titulo + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", fechaCreacion='" + fechaCreacion + '\'' +
@@ -120,12 +121,12 @@ public abstract class Publicacion {
                 '}';
     }
 
-    public boolean estaCompleta(){
+    public boolean estaCompleta() {
         return this.titulo != null && this.descripcion != null && this.fechaCreacion != null && this.fechaFin != null && this.categoria != null;
     }
 
-    public void setCategoriaCmbBox(String categoria){
-        switch (categoria){
+    public void setCategoriaCmbBox(String categoria) {
+        switch (categoria) {
             case "Tecnologia":
                 this.categoria = Categoria.TECNOLOGIA;
                 break;
@@ -151,6 +152,10 @@ public abstract class Publicacion {
                 this.categoria = Categoria.TECNOLOGIA;
                 break;
         }
+
+    }
+
+    public void obtenerInteraccion() {
 
     }
 }

@@ -44,23 +44,19 @@ public class InicioOfertasController {
 
     private List<Oferta> ofertas = new ArrayList();
 
-    public List<Oferta> cargarOfertas(int pagina) {
-        List<Oferta> ofertas = new ArrayList<>();
-        Oferta oferta = new Oferta();
-        Oferta[] ofertasArray = new modelo.Oferta[0];
-        try {
-            ofertasArray = oferta.obtenerOfertas(pagina,-1);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        for (int i = 0; i < ofertasArray.length; i++) {
-            ofertas.add(ofertasArray[i]);
-            ofertasArray[i].toString();
-        }
-        return ofertas;
+
+    public void initialize() {
+        this.llenarComboCategorias();
+        myListener = new MyListener() {
+            @Override
+            public void onClickListener(Oferta oferta) {
+                verOferta(oferta);
+            }
+        };
+        llenarPagina();
     }
 
-    public void llenarPagina(){
+    public void llenarPagina() {
         ofertas.addAll(this.cargarOfertas(pagina));
         try {
             for (int i = 0; i < ofertas.size(); i++) {
@@ -77,16 +73,24 @@ public class InicioOfertasController {
         }
     }
 
-    public void initialize() {
-        this.llenarComboCategorias();
-        myListener = new MyListener() {
-            @Override
-            public void onClickListener(Oferta oferta) {
-                verOferta(oferta);
-            }
-        };
-        llenarPagina();
+    public List<Oferta> cargarOfertas(int pagina) {
+        List<Oferta> ofertas = new ArrayList<>();
+        Oferta oferta = new Oferta();
+        Oferta[] ofertasArray = new modelo.Oferta[0];
+        try {
+            ofertasArray = oferta.obtenerOfertas(pagina, -1);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        for (int i = 0; i < ofertasArray.length; i++) {
+            ofertas.add(ofertasArray[i]);
+            ofertasArray[i].toString();
+        }
+        return ofertas;
     }
+
+
+
 
     public void llenarComboCategorias() {
         ObservableList<String> listaCategorias = FXCollections.observableArrayList();
@@ -101,17 +105,18 @@ public class InicioOfertasController {
         cmbCategoria.setItems(listaCategorias);
     }
 
-    public void clicPublicarOferta(){
-        MainController.activate("PublicarOferta","Regístrate",MainController.Sizes.MID);
+    public void clicPublicarOferta() {
+        MainController.activate("PublicarOferta", "Regístrate", MainController.Sizes.MID);
     }
 
-    public void verOferta(Oferta oferta){
-        MainController.save("oferta",oferta);
-        MainController.activate("VerOferta","Ver Oferta",MainController.Sizes.MID);
+    public void verOferta(Oferta oferta) {
+        System.out.println(oferta.toString());
+        MainController.save("oferta", oferta);
+        MainController.activate("VerOferta", "Ver Oferta", MainController.Sizes.MID);
     }
 
-    public void avanzarPagina(){
-        this.pagina ++;
+    public void avanzarPagina() {
+        this.pagina++;
         this.ofertas.clear();
         vbox.getChildren().clear();
         llenarPagina();
@@ -120,15 +125,15 @@ public class InicioOfertasController {
         System.out.println(ofertas);
     }
 
-    public void retrcoderPagina(){
-        this.pagina --;
+    public void retrcoderPagina() {
+        this.pagina--;
         this.ofertas.clear();
         vbox.getChildren().clear();
         llenarPagina();
 
     }
 
-    public void cambiarACodigos(){
-        MainController.activate("InicioCodigos","Códigos", MainController.Sizes.MID);
+    public void cambiarACodigos() {
+        MainController.activate("InicioCodigos", "Códigos", MainController.Sizes.MID);
     }
 }
