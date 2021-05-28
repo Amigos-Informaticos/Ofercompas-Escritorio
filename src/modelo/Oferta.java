@@ -73,16 +73,18 @@ public class Oferta extends Publicacion {
 
     public Oferta deJsonAObjeto(JsonObject ofertaJson) {
         Oferta oferta = new Oferta();
-        oferta.setTitulo(String.valueOf(ofertaJson.get("titulo")));
-        oferta.setDescripcion(String.valueOf(ofertaJson.get("descripcion")));
-        oferta.setFechaCreacion(String.valueOf(ofertaJson.get("fechaCreacion")));
-        oferta.setFechaFin(String.valueOf(ofertaJson.get("fechaFin")));
-        oferta.setPrecio(String.valueOf(ofertaJson.get("precio")));
-        oferta.setVinculo(String.valueOf(ofertaJson.get("vinculo")));
+        oferta.setIdPublicacion(Integer.parseInt(String.valueOf(ofertaJson.get("idPublicacion"))));
+        oferta.setTitulo(ofertaJson.get("titulo").getAsString());
+        oferta.setDescripcion(ofertaJson.get("descripcion").getAsString());
+        oferta.setFechaCreacion(ofertaJson.get("fechaCreacion").getAsString());
+        oferta.setFechaFin(ofertaJson.get("fechaFin").getAsString());
+        oferta.setPrecio(ofertaJson.get("precio").getAsString());
+        oferta.setVinculo(ofertaJson.get("vinculo").getAsString());
+        oferta.setPuntuacion(Integer.parseInt(String.valueOf(ofertaJson.get("puntuacion"))));
         return oferta;
     }
 
-    public Oferta[] obtenerOfertas(int pagina) throws IOException {
+    public Oferta[] obtenerOfertasSinCategoria(int pagina) throws IOException {
         HashMap<String, String> parametros = new HashMap();
         parametros.put("pagina", String.valueOf(pagina));
         return getOfertas(parametros);
@@ -106,6 +108,13 @@ public class Oferta extends Publicacion {
             }
         }
         return ofertasConvertidas;
+    }
+
+    public Oferta[] obtenerOfertasPorPublicador(int pagina, int idPublicador) throws IOException {
+        HashMap<String, String> parametros = new HashMap();
+        parametros.put("pagina", String.valueOf(pagina));
+        parametros.put("idPublicador", String.valueOf(idPublicador));
+        return getOfertas(parametros);
     }
 
 

@@ -6,11 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import modelo.Oferta;
 import modelo.Oferta;
 import vista.MainController;
 import vista.MyListener;
@@ -35,25 +35,15 @@ public class InicioOfertasController {
     @FXML
     private VBox vbox;
 
+    @FXML
+    private Label lblPagina;
+
+    private int pagina = 1;
+
     private MyListener myListener;
 
-    private List<Oferta> ofertas = new ArrayList<modelo.Oferta>();
+    private List<Oferta> ofertas = new ArrayList();
 
-    public List<Oferta> cargarOfertas(int pagina) {
-        List<Oferta> ofertas = new ArrayList<>();
-        Oferta oferta = new Oferta();
-        Oferta[] ofertasArray = new modelo.Oferta[0];
-        try {
-            ofertasArray = oferta.obtenerOfertas(pagina,-1);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        for (int i = 0; i < ofertasArray.length; i++) {
-            ofertas.add(ofertasArray[i]);
-            ofertasArray[i].toString();
-        }
-        return ofertas;
-    }
 
     public void initialize() {
         this.llenarComboCategorias();
@@ -63,7 +53,11 @@ public class InicioOfertasController {
                 verOferta(oferta);
             }
         };
-        ofertas.addAll(this.cargarOfertas(1));
+        llenarPagina();
+    }
+
+    public void llenarPagina() {
+        ofertas.addAll(this.cargarOfertas(pagina));
         try {
             for (int i = 0; i < ofertas.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -77,9 +71,26 @@ public class InicioOfertasController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
+
+    public List<Oferta> cargarOfertas(int pagina) {
+        List<Oferta> ofertas = new ArrayList<>();
+        Oferta oferta = new Oferta();
+        Oferta[] ofertasArray = new modelo.Oferta[0];
+        try {
+            ofertasArray = oferta.obtenerOfertas(pagina, -1);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        for (int i = 0; i < ofertasArray.length; i++) {
+            ofertas.add(ofertasArray[i]);
+            ofertasArray[i].toString();
+        }
+        return ofertas;
+    }
+
+
+
 
     public void llenarComboCategorias() {
         ObservableList<String> listaCategorias = FXCollections.observableArrayList();
@@ -94,12 +105,35 @@ public class InicioOfertasController {
         cmbCategoria.setItems(listaCategorias);
     }
 
-    public void clicPublicarOferta(){
-        MainController.activate("PublicarOferta","Regístrate",MainController.Sizes.MID);
+    public void clicPublicarOferta() {
+        MainController.activate("PublicarOferta", "Regístrate", MainController.Sizes.MID);
     }
 
-    public void verOferta(Oferta oferta){
-        MainController.save("oferta",oferta);
-        MainController.activate("VerOferta","Ver Oferta",MainController.Sizes.MID);
+    public void verOferta(Oferta oferta) {
+        System.out.println(oferta.toString());
+        MainController.save("oferta", oferta);
+        MainController.activate("VerOferta", "Ver Oferta", MainController.Sizes.MID);
+    }
+
+    public void avanzarPagina() {
+        this.pagina++;
+        this.ofertas.clear();
+        vbox.getChildren().clear();
+        llenarPagina();
+        this.lblPagina.setText(String.valueOf(this.pagina));
+        System.out.println(pagina);
+        System.out.println(ofertas);
+    }
+
+    public void retrcoderPagina() {
+        this.pagina--;
+        this.ofertas.clear();
+        vbox.getChildren().clear();
+        llenarPagina();
+
+    }
+
+    public void cambiarACodigos() {
+        MainController.activate("InicioCodigos", "Códigos", MainController.Sizes.MID);
     }
 }

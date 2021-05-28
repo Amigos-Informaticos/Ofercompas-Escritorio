@@ -34,6 +34,6 @@ public class ItemOfertasController {
         this.myListener = myListener;
         lblTitulo.setText(oferta.getTitulo());
         lblPrecio.setText("$" + oferta.getPrecio());
-        lblPuntuacion.setText(oferta.getFechaCreacion());
+        lblPuntuacion.setText(String.valueOf(oferta.getPuntuacion()));
     }
 }

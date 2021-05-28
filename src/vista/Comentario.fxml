@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="60.0" prefWidth="270.0" styleClass="comentario-item" stylesheets="@estilo/estilo.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.ComentarioController">
+   <children>
+      <Label fx:id="lblNickname" layoutX="8.0" layoutY="6.0" prefHeight="17.0" prefWidth="265.0" text="Nickname:" textFill="#0011ff">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblContenido" alignment="TOP_LEFT" layoutX="17.0" layoutY="22.0" prefHeight="34.0" prefWidth="258.0" text="Contenido" />
+   </children>
+</AnchorPane>

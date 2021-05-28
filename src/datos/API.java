@@ -16,8 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class API {
-    private String URL;
-    private int port;
+    private String URL = "http://127.0.0.1";
+    private int port = 5000;
 
     public String getURL() {
         return URL;
