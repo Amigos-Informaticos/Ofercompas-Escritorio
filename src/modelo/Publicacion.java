@@ -155,7 +155,4 @@ public abstract class Publicacion {
 
     }
 
-    public void obtenerInteraccion() {
-
-    }
 }

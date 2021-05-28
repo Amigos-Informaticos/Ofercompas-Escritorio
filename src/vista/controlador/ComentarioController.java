@@ -10,10 +10,8 @@ public class ComentarioController {
 
     @FXML
     private Label lblContenido;
-    private Comentario comentario;
 
     public void setData(Comentario comentario) {
-        this.comentario = comentario;
         this.lblNickname.setText(comentario.getNicknameComentador());
         this.lblContenido.setText(comentario.getContenido());
     }

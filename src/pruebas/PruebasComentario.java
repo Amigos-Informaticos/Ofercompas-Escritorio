@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class pruebasComentario {
+public class PruebasComentario {
 
     @Test
     public void obtenerComentarios(){
