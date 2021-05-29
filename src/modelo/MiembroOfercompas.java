@@ -10,8 +10,8 @@ public class MiembroOfercompas {
     private String email;
     private String nickname;
     private String contrasenia;
-    private double idMiembro;
-    private double tipoMiembro;
+    private int idMiembro;
+    private int tipoMiembro;
 
     public MiembroOfercompas(String email, String nickname, String contrasenia) {
         this.email = email;
@@ -23,20 +23,16 @@ public class MiembroOfercompas {
 
     }
 
-    public double getIdMiembro() {
+    public int getIdMiembro() {
         return idMiembro;
     }
 
-    public void setIdMiembro(double idMiembro) {
+    public void setIdMiembro(int idMiembro) {
         this.idMiembro = idMiembro;
     }
 
-    public double getTipoMiembro() {
+    public int getTipoMiembro() {
         return tipoMiembro;
-    }
-
-    public void setTipoMiembro(double tipoMiembro) {
-        this.tipoMiembro = tipoMiembro;
     }
 
     public void setTipoMiembro(int tipoMiembro) {
@@ -69,15 +65,6 @@ public class MiembroOfercompas {
 
     public boolean estaCompleto() {
         return this.email != null && this.nickname != null && this.contrasenia != null;
-    }
-
-    @Override
-    public String toString() {
-        return "MiembroOfercompas{" +
-                "email='" + email + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", contrasenia='" + contrasenia + '\'' +
-                '}';
     }
 
     public int registrar() throws ConnectException {
@@ -122,4 +109,14 @@ public class MiembroOfercompas {
         return Pattern.compile(emailRegex).matcher(email==null?"":email).matches();
     }
 
+    @Override
+    public String toString() {
+        return "MiembroOfercompas{" +
+                "email='" + email + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", contrasenia='" + contrasenia + '\'' +
+                ", idMiembro=" + idMiembro +
+                ", tipoMiembro=" + tipoMiembro +
+                '}';
+    }
 }
