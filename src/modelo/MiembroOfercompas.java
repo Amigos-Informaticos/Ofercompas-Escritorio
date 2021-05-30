@@ -3,7 +3,6 @@ package modelo;
 import com.google.gson.JsonObject;
 import datos.API;
 
-import java.io.IOException;
 import java.net.ConnectException;
 import java.util.HashMap;
 import java.util.regex.Pattern;
@@ -14,7 +13,6 @@ public class MiembroOfercompas {
     private String contrasenia;
     private int idMiembro;
     private int tipoMiembro;
-    private API api;
 
     public MiembroOfercompas(String email, String nickname, String contrasenia) {
         this.email = email;
@@ -40,7 +38,7 @@ public class MiembroOfercompas {
         this.idMiembro = idMiembro;
     }
 
-    public double getTipoMiembro() {
+    public int getTipoMiembro() {
         return tipoMiembro;
     }
 
@@ -76,28 +74,19 @@ public class MiembroOfercompas {
         return this.email != null && this.nickname != null && this.contrasenia != null;
     }
 
-    @Override
-    public String toString() {
-        return "MiembroOfercompas{" +
-                "email='" + email + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", contrasenia='" + contrasenia + '\'' +
-                '}';
-    }
+    public int registrar() throws ConnectException {
+        API api = new API();
+        api.setURL("http://127.0.0.1");
+        api.setPort(5000);
 
-    public int registrar() throws IOException {
         HashMap respuesta = api.connect("POST","miembros",null, this.obtenerHashmap());
         return (int) respuesta.get("status");
     }
-    public MiembroOfercompas logear() throws IOException {
-        HashMap<String, String> respuesta = api.connect("POST","login", null, this.obtenerHashmapLogin());
-        MiembroOfercompas miembroOfercompas = new MiembroOfercompas();
-        if (respuesta.get("status").equals(200)) {
-            int idMiembro = (int) Math.round(Float.parseFloat(respuesta.get("idMiembro")));
-            miembroOfercompas.setIdMiembro(idMiembro);
-        }
-        return miembroOfercompas;
-    }
+    public HashMap logear() throws ConnectException{
+        API api = new API();
+        api.setURL("http://127.0.0.1");
+        api.setPort(5000);
+        HashMap respuesta = api.connect("POST","login",null, this.obtenerHashmapLogin());
 
     public MiembroOfercompas deJsonAObjeto(JsonObject miembroJson) {
         MiembroOfercompas miembroOfercompas = new MiembroOfercompas();
@@ -133,5 +122,14 @@ public class MiembroOfercompas {
         return Pattern.compile(emailRegex).matcher(email==null?"":email).matches();
     }
 
-
+    @Override
+    public String toString() {
+        return "MiembroOfercompas{" +
+                "email='" + email + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", contrasenia='" + contrasenia + '\'' +
+                ", idMiembro=" + idMiembro +
+                ", tipoMiembro=" + tipoMiembro +
+                '}';
+    }
 }
