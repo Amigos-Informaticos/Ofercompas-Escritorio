@@ -33,12 +33,21 @@ public class LoginController {
                 if (status == 200) {
                     HashMap payLoad = (HashMap) resultado.get("json");
                     MiembroOfercompas miembroOfercompas = new MiembroOfercompas();
-                    miembroOfercompas.setIdMiembro((double) payLoad.get("idMiembro"));
-                    miembroOfercompas.setTipoMiembro((double) payLoad.get("tipoMiembro"));
+                    Double idMiembroDouble =(Double) payLoad.get("idMiembro");
+                    Double tipoMiembroDouble = (Double) payLoad.get("tipoMiembro");
+                    int idMiembroInt = idMiembroDouble.intValue();
+                    int tipoMiembroInt = tipoMiembroDouble.intValue();
+
+
+                    miembroOfercompas.setIdMiembro(idMiembroInt);
+                    miembroOfercompas.setTipoMiembro(tipoMiembroInt);
                     miembroOfercompas.setNickname((String) payLoad.get("nickname"));
+                    miembroOfercompas.setEmail((String) payLoad.get("email"));
+                    miembroOfercompas.setContrasenia((String) payLoad.get("contrasenia"));
                     String token = (String) payLoad.get("token");
                     MainController.save("miembroLogeado", miembroOfercompas);
                     MainController.save("token", token);
+                    System.out.println(miembroOfercompas.toString());
                     MainController.activate("InicioOfertas", "Inicio", MainController.Sizes.MID);
 
                 } else if (status == 404) {

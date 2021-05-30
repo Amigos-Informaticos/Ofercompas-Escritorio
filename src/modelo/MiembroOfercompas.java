@@ -2,7 +2,6 @@ package modelo;
 
 import datos.API;
 
-import java.io.IOException;
 import java.net.ConnectException;
 import java.util.HashMap;
 import java.util.regex.Pattern;
@@ -11,8 +10,8 @@ public class MiembroOfercompas {
     private String email;
     private String nickname;
     private String contrasenia;
-    private double idMiembro;
-    private double tipoMiembro;
+    private int idMiembro;
+    private int tipoMiembro;
 
     public MiembroOfercompas(String email, String nickname, String contrasenia) {
         this.email = email;
@@ -24,20 +23,16 @@ public class MiembroOfercompas {
 
     }
 
-    public double getIdMiembro() {
+    public int getIdMiembro() {
         return idMiembro;
     }
 
-    public void setIdMiembro(double idMiembro) {
+    public void setIdMiembro(int idMiembro) {
         this.idMiembro = idMiembro;
     }
 
-    public double getTipoMiembro() {
+    public int getTipoMiembro() {
         return tipoMiembro;
-    }
-
-    public void setTipoMiembro(double tipoMiembro) {
-        this.tipoMiembro = tipoMiembro;
     }
 
     public void setTipoMiembro(int tipoMiembro) {
@@ -72,16 +67,7 @@ public class MiembroOfercompas {
         return this.email != null && this.nickname != null && this.contrasenia != null;
     }
 
-    @Override
-    public String toString() {
-        return "MiembroOfercompas{" +
-                "email='" + email + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", contrasenia='" + contrasenia + '\'' +
-                '}';
-    }
-
-    public int registrar() throws IOException {
+    public int registrar() throws ConnectException {
         API api = new API();
         api.setURL("http://127.0.0.1");
         api.setPort(5000);
@@ -89,7 +75,7 @@ public class MiembroOfercompas {
         HashMap respuesta = api.connect("POST","miembros",null, this.obtenerHashmap());
         return (int) respuesta.get("status");
     }
-    public HashMap logear() throws IOException {
+    public HashMap logear() throws ConnectException{
         API api = new API();
         api.setURL("http://127.0.0.1");
         api.setPort(5000);
@@ -123,4 +109,14 @@ public class MiembroOfercompas {
         return Pattern.compile(emailRegex).matcher(email==null?"":email).matches();
     }
 
+    @Override
+    public String toString() {
+        return "MiembroOfercompas{" +
+                "email='" + email + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", contrasenia='" + contrasenia + '\'' +
+                ", idMiembro=" + idMiembro +
+                ", tipoMiembro=" + tipoMiembro +
+                '}';
+    }
 }
