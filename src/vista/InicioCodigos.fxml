@@ -82,7 +82,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </Button>
-                        <Label text="1" />
+                        <Label fx:id="lblPagina" text="1" />
                         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Siguiente">
                            <HBox.margin>
                               <Insets left="10.0" />

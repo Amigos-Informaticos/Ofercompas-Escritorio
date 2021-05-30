@@ -97,9 +97,6 @@ public class InicioOfertasController {
         return ofertas;
     }
 
-
-
-
     public void llenarComboCategorias() {
         ObservableList<String> listaCategorias = FXCollections.observableArrayList();
         listaCategorias.add("Tecnologia");

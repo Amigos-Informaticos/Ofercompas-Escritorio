@@ -6,13 +6,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import modelo.CodigoDescuento;
+import modelo.MiembroOfercompas;
 import modelo.Oferta;
+import vista.InicioCodigosListener;
 import vista.MainController;
 
 import java.io.IOException;
@@ -30,12 +33,44 @@ public class InicioCodigosController {
     private MenuButton menuPerfil;
 
     @FXML
+    private Label lblPagina;
+
+    @FXML
     private ScrollPane scroll;
 
     @FXML
     private GridPane grid;
 
+    private int pagina = 1;
+
     private List<CodigoDescuento> codigosDescuento = new ArrayList<>();
+
+    private InicioCodigosListener listenerCodigos;
+
+    public void initialize() {
+        this.llenarComboCategorias();
+        listenerCodigos = new InicioCodigosListener() {
+            @Override
+            public void onClickListener(CodigoDescuento codigoDescuento) {
+                verCodigo(codigoDescuento);
+            }
+        };
+        llenarPagina();
+        guardaMiembro();
+
+    }
+
+    public void guardaMiembro(){
+        MiembroOfercompas miembroOfercompas = new MiembroOfercompas();
+        miembroOfercompas.setIdMiembro(16);
+        MainController.save("miembro",miembroOfercompas);
+    }
+
+    public void verCodigo(CodigoDescuento codigoDescuento) {
+        System.out.println(codigoDescuento.toString());
+        MainController.save("codigoDescuento", codigoDescuento);
+        MainController.activate("VerCodigoDescuento", "Ver Oferta", MainController.Sizes.MID);
+    }
 
 
     public List<CodigoDescuento> getData() {
@@ -65,8 +100,9 @@ public class InicioCodigosController {
         return codigoDescuentos;
     }
 
-    public void initialize() {
-        this.llenarComboCategorias();
+
+
+    public void llenarPagina(){
         codigosDescuento.addAll(this.cargarCodigos());
         int columna = 0;
         int fila = 0;
@@ -77,7 +113,7 @@ public class InicioCodigosController {
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 ItemCodigosController itemCodigosController = fxmlLoader.getController();
-                itemCodigosController.setData(codigosDescuento.get(i));
+                itemCodigosController.setData(codigosDescuento.get(i),listenerCodigos);
 
                 if (columna == 2) {
                     columna = 0;
@@ -118,6 +154,28 @@ public class InicioCodigosController {
 
     public void clicPublicarOferta(){
         MainController.activate("PublicarOferta","Regístrate",MainController.Sizes.MID);
+    }
+
+    public void avanzarPagina() {
+        this.pagina++;
+        this.codigosDescuento.clear();
+        grid.getChildren().clear();
+        llenarPagina();
+        this.lblPagina.setText(String.valueOf(this.pagina));
+        System.out.println(pagina);
+        System.out.println(codigosDescuento);
+    }
+
+    public void retrcoderPagina() {
+        this.pagina--;
+        this.codigosDescuento.clear();
+        grid.getChildren().clear();
+        llenarPagina();
+
+    }
+
+    public void cambiarACodigos() {
+        MainController.activate("InicioCodigos", "Códigos", MainController.Sizes.MID);
     }
 
 

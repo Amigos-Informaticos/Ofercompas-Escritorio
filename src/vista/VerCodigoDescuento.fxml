@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.VerCodigoDescuentoController">
+   <children>
+      <Label fx:id="lblTitulo" layoutX="252.0" layoutY="54.0" prefHeight="32.0" prefWidth="300.0" text="Titulo">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="36.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagenes/img_login.jpg" />
+         </image></ImageView>
+      <Label fx:id="lblDescripcion" alignment="TOP_LEFT" layoutX="252.0" layoutY="86.0" prefHeight="91.0" prefWidth="300.0" text="Descripcion" />
+      <Label fx:id="lblPuntuacion" alignment="CENTER" layoutX="108.0" layoutY="222.0" prefHeight="30.0" prefWidth="56.0" text="000" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="72.0" layoutY="254.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" text="Denunciar Código" />
+      <ScrollPane layoutY="293.0" prefHeight="107.0" prefWidth="336.0">
+         <content>
+            <VBox fx:id="vbox" prefHeight="160.0" prefWidth="320.0" style="-fx-background-color: #bfbfbf;" />
+         </content>
+      </ScrollPane>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#clicAtras" text="Atrás" />
+      <Button layoutX="348.0" layoutY="322.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Comentar" />
+      <TextField layoutX="348.0" layoutY="293.0" prefHeight="25.0" prefWidth="246.0" promptText="Escribe aquí tu comentario" />
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="167.0" layoutY="222.0" onMouseClicked="#puntuarPositivamente" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagenes/like.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="76.0" layoutY="222.0" onMouseClicked="#puntuarNegativamente" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+         <image>
+            <Image url="@imagenes/dislike.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblFechaInicio" alignment="CENTER" contentDisplay="CENTER" layoutX="284.0" layoutY="194.0" prefHeight="17.0" prefWidth="129.0" text="Inicia: 000-00-00" />
+      <Label fx:id="lblFechaFin" alignment="CENTER" contentDisplay="CENTER" layoutX="432.0" layoutY="194.0" prefHeight="17.0" prefWidth="129.0" text="Termina: 000-00-00" />
+      <Label fx:id="lblCodigo" layoutX="256.0" layoutY="218.0" prefHeight="43.0" prefWidth="300.0" text="CODIGO-PRUEBA-12345" textFill="#10d724">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
