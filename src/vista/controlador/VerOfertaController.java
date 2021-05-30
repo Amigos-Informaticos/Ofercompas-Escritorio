@@ -127,8 +127,10 @@ public class VerOfertaController {
         }
         //int nuevaPuntuacion = oferta.getPuntuacion() +1;
         lblPuntuacion.setText(String.valueOf(oferta.getPuntuacion() - 1));
+    }
 
-
+    public void clicAtras(){
+        MainController.activate("InicioOfertas", "Ver Oferta", MainController.Sizes.MID);
     }
 
 

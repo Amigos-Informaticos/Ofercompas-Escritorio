@@ -39,7 +39,7 @@
             <VBox fx:id="vbox" prefHeight="160.0" prefWidth="320.0" style="-fx-background-color: #bfbfbf;" />
          </content>
       </ScrollPane>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Atrás" />
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#clicAtras" text="Atrás" />
       <Button layoutX="348.0" layoutY="322.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Comentar" />
       <TextField layoutX="348.0" layoutY="293.0" prefHeight="25.0" prefWidth="246.0" promptText="Escribe aquí tu comentario" />
       <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="206.0" layoutY="221.0" onMouseClicked="#puntuarPositivamente" pickOnBounds="true" preserveRatio="true">

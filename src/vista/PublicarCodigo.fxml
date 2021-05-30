@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.PublicarOfertaController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.PublicarCodigoController">
    <children>
       <TextField fx:id="txtTitulo" layoutX="140.0" layoutY="47.0" prefHeight="25.0" prefWidth="291.0" promptText="Titulo" />
       <TextArea fx:id="txtDescripcion" layoutX="140.0" layoutY="86.0" prefHeight="92.0" prefWidth="291.0" promptText="Descripcion" />

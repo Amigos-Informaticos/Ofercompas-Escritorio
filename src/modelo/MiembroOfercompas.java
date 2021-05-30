@@ -3,6 +3,7 @@ package modelo;
 import com.google.gson.JsonObject;
 import datos.API;
 
+import java.io.IOException;
 import java.net.ConnectException;
 import java.util.HashMap;
 import java.util.regex.Pattern;
@@ -13,6 +14,7 @@ public class MiembroOfercompas {
     private String contrasenia;
     private int idMiembro;
     private int tipoMiembro;
+    private API api;
 
     public MiembroOfercompas(String email, String nickname, String contrasenia) {
         this.email = email;
@@ -74,7 +76,7 @@ public class MiembroOfercompas {
         return this.email != null && this.nickname != null && this.contrasenia != null;
     }
 
-    public int registrar() throws ConnectException {
+    public int registrar() throws IOException {
         API api = new API();
         api.setURL("http://127.0.0.1");
         api.setPort(5000);
@@ -82,11 +84,13 @@ public class MiembroOfercompas {
         HashMap respuesta = api.connect("POST","miembros",null, this.obtenerHashmap());
         return (int) respuesta.get("status");
     }
-    public HashMap logear() throws ConnectException{
+    public HashMap logear() throws IOException {
         API api = new API();
         api.setURL("http://127.0.0.1");
         api.setPort(5000);
-        HashMap respuesta = api.connect("POST","login",null, this.obtenerHashmapLogin());
+        HashMap respuesta = api.connect("POST", "login", null, this.obtenerHashmapLogin());
+        return respuesta;
+    }
 
     public MiembroOfercompas deJsonAObjeto(JsonObject miembroJson) {
         MiembroOfercompas miembroOfercompas = new MiembroOfercompas();
@@ -97,9 +101,6 @@ public class MiembroOfercompas {
         return miembroOfercompas;
     }
 
-
-
-
     public HashMap obtenerHashmap(){
         HashMap<String ,String> miembro = new HashMap<String, String>();
         miembro.put("email",this.email);
@@ -108,6 +109,7 @@ public class MiembroOfercompas {
 
         return miembro;
     }
+
     public HashMap obtenerHashmapLogin(){
         HashMap<String ,String> miembro = new HashMap<String, String>();
         miembro.put("email",this.email);
@@ -115,6 +117,7 @@ public class MiembroOfercompas {
 
         return miembro;
     }
+
     public static boolean esEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]" +
                 "+@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])" +
