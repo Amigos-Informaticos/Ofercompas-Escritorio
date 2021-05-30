@@ -6,31 +6,29 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="200.0" prefWidth="400.0" stylesheets="@estilo/estilo.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.ItemOfertasController">
+<AnchorPane maxHeight="150.0" maxWidth="370.0" minHeight="150.0" minWidth="370.0" onMousePressed="#click" prefHeight="150.0" prefWidth="370.0" stylesheets="@estilo/estilo.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.ItemOfertasController">
    <children>
-      <BorderPane layoutX="57.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <top>
-            <HBox prefHeight="50.0" prefWidth="350.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" layoutX="5.0" layoutY="19.0" maxHeight="150.0" maxWidth="370.0" minHeight="112.0" minWidth="370.0" prefHeight="112.0" prefWidth="370.0">
+         <children>
+            <ImageView fx:id="imgProducto" fitHeight="94.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/img_login.jpg" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
+            <VBox prefHeight="99.0" prefWidth="194.0">
                <children>
-                  <Label fx:id="lblTitulo" prefHeight="43.0" prefWidth="342.0" text="Label">
+                  <Label fx:id="lblTitulo" prefHeight="0.0" prefWidth="194.0" text="Label">
                      <font>
-                        <Font size="29.0" />
+                        <Font size="18.0" />
                      </font>
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
                   </Label>
-               </children>
-            </HBox>
-         </top>
-         <left>
-            <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-               <children>
                   <Label fx:id="lblPrecio" text="0000">
                      <font>
                         <Font size="14.0" />
@@ -42,16 +40,15 @@
                      </font>
                   </Label>
                </children>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
             </VBox>
-         </left>
-         <center>
-            <ImageView fx:id="imgProducto" fitHeight="140.0" fitWidth="245.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-               <image>
-                  <Image url="@imagenes/img_login.jpg" />
-               </image>
-            </ImageView>
-         </center>
-      </BorderPane>
+         </children>
+         <padding>
+            <Insets left="5.0" right="5.0" />
+         </padding>
+      </HBox>
    </children>
    <styleClass>
       <String fx:value="fruit-item" />

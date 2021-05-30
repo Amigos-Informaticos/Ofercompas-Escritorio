@@ -8,7 +8,7 @@ import modelo.MiembroOfercompas;
 import utils.LimitadorTextField;
 import vista.MainController;
 
-import java.net.ConnectException;
+import java.io.IOException;
 
 public class RegistrarMiembroController {
     @FXML
@@ -49,7 +49,7 @@ public class RegistrarMiembroController {
                             "Error al conectar con el servidor",
                             "Error al conectar con el servidor, por favor inténtelo más tarde");
                 }
-            } catch (ConnectException connectException) {
+            } catch (IOException ioExceptionException) {
                 MainController.alert(Alert.AlertType.ERROR,
                         "Error al conectar con el servidor",
                         "Error al conectar con el servidor, por favor inténtelo más tarde");
@@ -92,8 +92,6 @@ public class RegistrarMiembroController {
         }else {
             mostrarMensaje("Campos Vacíos", "Por favor, ingrese una email");
         }
-
-
         return  camposCompletos;
     }
 
@@ -111,8 +109,6 @@ public class RegistrarMiembroController {
 
         return  contraseniasIguales;
     }
-
-
 
     private boolean validarCampos(){
         boolean camposValidos = false;

@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import modelo.MiembroOfercompas;
 import vista.MainController;
 
-import java.net.ConnectException;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class LoginController {
@@ -23,7 +23,6 @@ public class LoginController {
     public void clicRegistrarse() {
         MainController.activate("RegistrarMiembro", "Regístrate", MainController.Sizes.MID);
     }
-    //componer
     public void clicIniciarSesion() {
         if (instanciaMiembroOfercomas()) {
             HashMap resultado = null;
@@ -60,7 +59,7 @@ public class LoginController {
                             "Error del servidor",
                             "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
                 }
-            } catch (ConnectException connectException) {
+            } catch (IOException ioException) {
                 MainController.alert(Alert.AlertType.ERROR,
                         "Error del servidor",
                         "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
@@ -82,7 +81,6 @@ public class LoginController {
             this.miembroOfercompas.setContrasenia(this.txtContrasenia.getText());
             instanciado = true;
         }
-
 
         return instanciado;
     }

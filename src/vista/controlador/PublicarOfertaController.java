@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import modelo.Oferta;
 import vista.MainController;
 
+import java.io.IOException;
 import java.net.ConnectException;
 
 public class PublicarOfertaController {
@@ -69,10 +70,8 @@ public class PublicarOfertaController {
                             "Error del servidor",
                             "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
                 }
-            } catch (ConnectException connectException) {
-                MainController.alert(Alert.AlertType.ERROR,
-                        "Error del servidor",
-                        "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
         } else {
             MainController.alert(Alert.AlertType.WARNING,

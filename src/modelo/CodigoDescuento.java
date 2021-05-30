@@ -1,6 +1,9 @@
 package modelo;
 
-import java.net.ConnectException;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+import java.io.IOException;
 import java.util.HashMap;
 
 public class CodigoDescuento extends Publicacion{
@@ -23,8 +26,8 @@ public class CodigoDescuento extends Publicacion{
         this.codigo = codigo;
     }
 
-    public int publicar() throws ConnectException {
-        HashMap respuesta = this.api.connect("POST", "ofertas", null, this.obtenerHashmap());
+    public int publicar() throws IOException {
+        HashMap respuesta = this.api.connect("POST", "codigos", null, this.obtenerHashmap());
         return (int) respuesta.get("status");
     }
 
@@ -35,7 +38,7 @@ public class CodigoDescuento extends Publicacion{
         codigo.put("fechaCreacion", this.fechaCreacion);
         codigo.put("fechaFin", this.fechaFin);
         codigo.put("categoria", String.valueOf(this.categoria.getIndice()));
-        codigo.put("publicador", String.valueOf(this.idPublicador));
+        codigo.put("publicador", String.valueOf(this.idPublicacion));
         codigo.put("codigo", this.codigo);
 
         return codigo;
@@ -45,40 +48,48 @@ public class CodigoDescuento extends Publicacion{
         return super.estaCompleta() && this.codigo != null;
     }
 
-    public Oferta[] obtenerCodigos(int pagina, int categoria) throws ConnectException {
+    public CodigoDescuento[] obtenerCodigos(int pagina, int categoria) throws Exception {
         HashMap<String, String> parametros = new HashMap();
         parametros.put("pagina", String.valueOf(pagina));
         parametros.put("categoria", String.valueOf(categoria));
         return getCodigos(parametros);
     }
 
-    public Oferta deHashmapAObjeto(HashMap ofertaHashmap) {
-        Oferta oferta = new Oferta();
-        oferta.setTitulo((String) ofertaHashmap.get("titulo"));
-        oferta.setDescripcion((String) ofertaHashmap.get("descripcion"));
-        oferta.setFechaCreacion((String) ofertaHashmap.get("fechaCreacion"));
-        oferta.setFechaFin((String) ofertaHashmap.get("fechaFin"));
-        oferta.setPrecio((String) ofertaHashmap.get("precio"));
-        oferta.setVinculo((String) ofertaHashmap.get("vinculo"));
-        return oferta;
+    public CodigoDescuento deHashmapAObjeto(HashMap codigoHashmap) {
+        CodigoDescuento codigoDescuento = new CodigoDescuento();
+        codigoDescuento.setTitulo((String) codigoHashmap.get("titulo"));
+        codigoDescuento.setDescripcion((String) codigoHashmap.get("descripcion"));
+        codigoDescuento.setFechaCreacion((String) codigoHashmap.get("fechaCreacion"));
+        codigoDescuento.setFechaFin((String) codigoHashmap.get("fechaFin"));
+        return codigoDescuento;
     }
 
-    public Oferta[] obtenerCodigos(int pagina) throws ConnectException {
+    public CodigoDescuento[] obtenerCodigos(int pagina) throws Exception {
         HashMap<String, String> parametros = new HashMap();
         parametros.put("pagina", String.valueOf(pagina));
         return getCodigos(parametros);
     }
 
-    private Oferta[] getCodigos(HashMap<String, String> parametros) throws ConnectException {
-        HashMap respuesta = this.api.connect("GET", "codigos", parametros);
-        Oferta[] ofertasConvertidas = new Oferta[0];
-        if (respuesta.get("status").equals("200")) {
-            HashMap[] ofertasObtenidas = (HashMap[]) respuesta.get("json");
-            ofertasConvertidas = new Oferta[ofertasObtenidas.length];
-            for (int i = 0, ofertasObtenidasLength = ofertasObtenidas.length; i < ofertasObtenidasLength; i++) {
-                ofertasConvertidas[i] = deHashmapAObjeto(ofertasObtenidas[i]);
+    private CodigoDescuento[] getCodigos(HashMap<String, String> parametros) throws IOException {
+        HashMap respuesta = this.api.connect("GET", "codigos", parametros, null, null, true);
+        CodigoDescuento[] codigosConvertidos = new CodigoDescuento[0];
+        if (respuesta.get("status").equals(200)) {
+            JsonArray codigosObtenidos = (JsonArray) respuesta.get("json");
+            codigosConvertidos = new CodigoDescuento[codigosObtenidos.size()];
+            for (int i = 0; i < codigosObtenidos.size(); i++) {
+                codigosConvertidos[i] = deJsonAObjeto((JsonObject) codigosObtenidos.get(i));
             }
         }
-        return ofertasConvertidas;
+        return codigosConvertidos;
+    }
+
+    public CodigoDescuento deJsonAObjeto(JsonObject codigoJson) {
+        CodigoDescuento codigoDescuento = new CodigoDescuento();
+        codigoDescuento.setTitulo(String.valueOf(codigoJson.get("titulo")));
+        codigoDescuento.setDescripcion(String.valueOf(codigoJson.get("descripcion")));
+        codigoDescuento.setFechaCreacion(String.valueOf(codigoJson.get("fechaCreacion")));
+        codigoDescuento.setFechaFin(String.valueOf(codigoJson.get("fechaFin")));
+        codigoDescuento.setCodigo(String.valueOf(codigoJson.get("codigo")));
+        return codigoDescuento;
     }
 }
