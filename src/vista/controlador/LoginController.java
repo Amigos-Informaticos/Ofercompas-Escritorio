@@ -1,5 +1,7 @@
 package vista.controlador;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
@@ -24,42 +26,11 @@ public class LoginController {
         MainController.activate("RegistrarMiembro", "Regístrate", MainController.Sizes.MID);
     }
     public void clicIniciarSesion() {
-        if (instanciaMiembroOfercomas()) {
-            HashMap resultado = null;
-            try {
-                resultado = this.miembroOfercompas.logear();
-                int status = (int) resultado.get("status");
-
-                if (status == 200) {
-                    HashMap payLoad = (HashMap) resultado.get("json");
-                    MiembroOfercompas miembroOfercompas = new MiembroOfercompas();
-                    miembroOfercompas.setIdMiembro((double) payLoad.get("idMiembro"));
-                    miembroOfercompas.setTipoMiembro((double) payLoad.get("tipoMiembro"));
-                    miembroOfercompas.setNickname((String) payLoad.get("nickname"));
-                    String token = (String) payLoad.get("token");
-                    MainController.save("miembroLogeado", miembroOfercompas);
-                    MainController.save("token", token);
-                    MainController.activate("InicioOfertas", "Inicio", MainController.Sizes.MID);
-
-                } else if (status == 404) {
-                    MainController.alert(Alert.AlertType.WARNING,
-                            "Usuario no encontrado",
-                            "Verifica la información ingresada");
-                } else {
-                    MainController.alert(Alert.AlertType.ERROR,
-                            "Error del servidor",
-                            "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
-                }
-            } catch (IOException ioException) {
-                MainController.alert(Alert.AlertType.ERROR,
-                        "Error del servidor",
-                        "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
-            } catch (NullPointerException nullPointerException){
-                MainController.alert(Alert.AlertType.ERROR,
-                        "Error del servidor",
-                        "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
-            }
-
+        instanciaMiembroOfercomas();
+        try {
+            this.miembroOfercompas.logear();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
         }
     }
 
@@ -72,7 +43,6 @@ public class LoginController {
             this.miembroOfercompas.setContrasenia(this.txtContrasenia.getText());
             instanciado = true;
         }
-
         return instanciado;
     }
 
@@ -101,9 +71,7 @@ public class LoginController {
                         "Campos Vacios",
                         "Por favor ingrese una contraseña");
             }
-
         }
-
         return camposValidos;
     }
 

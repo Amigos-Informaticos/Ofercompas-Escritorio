@@ -70,7 +70,6 @@ public class Oferta extends Publicacion {
     }
 
 
-
     public Oferta deJsonAObjeto(JsonObject ofertaJson) {
         Oferta oferta = new Oferta();
         oferta.setIdPublicacion(Integer.parseInt(String.valueOf(ofertaJson.get("idPublicacion"))));
@@ -99,6 +98,7 @@ public class Oferta extends Publicacion {
 
     private Oferta[] getOfertas(HashMap<String, String> parametros) throws IOException {
         HashMap respuesta = this.api.connect("GET", "ofertas", parametros, null, null, true);
+        System.out.println(respuesta);
         Oferta[] ofertasConvertidas = new Oferta[0];
         if (respuesta.get("status").equals(200)) {
             JsonArray ofertasObtenidas = (JsonArray) respuesta.get("json");

@@ -1,5 +1,6 @@
 package modelo;
 
+import com.google.gson.JsonObject;
 import datos.API;
 
 import java.io.IOException;
@@ -11,33 +12,36 @@ public class MiembroOfercompas {
     private String email;
     private String nickname;
     private String contrasenia;
-    private double idMiembro;
-    private double tipoMiembro;
+    private int idMiembro;
+    private int tipoMiembro;
+    private API api;
 
     public MiembroOfercompas(String email, String nickname, String contrasenia) {
         this.email = email;
         this.nickname = nickname;
         this.contrasenia = contrasenia;
+        api = new API();
+        api.setURL("http://127.0.0.1");
+        api.setPort(5000);
     }
 
     public MiembroOfercompas() {
+        api = new API();
+        api.setURL("http://127.0.0.1");
+        api.setPort(5000);
 
     }
 
-    public double getIdMiembro() {
+    public int getIdMiembro() {
         return idMiembro;
     }
 
-    public void setIdMiembro(double idMiembro) {
+    public void setIdMiembro(int idMiembro) {
         this.idMiembro = idMiembro;
     }
 
     public double getTipoMiembro() {
         return tipoMiembro;
-    }
-
-    public void setTipoMiembro(double tipoMiembro) {
-        this.tipoMiembro = tipoMiembro;
     }
 
     public void setTipoMiembro(int tipoMiembro) {
@@ -82,20 +86,26 @@ public class MiembroOfercompas {
     }
 
     public int registrar() throws IOException {
-        API api = new API();
-        api.setURL("http://127.0.0.1");
-        api.setPort(5000);
-
         HashMap respuesta = api.connect("POST","miembros",null, this.obtenerHashmap());
         return (int) respuesta.get("status");
     }
-    public HashMap logear() throws IOException {
-        API api = new API();
-        api.setURL("http://127.0.0.1");
-        api.setPort(5000);
-        HashMap respuesta = api.connect("POST","login",null, this.obtenerHashmapLogin());
+    public MiembroOfercompas logear() throws IOException {
+        HashMap<String, String> respuesta = api.connect("POST","login", null, this.obtenerHashmapLogin());
+        MiembroOfercompas miembroOfercompas = new MiembroOfercompas();
+        if (respuesta.get("status").equals(200)) {
+            int idMiembro = (int) Math.round(Float.parseFloat(respuesta.get("idMiembro")));
+            miembroOfercompas.setIdMiembro(idMiembro);
+        }
+        return miembroOfercompas;
+    }
 
-        return respuesta;
+    public MiembroOfercompas deJsonAObjeto(JsonObject miembroJson) {
+        MiembroOfercompas miembroOfercompas = new MiembroOfercompas();
+        miembroOfercompas.setIdMiembro(Integer.parseInt(String.valueOf(miembroJson.get("idMiembro"))));
+        miembroOfercompas.setEmail(miembroJson.get("titulo").getAsString());
+        miembroOfercompas.setContrasenia(miembroJson.get("descripcion").getAsString());
+
+        return miembroOfercompas;
     }
 
 
@@ -122,5 +132,6 @@ public class MiembroOfercompas {
                 "?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)*$";
         return Pattern.compile(emailRegex).matcher(email==null?"":email).matches();
     }
+
 
 }

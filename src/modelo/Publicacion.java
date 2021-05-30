@@ -3,6 +3,9 @@ package modelo;
 import com.google.gson.annotations.SerializedName;
 import datos.API;
 
+import java.io.IOException;
+import java.util.HashMap;
+
 public abstract class Publicacion {
     @SerializedName("titulo")
     protected String titulo;
@@ -155,4 +158,13 @@ public abstract class Publicacion {
 
     }
 
+    public void puntuar(int idMiembro, int esPositiva) throws IOException {
+        HashMap<String,String> parametros = new HashMap<>();
+        parametros.put("idMiembro", String.valueOf(idMiembro));
+        parametros.put("esPositiva", String.valueOf(esPositiva));
+        api.connect("POST",("publicaciones/" + this.idPublicacion+"/puntuaciones"),null,parametros);
+
+
+
+    }
 }

@@ -11,6 +11,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import modelo.MiembroOfercompas;
 import modelo.Oferta;
 import vista.MainController;
 import vista.MyListener;
@@ -54,6 +55,13 @@ public class InicioOfertasController {
             }
         };
         llenarPagina();
+        guardaMiembro();
+    }
+
+    public void guardaMiembro(){
+        MiembroOfercompas miembroOfercompas = new MiembroOfercompas();
+        miembroOfercompas.setIdMiembro(16);
+        MainController.save("miembro",miembroOfercompas);
     }
 
     public void llenarPagina() {
