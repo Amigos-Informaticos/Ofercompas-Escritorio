@@ -58,7 +58,7 @@ public class Oferta extends Publicacion {
         oferta.put("categoria", String.valueOf(this.categoria.getIndice()));
         oferta.put("vinculo", this.getVinculo());
         oferta.put("precio", this.precio);
-        oferta.put("publicador", String.valueOf(this.idPublicacion));
+        oferta.put("publicador", String.valueOf(7));
         System.out.println(oferta.toString());
 
         return oferta;
