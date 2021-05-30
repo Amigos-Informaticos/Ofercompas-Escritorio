@@ -1,7 +1,5 @@
 package vista.controlador;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
@@ -63,11 +61,11 @@ public class LoginController {
                 }
             } catch (IOException ioException) {
                 MainController.alert(Alert.AlertType.ERROR,
-                        "Error del servidor",
+                        "Error del servidor: IOEXCEPTION",
                         "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
             } catch (NullPointerException nullPointerException){
                 MainController.alert(Alert.AlertType.ERROR,
-                        "Error del servidor",
+                        "Error del servidor: Null Pointer",
                         "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
             }
 
@@ -83,8 +81,11 @@ public class LoginController {
             this.miembroOfercompas.setContrasenia(this.txtContrasenia.getText());
             instanciado = true;
         }
+
         return instanciado;
     }
+
+
 
     private boolean camposValidos() {
         boolean campoEmailValido = false;
@@ -111,7 +112,9 @@ public class LoginController {
                         "Campos Vacios",
                         "Por favor ingrese una contraseña");
             }
+
         }
+
         return camposValidos;
     }
 
