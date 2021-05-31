@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import datos.API;
 
 import java.io.IOException;
-import java.net.ConnectException;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
