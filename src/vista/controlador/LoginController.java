@@ -61,11 +61,11 @@ public class LoginController {
                 }
             } catch (IOException ioException) {
                 MainController.alert(Alert.AlertType.ERROR,
-                        "Error del servidor: IOEXCEPTION",
+                        "Error del servidor",
                         "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
             } catch (NullPointerException nullPointerException){
                 MainController.alert(Alert.AlertType.ERROR,
-                        "Error del servidor: Null Pointer",
+                        "Error del servidor",
                         "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
             }
 
