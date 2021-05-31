@@ -21,13 +21,16 @@
          <image>
             <Image url="@imagenes/img_login.jpg" />
          </image></ImageView>
-      <Label fx:id="lblDescripcion" alignment="TOP_LEFT" layoutX="252.0" layoutY="86.0" prefHeight="91.0" prefWidth="300.0" text="Descripcion" />
+      <Label fx:id="lblDescripcion" alignment="TOP_LEFT" layoutX="252.0" layoutY="86.0" prefHeight="91.0" prefWidth="300.0" text="Descripcion">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
       <Label fx:id="lblPuntuacion" alignment="CENTER" layoutX="108.0" layoutY="222.0" prefHeight="30.0" prefWidth="56.0" text="000" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Button layoutX="72.0" layoutY="254.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" text="Denunciar Código" />
+      <Button layoutX="72.0" layoutY="258.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" text="Denunciar Código" />
       <ScrollPane layoutY="293.0" prefHeight="107.0" prefWidth="336.0">
          <content>
             <VBox fx:id="vbox" prefHeight="160.0" prefWidth="320.0" style="-fx-background-color: #bfbfbf;" />

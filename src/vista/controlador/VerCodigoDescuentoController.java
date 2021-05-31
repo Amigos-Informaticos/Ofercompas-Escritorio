@@ -9,13 +9,9 @@ import javafx.scene.layout.VBox;
 import modelo.CodigoDescuento;
 import modelo.Comentario;
 import modelo.MiembroOfercompas;
-import modelo.Oferta;
 import vista.MainController;
 
-import java.awt.*;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,7 +95,6 @@ public class VerCodigoDescuentoController {
         } catch (IOException ioException) {
             System.out.println(ioException);
         }
-        //int nuevaPuntuacion = codigoDescuento.getPuntuacion() +1;
         lblPuntuacion.setText(String.valueOf(codigoDescuento.getPuntuacion() + 1));
     }
 
@@ -110,12 +105,11 @@ public class VerCodigoDescuentoController {
         } catch (IOException ioException) {
             System.out.println(ioException);
         }
-        //int nuevaPuntuacion = codigoDescuento.getPuntuacion() +1;
         lblPuntuacion.setText(String.valueOf(codigoDescuento.getPuntuacion() - 1));
     }
 
     public void clicAtras(){
-        MainController.activate("InicioOfertas", "Ver Oferta", MainController.Sizes.MID);
+        MainController.activate("InicioCodigos", "Ver Oferta", MainController.Sizes.MID);
     }
 
 

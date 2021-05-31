@@ -5,10 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import modelo.CodigoDescuento;
+import utils.LimitadorTextField;
 import vista.MainController;
 
 import java.io.IOException;
-import java.net.ConnectException;
 
 public class PublicarCodigoController {
     @FXML
@@ -22,13 +22,21 @@ public class PublicarCodigoController {
     @FXML
     private ComboBox cmbCategoria;
     @FXML
-    private TextField txtVinculo;
+    private TextField txtCodigo;
 
     private CodigoDescuento CodigoDescuento;
 
     public void initialize() {
         CodigoDescuento = new CodigoDescuento();
         llenarComboCategorias();
+        limitarTextfields();
+    }
+
+    public void limitarTextfields() {
+        LimitadorTextField.limitarTamanio(txtTitulo,30);
+        LimitadorTextField.limitarTamanioArea(txtDescripcion, 200);
+        LimitadorTextField.limitarTamanio(txtCodigo, 100);
+
     }
 
     public void instanciaCodigoDescuento() {
@@ -37,7 +45,7 @@ public class PublicarCodigoController {
         CodigoDescuento.setFechaCreacion(String.valueOf(fechaCreacion.getValue()));
         CodigoDescuento.setFechaFin(String.valueOf(fechaFin.getValue()));
         CodigoDescuento.setCategoriaCmbBox((String) cmbCategoria.getValue());
-        CodigoDescuento.setCodigo(txtVinculo.getText());
+        CodigoDescuento.setCodigo(txtCodigo.getText());
         System.out.println(CodigoDescuento.toString());
     }
 

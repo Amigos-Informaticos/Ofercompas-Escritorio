@@ -12,9 +12,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
+import modelo.Categoria;
 import modelo.CodigoDescuento;
 import modelo.MiembroOfercompas;
-import modelo.Oferta;
 import vista.InicioCodigosListener;
 import vista.MainController;
 
@@ -42,6 +42,8 @@ public class InicioCodigosController {
     private GridPane grid;
 
     private int pagina = 1;
+
+    private int categoria = -1;
 
     private List<CodigoDescuento> codigosDescuento = new ArrayList<>();
 
@@ -84,12 +86,12 @@ public class InicioCodigosController {
         return codigos;
     }
 
-    public List<CodigoDescuento> cargarCodigos() {
+    public List<CodigoDescuento> cargarCodigos(int pagina, int categoria) {
         List<CodigoDescuento> codigoDescuentos = new ArrayList<>();
         CodigoDescuento codigoDescuento = new CodigoDescuento();
         CodigoDescuento[] codigosArray = new CodigoDescuento[0];
         try {
-            codigosArray = codigoDescuento.obtenerCodigos(1,-1);
+            codigosArray = codigoDescuento.obtenerCodigos(pagina,categoria);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -103,7 +105,7 @@ public class InicioCodigosController {
 
 
     public void llenarPagina(){
-        codigosDescuento.addAll(this.cargarCodigos());
+        codigosDescuento.addAll(this.cargarCodigos(pagina, categoria));
         int columna = 0;
         int fila = 0;
         try {
@@ -153,7 +155,11 @@ public class InicioCodigosController {
     }
 
     public void clicPublicarOferta(){
-        MainController.activate("PublicarOferta","Regístrate",MainController.Sizes.MID);
+        MainController.activate("PublicarOferta","Publicar Oferta",MainController.Sizes.MID);
+    }
+
+    public void clicPublicarCodigo(){
+        MainController.activate("PublicarCodigo","Publicar Codigo",MainController.Sizes.MID);
     }
 
     public void avanzarPagina() {
@@ -174,8 +180,52 @@ public class InicioCodigosController {
 
     }
 
-    public void cambiarACodigos() {
-        MainController.activate("InicioCodigos", "Códigos", MainController.Sizes.MID);
+    public void cambiarAOfertas() {
+        MainController.activate("InicioOfertas", "Inicio", MainController.Sizes.MID);
+    }
+
+    public void buscarPorCategoria() {
+        String categoriaBuscar = cmbCategoria.getValue();
+        System.out.println("Categoria:" + categoriaBuscar);
+        if (categoriaBuscar != null) {
+            cambiarCategoria(cmbCategoria.getValue());
+            this.codigosDescuento.clear();
+            grid.getChildren().clear();
+            llenarPagina();
+            this.lblPagina.setText(String.valueOf(1));
+            System.out.println(pagina);
+            System.out.println(codigosDescuento);
+        }
+    }
+
+    public void cambiarCategoria(String categoria) {
+        System.out.println(categoria);
+        switch (categoria) {
+            case "Tecnologia":
+                this.categoria = Categoria.TECNOLOGIA.getIndice();
+                break;
+            case "Moda de mujer":
+                this.categoria = Categoria.MODAMUJER.getIndice();
+                break;
+            case "Moda de hombre":
+                this.categoria = Categoria.MODAHOMBRE.getIndice();
+                break;
+            case "Hogar":
+                this.categoria = Categoria.HOGAR.getIndice();
+                break;
+            case "Mascotas":
+                this.categoria = Categoria.MASCOTAS.getIndice();
+                break;
+            case "Viaje":
+                this.categoria = Categoria.VIAJE.getIndice();
+                break;
+            case "Comida y bebida":
+                this.categoria = Categoria.COMIDABEBIDA.getIndice();
+                break;
+            default:
+                this.categoria = Categoria.TECNOLOGIA.getIndice();
+                break;
+        }
     }
 
 

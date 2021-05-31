@@ -28,11 +28,10 @@
                         </Label>
                      </children>
                   </HBox>
-                  <ComboBox fx:id="cmbCategoria" prefWidth="150.0" promptText="Categoría" styleClass="comboBox" stylesheets="@estilo/estilo.css" />
                   <MenuButton fx:id="menuPublicar" mnemonicParsing="false" prefWidth="150.0" styleClass="comboBox" stylesheets="@estilo/estilo.css" text="Publicar">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#clicPublicarOferta" text="Oferta" />
-                      <MenuItem mnemonicParsing="false" text="Código" />
+                      <MenuItem mnemonicParsing="false" onAction="#clicPublicarCodigo" text="Código" />
                     </items>
                      <VBox.margin>
                         <Insets top="20.0" />
@@ -52,6 +51,15 @@
                   <Button mnemonicParsing="false" onAction="#cambiarACodigos" prefWidth="150.0" styleClass="add-btn" text="Ir a Códigos">
                      <VBox.margin>
                         <Insets top="20.0" />
+                     </VBox.margin>
+                  </Button>
+                  <ComboBox fx:id="cmbCategoria" prefWidth="150.0" promptText="Categoría" styleClass="comboBox" stylesheets="@estilo/estilo.css">
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin></ComboBox>
+                  <Button mnemonicParsing="false" onAction="#buscarPorCategoria" prefWidth="150.0" styleClass="add-btn" text="Aplicar filtro">
+                     <VBox.margin>
+                        <Insets top="10.0" />
                      </VBox.margin>
                   </Button>
                </children>

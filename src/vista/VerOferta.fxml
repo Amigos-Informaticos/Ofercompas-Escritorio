@@ -21,7 +21,10 @@
          <image>
             <Image url="@imagenes/img_login.jpg" />
          </image></ImageView>
-      <Label fx:id="lblDescripcion" alignment="TOP_LEFT" layoutX="252.0" layoutY="86.0" prefHeight="91.0" prefWidth="300.0" text="Descripcion" />
+      <Label fx:id="lblDescripcion" alignment="TOP_LEFT" layoutX="252.0" layoutY="86.0" prefHeight="91.0" prefWidth="300.0" text="Descripcion">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
       <Label fx:id="lblPrecio" layoutX="36.0" layoutY="221.0" prefHeight="30.0" prefWidth="86.0" text="Precio" textFill="#00c946">
          <font>
             <Font name="System Bold" size="20.0" />

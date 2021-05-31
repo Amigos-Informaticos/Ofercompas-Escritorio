@@ -12,7 +12,10 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.PublicarCodigoController">
    <children>
       <TextField fx:id="txtTitulo" layoutX="140.0" layoutY="47.0" prefHeight="25.0" prefWidth="291.0" promptText="Titulo" />
-      <TextArea fx:id="txtDescripcion" layoutX="140.0" layoutY="86.0" prefHeight="92.0" prefWidth="291.0" promptText="Descripcion" />
+      <TextArea fx:id="txtDescripcion" layoutX="140.0" layoutY="86.0" prefHeight="92.0" prefWidth="291.0" promptText="Descripcion">
+         <font>
+            <Font size="14.0" />
+         </font></TextArea>
       <ComboBox fx:id="cmbCategoria" layoutX="221.0" layoutY="290.0" prefHeight="25.0" prefWidth="121.0" promptText="Categoria" />
       <DatePicker fx:id="fechaCreacion" layoutX="71.0" layoutY="252.0" promptText="Cuando inicia" />
       <DatePicker fx:id="fechaFin" layoutX="300.0" layoutY="252.0" promptText="Cuando termina" />
@@ -23,7 +26,7 @@
             <Font name="System Italic" size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="txtVinculo" alignment="CENTER" layoutX="140.0" layoutY="194.0" prefHeight="35.0" prefWidth="291.0" promptText="Escribe el Código aquí">
+      <TextField fx:id="txtCodigo" alignment="CENTER" layoutX="140.0" layoutY="194.0" prefHeight="35.0" prefWidth="291.0" promptText="Escribe el Código aquí">
          <font>
             <Font size="18.0" />
          </font></TextField>

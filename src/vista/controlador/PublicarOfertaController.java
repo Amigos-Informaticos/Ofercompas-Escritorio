@@ -5,10 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import modelo.Oferta;
+import utils.LimitadorTextField;
 import vista.MainController;
 
 import java.io.IOException;
-import java.net.ConnectException;
 
 public class PublicarOfertaController {
     @FXML
@@ -31,7 +31,19 @@ public class PublicarOfertaController {
     public void initialize() {
         oferta = new Oferta();
         llenarComboCategorias();
+        limitarTextfields();
     }
+
+    public void limitarTextfields() {
+        LimitadorTextField.limitarTamanio(txtTitulo,30);
+        LimitadorTextField.limitarTamanioArea(txtDescripcion, 200);
+        LimitadorTextField.limitarTamanio(txtPrecio, 6);
+        LimitadorTextField.limitarTamanio(txtVinculo, 2048);
+
+        LimitadorTextField.soloNumeros(txtPrecio);
+    }
+
+
 
     public void instanciaOferta() {
         oferta.setTitulo(txtTitulo.getText());
