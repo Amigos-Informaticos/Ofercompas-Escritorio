@@ -177,4 +177,9 @@ public abstract class Publicacion {
         HashMap respuesta = api.connect("POST", ("publicaciones/" + this.idPublicacion + "/puntuaciones"), null, parametros);
         return (int) respuesta.get("status");
     }
+
+    public int eliminar() throws IOException {
+        HashMap respuesta = this.api.connect("DELETE", ("publicaciones/"+this.idPublicacion), null, null);
+        return (int) respuesta.get("status");
+    }
 }

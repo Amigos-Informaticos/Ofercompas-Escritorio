@@ -60,17 +60,17 @@
       <Label fx:id="lblFechaFin" alignment="CENTER" contentDisplay="CENTER" layoutX="432.0" layoutY="194.0" prefHeight="17.0" prefWidth="129.0" text="Termina: 000-00-00" />
       <Pane layoutX="4.0" layoutY="4.0" prefHeight="50.0" prefWidth="592.0" style="-fx-background-color: #00AE07;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fx:id="btnEliminar" fitHeight="35.0" fitWidth="35.0" layoutX="551.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../AppData/Local/Temp/icons8_trash_24px.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="btnActualizar" fitHeight="35.0" fitWidth="35.0" layoutX="507.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../AppData/Local/Temp/icons8_edit_24px.png" />
-               </image>
-            </ImageView>
             <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#clicAtras" text="Atrás" />
+            <ImageView fx:id="btnEliminar" fitHeight="30.0" fitWidth="30.0" layoutX="556.0" layoutY="10.0" onMouseClicked="#eliminar" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/delete_btn.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="btnActualizar" fitHeight="30.0" fitWidth="30.0" layoutX="516.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/edit_btn.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

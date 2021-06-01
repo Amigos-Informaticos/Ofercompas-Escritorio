@@ -64,7 +64,7 @@ public class InicioOfertasController {
 
     public void guardaMiembro() {
         MiembroOfercompas miembroOfercompas = new MiembroOfercompas();
-        miembroOfercompas.setIdMiembro(16);
+        miembroOfercompas.setIdMiembro(7);
         MainController.save("miembro", miembroOfercompas);
     }
 

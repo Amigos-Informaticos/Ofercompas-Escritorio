@@ -3,6 +3,7 @@ package vista.controlador;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -122,7 +123,7 @@ public class VerOfertaController {
         MiembroOfercompas miembroOfercompas = (MiembroOfercompas) MainController.get("miembro");
         System.out.println(miembroOfercompas.getIdMiembro());
         try {
-            oferta.puntuar(miembroOfercompas.getIdMiembro(),1);
+            oferta.puntuar(miembroOfercompas.getIdMiembro(), 1);
         } catch (IOException ioException) {
             System.out.println(ioException);
         }
@@ -132,24 +133,35 @@ public class VerOfertaController {
     public void puntuarNegativamente() {
         MiembroOfercompas miembroOfercompas = (MiembroOfercompas) MainController.get("miembro");
         try {
-            oferta.puntuar(miembroOfercompas.getIdMiembro(),0);
+            oferta.puntuar(miembroOfercompas.getIdMiembro(), 0);
         } catch (IOException ioException) {
             System.out.println(ioException);
         }
         lblPuntuacion.setText(String.valueOf(oferta.getPuntuacion() - 1));
     }
 
-    public void clicAtras(){
+    public void clicAtras() {
         MainController.activate("InicioOfertas", "Ver Oferta", MainController.Sizes.MID);
     }
 
-    public void soyAutor(){
-        if (miembroOfercompas.getIdMiembro() == oferta.getIdPublicador()){
+    public void soyAutor() {
+        System.out.println("Miembro: " + miembroOfercompas.getIdMiembro() + " Oferta: " + oferta.getIdPublicador());
+        if (miembroOfercompas.getIdMiembro() == oferta.getIdPublicador()) {
             btnEliminar.setVisible(true);
             btnActualizar.setVisible(true);
-        }else {
+        } else {
             btnEliminar.setVisible(false);
             btnActualizar.setVisible(false);
+        }
+    }
+
+    public void eliminar(){
+        if (MainController.alert(Alert.AlertType.CONFIRMATION, "¿Está seguro que desea eliminar esta Oferta?", "")){
+            try {
+                oferta.eliminar();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }
     }
 
