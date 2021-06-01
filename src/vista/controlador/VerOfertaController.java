@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import modelo.Comentario;
@@ -40,17 +41,28 @@ public class VerOfertaController {
     @FXML
     private VBox vbox;
 
+    @FXML
+    private ImageView btnEliminar;
+
+    @FXML
+    private ImageView btnActualizar;
+
     private Oferta oferta;
+
+    private MiembroOfercompas miembroOfercompas;
 
     private List<Comentario> comentarios = new ArrayList<>();
 
     public void initialize() {
+        miembroOfercompas = (MiembroOfercompas) MainController.get("miembro");
+        oferta = (Oferta) MainController.get("oferta");
         mostrarInformacionOferta();
         this.mostrarComentarios();
+
+        soyAutor();
     }
 
     public void mostrarInformacionOferta() {
-        oferta = (Oferta) MainController.get("oferta");
         this.lblTitulo.setText(oferta.getTitulo());
         this.lblDescripcion.setText(oferta.getDescripcion());
         this.lblFechaInicio.setText(oferta.getFechaCreacion());
@@ -114,7 +126,6 @@ public class VerOfertaController {
         } catch (IOException ioException) {
             System.out.println(ioException);
         }
-        //int nuevaPuntuacion = oferta.getPuntuacion() +1;
         lblPuntuacion.setText(String.valueOf(oferta.getPuntuacion() + 1));
     }
 
@@ -125,12 +136,21 @@ public class VerOfertaController {
         } catch (IOException ioException) {
             System.out.println(ioException);
         }
-        //int nuevaPuntuacion = oferta.getPuntuacion() +1;
         lblPuntuacion.setText(String.valueOf(oferta.getPuntuacion() - 1));
     }
 
     public void clicAtras(){
         MainController.activate("InicioOfertas", "Ver Oferta", MainController.Sizes.MID);
+    }
+
+    public void soyAutor(){
+        if (miembroOfercompas.getIdMiembro() == oferta.getIdPublicador()){
+            btnEliminar.setVisible(true);
+            btnActualizar.setVisible(true);
+        }else {
+            btnEliminar.setVisible(false);
+            btnActualizar.setVisible(false);
+        }
     }
 
 

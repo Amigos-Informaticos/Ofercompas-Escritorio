@@ -80,6 +80,8 @@ public class Oferta extends Publicacion {
         oferta.setPrecio(ofertaJson.get("precio").getAsString());
         oferta.setVinculo(ofertaJson.get("vinculo").getAsString());
         oferta.setPuntuacion(Integer.parseInt(String.valueOf(ofertaJson.get("puntuacion"))));
+        oferta.setIdPublicador(Integer.parseInt(String.valueOf(ofertaJson.get("publicador"))));
+        System.out.println(oferta.getIdPublicador());
         return oferta;
     }
 

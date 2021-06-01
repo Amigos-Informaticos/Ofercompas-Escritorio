@@ -7,6 +7,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -42,7 +43,6 @@
             <VBox fx:id="vbox" prefHeight="160.0" prefWidth="320.0" style="-fx-background-color: #bfbfbf;" />
          </content>
       </ScrollPane>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#clicAtras" text="Atrás" />
       <Button layoutX="348.0" layoutY="322.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Comentar" />
       <TextField layoutX="348.0" layoutY="293.0" prefHeight="25.0" prefWidth="246.0" promptText="Escribe aquí tu comentario" />
       <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="206.0" layoutY="221.0" onMouseClicked="#puntuarPositivamente" pickOnBounds="true" preserveRatio="true">
@@ -58,5 +58,20 @@
       <Button layoutX="35.0" layoutY="190.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" text="Ver Video" />
       <Label fx:id="lblFechaInicio" alignment="CENTER" contentDisplay="CENTER" layoutX="284.0" layoutY="194.0" prefHeight="17.0" prefWidth="129.0" text="Inicia: 000-00-00" />
       <Label fx:id="lblFechaFin" alignment="CENTER" contentDisplay="CENTER" layoutX="432.0" layoutY="194.0" prefHeight="17.0" prefWidth="129.0" text="Termina: 000-00-00" />
+      <Pane layoutX="4.0" layoutY="4.0" prefHeight="50.0" prefWidth="592.0" style="-fx-background-color: #00AE07;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="btnEliminar" fitHeight="35.0" fitWidth="35.0" layoutX="551.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../AppData/Local/Temp/icons8_trash_24px.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="btnActualizar" fitHeight="35.0" fitWidth="35.0" layoutX="507.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../AppData/Local/Temp/icons8_edit_24px.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#clicAtras" text="Atrás" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

@@ -24,6 +24,17 @@ public abstract class Publicacion {
     @SerializedName("idPublicacion")
     protected int idPublicacion;
 
+    public int getIdPublicador() {
+        return idPublicador;
+    }
+
+    public void setIdPublicador(int idPublicador) {
+        this.idPublicador = idPublicador;
+    }
+
+    @SerializedName("idPublicador")
+    protected int idPublicador;
+
     protected API api;
 
     public int getIdPublicacion() {
@@ -121,6 +132,7 @@ public abstract class Publicacion {
                 ", puntuacion=" + puntuacion +
                 ", estado=" + estado +
                 ", categoria=" + categoria +
+                ", publicador=" + idPublicador +
                 '}';
     }
 

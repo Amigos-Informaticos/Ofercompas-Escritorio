@@ -59,6 +59,7 @@ public class InicioOfertasController {
         };
         llenarPagina();
         guardaMiembro();
+        System.out.println(ofertas.get(1).getIdPublicador());
     }
 
     public void guardaMiembro() {
@@ -117,6 +118,10 @@ public class InicioOfertasController {
         MainController.activate("PublicarOferta", "Regístrate", MainController.Sizes.MID);
     }
 
+    public void clicPublicarCodigo() {
+        MainController.activate("PublicarCodigo", "Regístrate", MainController.Sizes.MID);
+    }
+
     public void verOferta(Oferta oferta) {
         System.out.println(oferta.toString());
         MainController.save("oferta", oferta);
@@ -138,7 +143,6 @@ public class InicioOfertasController {
         this.ofertas.clear();
         vbox.getChildren().clear();
         llenarPagina();
-
     }
 
     public void cambiarACodigos() {
