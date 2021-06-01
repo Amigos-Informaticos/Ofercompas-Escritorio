@@ -11,6 +11,8 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import modelo.Categoria;
+import modelo.MiembroOfercompas;
 import modelo.Oferta;
 import vista.MainController;
 import vista.MyListener;
@@ -40,6 +42,8 @@ public class InicioOfertasController {
 
     private int pagina = 1;
 
+    private int categoria = -1;
+
     private MyListener myListener;
 
     private List<Oferta> ofertas = new ArrayList();
@@ -54,10 +58,18 @@ public class InicioOfertasController {
             }
         };
         llenarPagina();
+        guardaMiembro();
+        System.out.println(ofertas.get(1).getIdPublicador());
+    }
+
+    public void guardaMiembro() {
+        MiembroOfercompas miembroOfercompas = new MiembroOfercompas();
+        miembroOfercompas.setIdMiembro(7);
+        MainController.save("miembro", miembroOfercompas);
     }
 
     public void llenarPagina() {
-        ofertas.addAll(this.cargarOfertas(pagina));
+        ofertas.addAll(this.cargarOfertas(pagina, categoria));
         try {
             for (int i = 0; i < ofertas.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -73,12 +85,12 @@ public class InicioOfertasController {
         }
     }
 
-    public List<Oferta> cargarOfertas(int pagina) {
+    public List<Oferta> cargarOfertas(int pagina, int categoria) {
         List<Oferta> ofertas = new ArrayList<>();
         Oferta oferta = new Oferta();
         Oferta[] ofertasArray = new modelo.Oferta[0];
         try {
-            ofertasArray = oferta.obtenerOfertas(pagina, -1);
+            ofertasArray = oferta.obtenerOfertas(pagina, categoria);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -88,9 +100,6 @@ public class InicioOfertasController {
         }
         return ofertas;
     }
-
-
-
 
     public void llenarComboCategorias() {
         ObservableList<String> listaCategorias = FXCollections.observableArrayList();
@@ -107,6 +116,10 @@ public class InicioOfertasController {
 
     public void clicPublicarOferta() {
         MainController.activate("PublicarOferta", "Regístrate", MainController.Sizes.MID);
+    }
+
+    public void clicPublicarCodigo() {
+        MainController.activate("PublicarCodigo", "Regístrate", MainController.Sizes.MID);
     }
 
     public void verOferta(Oferta oferta) {
@@ -130,10 +143,53 @@ public class InicioOfertasController {
         this.ofertas.clear();
         vbox.getChildren().clear();
         llenarPagina();
-
     }
 
     public void cambiarACodigos() {
         MainController.activate("InicioCodigos", "Códigos", MainController.Sizes.MID);
+    }
+
+    public void buscarPorCategoria() {
+        String categoriaBuscar = cmbCategoria.getValue();
+        System.out.println("Categoria:" + categoriaBuscar);
+        if (categoriaBuscar != null) {
+            cambiarCategoria(cmbCategoria.getValue());
+            this.ofertas.clear();
+            vbox.getChildren().clear();
+            llenarPagina();
+            this.lblPagina.setText(String.valueOf(1));
+            System.out.println(pagina);
+            System.out.println(ofertas);
+        }
+    }
+
+    public void cambiarCategoria(String categoria) {
+        System.out.println(categoria);
+        switch (categoria) {
+            case "Tecnologia":
+                this.categoria = Categoria.TECNOLOGIA.getIndice();
+                break;
+            case "Moda de mujer":
+                this.categoria = Categoria.MODAMUJER.getIndice();
+                break;
+            case "Moda de hombre":
+                this.categoria = Categoria.MODAHOMBRE.getIndice();
+                break;
+            case "Hogar":
+                this.categoria = Categoria.HOGAR.getIndice();
+                break;
+            case "Mascotas":
+                this.categoria = Categoria.MASCOTAS.getIndice();
+                break;
+            case "Viaje":
+                this.categoria = Categoria.VIAJE.getIndice();
+                break;
+            case "Comida y bebida":
+                this.categoria = Categoria.COMIDABEBIDA.getIndice();
+                break;
+            default:
+                this.categoria = Categoria.TECNOLOGIA.getIndice();
+                break;
+        }
     }
 }

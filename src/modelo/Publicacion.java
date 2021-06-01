@@ -3,6 +3,9 @@ package modelo;
 import com.google.gson.annotations.SerializedName;
 import datos.API;
 
+import java.io.IOException;
+import java.util.HashMap;
+
 public abstract class Publicacion {
     @SerializedName("titulo")
     protected String titulo;
@@ -20,6 +23,17 @@ public abstract class Publicacion {
     protected Categoria categoria;
     @SerializedName("idPublicacion")
     protected int idPublicacion;
+
+    public int getIdPublicador() {
+        return idPublicador;
+    }
+
+    public void setIdPublicador(int idPublicador) {
+        this.idPublicador = idPublicador;
+    }
+
+    @SerializedName("idPublicador")
+    protected int idPublicador;
 
     protected API api;
 
@@ -118,6 +132,7 @@ public abstract class Publicacion {
                 ", puntuacion=" + puntuacion +
                 ", estado=" + estado +
                 ", categoria=" + categoria +
+                ", publicador=" + idPublicador +
                 '}';
     }
 
@@ -155,4 +170,16 @@ public abstract class Publicacion {
 
     }
 
+    public int puntuar(int idMiembro, int esPositiva) throws IOException {
+        HashMap<String, String> parametros = new HashMap<>();
+        parametros.put("idMiembro", String.valueOf(idMiembro));
+        parametros.put("esPositiva", String.valueOf(esPositiva));
+        HashMap respuesta = api.connect("POST", ("publicaciones/" + this.idPublicacion + "/puntuaciones"), null, parametros);
+        return (int) respuesta.get("status");
+    }
+
+    public int eliminar() throws IOException {
+        HashMap respuesta = this.api.connect("DELETE", ("publicaciones/"+this.idPublicacion), null, null);
+        return (int) respuesta.get("status");
+    }
 }

@@ -7,6 +7,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -21,7 +22,10 @@
          <image>
             <Image url="@imagenes/img_login.jpg" />
          </image></ImageView>
-      <Label fx:id="lblDescripcion" alignment="TOP_LEFT" layoutX="252.0" layoutY="86.0" prefHeight="91.0" prefWidth="300.0" text="Descripcion" />
+      <Label fx:id="lblDescripcion" alignment="TOP_LEFT" layoutX="252.0" layoutY="86.0" prefHeight="91.0" prefWidth="300.0" text="Descripcion">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
       <Label fx:id="lblPrecio" layoutX="36.0" layoutY="221.0" prefHeight="30.0" prefWidth="86.0" text="Precio" textFill="#00c946">
          <font>
             <Font name="System Bold" size="20.0" />
@@ -39,15 +43,14 @@
             <VBox fx:id="vbox" prefHeight="160.0" prefWidth="320.0" style="-fx-background-color: #bfbfbf;" />
          </content>
       </ScrollPane>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Atrás" />
       <Button layoutX="348.0" layoutY="322.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Comentar" />
       <TextField layoutX="348.0" layoutY="293.0" prefHeight="25.0" prefWidth="246.0" promptText="Escribe aquí tu comentario" />
-      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="206.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="206.0" layoutY="221.0" onMouseClicked="#puntuarPositivamente" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@imagenes/like.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="115.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="115.0" layoutY="221.0" onMouseClicked="#puntuarNegativamente" pickOnBounds="true" preserveRatio="true" rotate="180.0">
          <image>
             <Image url="@imagenes/dislike.png" />
          </image>
@@ -55,5 +58,20 @@
       <Button layoutX="35.0" layoutY="190.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" text="Ver Video" />
       <Label fx:id="lblFechaInicio" alignment="CENTER" contentDisplay="CENTER" layoutX="284.0" layoutY="194.0" prefHeight="17.0" prefWidth="129.0" text="Inicia: 000-00-00" />
       <Label fx:id="lblFechaFin" alignment="CENTER" contentDisplay="CENTER" layoutX="432.0" layoutY="194.0" prefHeight="17.0" prefWidth="129.0" text="Termina: 000-00-00" />
+      <Pane layoutX="4.0" layoutY="4.0" prefHeight="50.0" prefWidth="592.0" style="-fx-background-color: #00AE07;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#clicAtras" text="Atrás" />
+            <ImageView fx:id="btnEliminar" fitHeight="30.0" fitWidth="30.0" layoutX="556.0" layoutY="10.0" onMouseClicked="#eliminar" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/delete_btn.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="btnActualizar" fitHeight="30.0" fitWidth="30.0" layoutX="516.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/edit_btn.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

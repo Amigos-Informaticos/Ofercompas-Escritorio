@@ -38,7 +38,7 @@ public class CodigoDescuento extends Publicacion{
         codigo.put("fechaCreacion", this.fechaCreacion);
         codigo.put("fechaFin", this.fechaFin);
         codigo.put("categoria", String.valueOf(this.categoria.getIndice()));
-        codigo.put("publicador", String.valueOf(this.idPublicacion));
+        codigo.put("publicador", String.valueOf(7));
         codigo.put("codigo", this.codigo);
 
         return codigo;

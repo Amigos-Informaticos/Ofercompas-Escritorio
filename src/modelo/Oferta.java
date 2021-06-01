@@ -58,7 +58,7 @@ public class Oferta extends Publicacion {
         oferta.put("categoria", String.valueOf(this.categoria.getIndice()));
         oferta.put("vinculo", this.getVinculo());
         oferta.put("precio", this.precio);
-        oferta.put("publicador", String.valueOf(this.idPublicacion));
+        oferta.put("publicador", String.valueOf(7));
         System.out.println(oferta.toString());
 
         return oferta;
@@ -68,7 +68,6 @@ public class Oferta extends Publicacion {
     public boolean estaCompleta() {
         return super.estaCompleta() && this.vinculo != null && this.precio != null;
     }
-
 
 
     public Oferta deJsonAObjeto(JsonObject ofertaJson) {
@@ -81,6 +80,8 @@ public class Oferta extends Publicacion {
         oferta.setPrecio(ofertaJson.get("precio").getAsString());
         oferta.setVinculo(ofertaJson.get("vinculo").getAsString());
         oferta.setPuntuacion(Integer.parseInt(String.valueOf(ofertaJson.get("puntuacion"))));
+        oferta.setIdPublicador(Integer.parseInt(String.valueOf(ofertaJson.get("publicador"))));
+        System.out.println(oferta.getIdPublicador());
         return oferta;
     }
 
@@ -99,6 +100,7 @@ public class Oferta extends Publicacion {
 
     private Oferta[] getOfertas(HashMap<String, String> parametros) throws IOException {
         HashMap respuesta = this.api.connect("GET", "ofertas", parametros, null, null, true);
+        System.out.println(respuesta);
         Oferta[] ofertasConvertidas = new Oferta[0];
         if (respuesta.get("status").equals(200)) {
             JsonArray ofertasObtenidas = (JsonArray) respuesta.get("json");

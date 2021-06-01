@@ -4,32 +4,30 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import modelo.Oferta;
+import modelo.CodigoDescuento;
 import utils.LimitadorTextField;
 import vista.MainController;
 
 import java.io.IOException;
 
-public class PublicarOfertaController {
+public class PublicarCodigoController {
     @FXML
     private TextField txtTitulo;
     @FXML
     private TextArea txtDescripcion;
-    @FXML
-    private TextField txtPrecio;
-    @FXML
-    private TextField txtVinculo;
     @FXML
     private DatePicker fechaCreacion;
     @FXML
     private DatePicker fechaFin;
     @FXML
     private ComboBox cmbCategoria;
+    @FXML
+    private TextField txtCodigo;
 
-    private Oferta oferta;
+    private CodigoDescuento CodigoDescuento;
 
     public void initialize() {
-        oferta = new Oferta();
+        CodigoDescuento = new CodigoDescuento();
         llenarComboCategorias();
         limitarTextfields();
     }
@@ -37,23 +35,18 @@ public class PublicarOfertaController {
     public void limitarTextfields() {
         LimitadorTextField.limitarTamanio(txtTitulo,30);
         LimitadorTextField.limitarTamanioArea(txtDescripcion, 200);
-        LimitadorTextField.limitarTamanio(txtPrecio, 6);
-        LimitadorTextField.limitarTamanio(txtVinculo, 2048);
+        LimitadorTextField.limitarTamanio(txtCodigo, 100);
 
-        LimitadorTextField.soloNumeros(txtPrecio);
     }
 
-
-
-    public void instanciaOferta() {
-        oferta.setTitulo(txtTitulo.getText());
-        oferta.setDescripcion(txtDescripcion.getText());
-        oferta.setPrecio(txtPrecio.getText());
-        oferta.setFechaCreacion(String.valueOf(fechaCreacion.getValue()));
-        oferta.setFechaFin(String.valueOf(fechaFin.getValue()));
-        oferta.setVinculo(txtVinculo.getText());
-        oferta.setCategoriaCmbBox((String) cmbCategoria.getValue());
-        System.out.println(oferta.toString());
+    public void instanciaCodigoDescuento() {
+        CodigoDescuento.setTitulo(txtTitulo.getText());
+        CodigoDescuento.setDescripcion(txtDescripcion.getText());
+        CodigoDescuento.setFechaCreacion(String.valueOf(fechaCreacion.getValue()));
+        CodigoDescuento.setFechaFin(String.valueOf(fechaFin.getValue()));
+        CodigoDescuento.setCategoriaCmbBox((String) cmbCategoria.getValue());
+        CodigoDescuento.setCodigo(txtCodigo.getText());
+        System.out.println(CodigoDescuento.toString());
     }
 
     public void llenarComboCategorias() {
@@ -70,10 +63,10 @@ public class PublicarOfertaController {
     }
 
     public void publicar() {
-        instanciaOferta();
-        if (oferta.estaCompleta()) {
+        instanciaCodigoDescuento();
+        if (CodigoDescuento.estaCompleta()) {
             try {
-                if(oferta.publicar() == 201) {
+                if(CodigoDescuento.publicar() == 201) {
                     MainController.alert(Alert.AlertType.INFORMATION,
                             "Registro Exitoso",
                             "Publicación registrada exitosamente");
@@ -93,6 +86,6 @@ public class PublicarOfertaController {
     }
 
     public void clicAtras(){
-        MainController.activate("InicioOfertas","Inicio",MainController.Sizes.MID);
+        MainController.activate("InicioCodigoDescuentos","Inicio",MainController.Sizes.MID);
     }
 }

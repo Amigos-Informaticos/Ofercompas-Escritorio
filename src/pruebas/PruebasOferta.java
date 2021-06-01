@@ -58,7 +58,7 @@ public class PruebasOferta {
         try {
             instanciaOferta();
             Oferta[] ofertas = ofertaPrueba.obtenerOfertas(1,-1);
-            ofertas[0].toString();
+            System.out.println(ofertas[0].getIdPublicacion());
             assertNotNull(ofertas[0].getTitulo());
         } catch (IOException e) {
             System.out.println(e.getMessage());
