@@ -7,6 +7,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -36,7 +37,6 @@
             <VBox fx:id="vbox" prefHeight="160.0" prefWidth="320.0" style="-fx-background-color: #bfbfbf;" />
          </content>
       </ScrollPane>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#clicAtras" text="Atrás" />
       <Button layoutX="348.0" layoutY="322.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Comentar" />
       <TextField layoutX="348.0" layoutY="293.0" prefHeight="25.0" prefWidth="246.0" promptText="Escribe aquí tu comentario" />
       <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="167.0" layoutY="222.0" onMouseClicked="#puntuarPositivamente" pickOnBounds="true" preserveRatio="true">
@@ -56,5 +56,20 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <Pane layoutX="7.0" prefHeight="50.0" prefWidth="592.0" style="-fx-background-color: #f5aa42;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#clicAtras" text="Atrás" />
+            <ImageView fx:id="btnEliminar" fitHeight="30.0" fitWidth="30.0" layoutX="556.0" layoutY="10.0" onMouseClicked="#eliminar" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/delete_btn.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="btnActualizar" fitHeight="30.0" fitWidth="30.0" layoutX="516.0" layoutY="10.0" onMouseClicked="#actualizar" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagenes/edit_btn.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

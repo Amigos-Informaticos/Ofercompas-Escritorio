@@ -92,4 +92,9 @@ public class CodigoDescuento extends Publicacion{
         codigoDescuento.setCodigo(String.valueOf(codigoJson.get("codigo")));
         return codigoDescuento;
     }
+
+    public int actualizar() throws IOException {
+        HashMap respuesta = this.api.connect("PUT", ("codigos"+this.idPublicacion), null, this.obtenerHashmap());
+        return (int) respuesta.get("status");
+    }
 }

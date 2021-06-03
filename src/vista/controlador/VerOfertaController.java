@@ -165,5 +165,9 @@ public class VerOfertaController {
         }
     }
 
+    public void actualizar(){
+        MainController.activate("ActualizarOferta", "Actualizar Oferta", MainController.Sizes.MID);
+    }
+
 
 }

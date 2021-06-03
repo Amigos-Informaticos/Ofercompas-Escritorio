@@ -120,4 +120,8 @@ public class Oferta extends Publicacion {
     }
 
 
+    public int actualizar() throws IOException {
+        HashMap respuesta = this.api.connect("PUT", ("ofertas"+this.idPublicacion), null, this.obtenerHashmap());
+        return (int) respuesta.get("status");
+    }
 }
