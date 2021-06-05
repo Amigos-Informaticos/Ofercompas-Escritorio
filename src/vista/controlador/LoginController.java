@@ -7,6 +7,7 @@ import modelo.MiembroOfercompas;
 import vista.MainController;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.util.HashMap;
 
 public class LoginController {
@@ -60,12 +61,13 @@ public class LoginController {
                             "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
                 }
             } catch (IOException ioException) {
+                ioException.printStackTrace();
                 MainController.alert(Alert.AlertType.ERROR,
-                        "Error del servidor",
+                        "Error del servidor ioExcep",
                         "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
             } catch (NullPointerException nullPointerException){
                 MainController.alert(Alert.AlertType.ERROR,
-                        "Error del servidor",
+                        "Error del servidor  null pointer ",
                         "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
             }
 
@@ -91,7 +93,7 @@ public class LoginController {
         boolean campoEmailValido = false;
         boolean camposValidos = false;
         if (!this.txtEmail.getText().isEmpty()) {
-            if (MiembroOfercompas.esEmail(this.txtEmail.getText())) {
+            if (MiembroOfercompas.validarEmail(this.txtEmail.getText())) {
                 campoEmailValido = true;
             } else {
                 MainController.alert(Alert.AlertType.WARNING,

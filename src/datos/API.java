@@ -7,15 +7,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.ConnectException;
+import java.net.CookieManager;
+import java.net.HttpCookie;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class API {
+    private static CookieManager cookieManager = new CookieManager();
     private String URL = "http://127.0.0.1";
     private int port = 5000;
 
@@ -59,6 +61,20 @@ public class API {
                 connection.setRequestProperty(entry.getKey(), entry.getValue());
             }
         }
+        if (API.cookieManager.getCookieStore().getCookies().size() > 0) {
+            for (int i = 0; i < API.cookieManager.getCookieStore().getCookies().size(); i++) {
+                String cookieValue = API.cookieManager.getCookieStore().getCookies().get(i).getName()
+                        + "="
+                        + API.cookieManager.getCookieStore().getCookies().get(i).getValue();
+                if (i < API.cookieManager.getCookieStore().getCookies().size() - 1) {
+                    cookieValue += ";";
+                }
+                connection.addRequestProperty(
+                        "Cookie",
+                        cookieValue
+                );
+            }
+        }
         if (!metodo.equals("GET") && !metodo.equals("get")) {
             String jsonString = new Gson().toJson(payload);
             connection.setDoOutput(true);
@@ -74,21 +90,31 @@ public class API {
             }
         }
         resultados.put("status", connection.getResponseCode());
-        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         StringBuilder retorno = new StringBuilder();
-        String salida;
-        while ((salida = reader.readLine()) != null) {
-            retorno.append(salida);
-        }
-        connection.disconnect();
-        if (!retorno.toString().equals("")) {
-            if (!isArray) {
-                HashMap mapaRetorno = new Gson().fromJson(retorno.toString(), HashMap.class);
-                resultados.put("json", mapaRetorno);
-            } else {
-                JsonArray mapaRetorno = new Gson().fromJson(retorno.toString(), JsonArray.class);
-                resultados.put("json", mapaRetorno);
+        if (connection.getResponseCode() >= 200 && connection.getResponseCode() <= 299) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String salida;
+            while ((salida = reader.readLine()) != null) {
+                retorno.append(salida);
             }
+            List<String> cookiesHeader = connection.getHeaderFields().get("Set-Cookie");
+            if (cookiesHeader != null) {
+                for (String cookie: cookiesHeader) {
+                    API.cookieManager.getCookieStore().add(null, HttpCookie.parse(cookie).get(0));
+                }
+            }
+            connection.disconnect();
+            if (!retorno.toString().equals("")) {
+                if (!isArray) {
+                    HashMap mapaRetorno = new Gson().fromJson(retorno.toString(), HashMap.class);
+                    resultados.put("json", mapaRetorno);
+                } else {
+                    JsonArray mapaRetorno = new Gson().fromJson(retorno.toString(), JsonArray.class);
+                    resultados.put("json", mapaRetorno);
+                }
+            }
+        } else {
+            connection.disconnect();
         }
         return resultados;
     }

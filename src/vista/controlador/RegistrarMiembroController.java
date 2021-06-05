@@ -113,7 +113,7 @@ public class RegistrarMiembroController {
     private boolean validarCampos(){
         boolean camposValidos = false;
 
-        if(camposCompletos() && emailValido() && contraseniasIguales() ){
+        if(camposCompletos() && emailValido() && nickNameValido() &&contraseniasIguales() && validarContrasenia() ){
             camposValidos = true;
         }
 
@@ -132,13 +132,33 @@ public class RegistrarMiembroController {
             mostrarMensaje("Error", "Error al conectar con el servidor");
         }
     }
+
     public boolean emailValido(){
         boolean emailValido = false;
-        if(MiembroOfercompas.esEmail(this.txtEmail.getText())){
+        if(MiembroOfercompas.validarEmail(this.txtEmail.getText())){
             emailValido = true;
         }else{
             mostrarMensaje("Información inválida", "Por favor, ingrese un email válido");
         }
         return  emailValido;
     }
+    public boolean nickNameValido(){
+        boolean nickNameValido = false;
+        if(MiembroOfercompas.validarNickname(this.txtNickname.getText())){
+            nickNameValido = true;
+        }else{
+            mostrarMensaje("Información inválida", "Por favor, ingrese un nickname válido");
+        }
+        return nickNameValido;
+    }
+    boolean validarContrasenia(){
+        boolean contraseniaValida = false;
+        if(MiembroOfercompas.validadarContrasenia(this.txtContrasenia.getText())){
+            contraseniaValida = true;
+        }else {
+            mostrarMensaje("Información inválida", "Por favor, ingrese una contraseña válida");
+        }
+        return contraseniaValida;
+    }
+
 }

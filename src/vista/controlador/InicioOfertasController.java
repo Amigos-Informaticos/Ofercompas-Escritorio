@@ -2,6 +2,7 @@ package vista.controlador;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -46,7 +47,8 @@ public class InicioOfertasController {
 
     private MyListener myListener;
 
-    private List<Oferta> ofertas = new ArrayList();
+    private  List<Oferta> ofertas = new ArrayList();
+
 
 
     public void initialize() {
@@ -70,6 +72,7 @@ public class InicioOfertasController {
 
     public void llenarPagina() {
         ofertas.addAll(this.cargarOfertas(pagina, categoria));
+
         try {
             for (int i = 0; i < ofertas.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -191,5 +194,19 @@ public class InicioOfertasController {
                 this.categoria = Categoria.TECNOLOGIA.getIndice();
                 break;
         }
+    }
+
+    public void clicMisOfertas(ActionEvent actionEvent) {
+
+    }
+
+    public void clicMisCodigos(ActionEvent actionEvent) {
+    }
+
+    public void clicEditarPerfil(ActionEvent actionEvent) {
+        MainController.activate("Perfil", "Perfil", MainController.Sizes.SMALL);
+    }
+
+    public void clicCerrarSesion(ActionEvent actionEvent) {
     }
 }
