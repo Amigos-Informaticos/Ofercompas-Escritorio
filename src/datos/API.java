@@ -3,16 +3,12 @@ package datos;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.ConnectException;
-import java.net.HttpURLConnection;
-import java.net.ProtocolException;
-import java.net.URL;
+import java.io.*;
+import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class API {
@@ -55,7 +51,7 @@ public class API {
         URL url = new URL(this.buildURL(recurso, params));
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         if (headers != null) {
-            for (Map.Entry<String, String> entry: headers.entrySet()) {
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
                 connection.setRequestProperty(entry.getKey(), entry.getValue());
             }
         }
@@ -93,6 +89,52 @@ public class API {
         return resultados;
     }
 
+    public HashMap sendFiles(String metodo, String recurso, HashMap<String, String> params,
+                                             HashMap<String, String> payload, HashMap<String, String> headers, File archivos) throws IOException {
+        HashMap<String, Object> resultados = new HashMap();
+        URL url = new URL(this.buildURL(recurso, params));
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        if (headers != null) {
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
+                connection.setRequestProperty(entry.getKey(), entry.getValue());
+            }
+        }
+        connection.setDoOutput(true);
+        String boundary = Long.toHexString(System.currentTimeMillis());
+        connection.setRequestProperty("Content-Type", "multipart/form-data; boundary = " + boundary);
+        connection.setRequestMethod(metodo);
+
+        try (
+                OutputStream outputStream = connection.getOutputStream();
+                PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(outputStream, "UTF-8"), true);
+        ) {
+            String saltoLinea = "\r\n";
+            printWriter.append("--" + boundary).append(saltoLinea);
+            printWriter.append("Content-Disposition: form-data; name = \"imagenes\"; filename = \"  " + archivos.getName() + "\"").append(saltoLinea);
+            printWriter.append("Content-Type: " + URLConnection.guessContentTypeFromName(archivos.getName())).append(saltoLinea);
+            printWriter.append("Content-Transfer-Encoding: binary").append(saltoLinea);
+            if (payload!=null) {
+                for (Iterator<Map.Entry<String, String>> iterator = payload.entrySet().iterator(); iterator.hasNext(); ) {
+                    Map.Entry<String, String> entrada = iterator.next();
+
+                    String valorFormulario = entrada.getKey() + "=" + entrada.getValue();
+                    if (iterator.hasNext()){
+                        valorFormulario += "&";
+                    }
+                    outputStream.write(valorFormulario.getBytes(StandardCharsets.UTF_8));
+
+                }
+            }
+            printWriter.append(saltoLinea).flush();
+            Files.copy(archivos.toPath(), outputStream);
+            outputStream.flush();
+            printWriter.append(saltoLinea).flush();
+            printWriter.append("--" + boundary + "--").append(saltoLinea).flush();
+        }
+        resultados.put("status",connection.getResponseCode());
+        return resultados;
+    }
+
     public String buildURL(String recurso, HashMap<String, String> parametros) {
         StringBuilder completeUrl = new StringBuilder(this.URL + ":" + this.port);
         if (recurso != null) {
@@ -101,7 +143,7 @@ public class API {
         int parametrosSize = 0;
         if (parametros != null && !parametros.isEmpty()) {
             completeUrl.append("?");
-            for (Map.Entry<String, String> parametro: parametros.entrySet()) {
+            for (Map.Entry<String, String> parametro : parametros.entrySet()) {
                 completeUrl.append(parametro.getKey()).append("=").append(parametro.getValue());
                 if (parametrosSize < parametros.size()) {
                     completeUrl.append("&");

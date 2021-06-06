@@ -51,7 +51,8 @@ public class ActualizarOfertaController {
         this.fechaCreacion.setValue(LocalDate.parse(oferta.getFechaCreacion()));
         this.fechaFin.setValue(LocalDate.parse(oferta.getFechaFin()));
         this.txtPrecio.setText(oferta.getPrecio());
-        this.txtDescripcion.setText(String.valueOf(oferta.getPuntuacion()));
+        this.txtVinculo.setText(oferta.getVinculo());
+        this.cmbCategoria.setValue(oferta.deCategoriaACmbBox());
         System.out.println(oferta.getIdPublicacion());
     }
 
@@ -83,9 +84,9 @@ public class ActualizarOfertaController {
         instanciaOferta();
         if (oferta.estaCompleta()) {
             try {
-                if(oferta.actualizar() == 201) {
+                if(oferta.actualizar() == 200) {
                     MainController.alert(Alert.AlertType.INFORMATION,
-                            "Registro Exitoso",
+                            "Actualización Exitosa",
                             "Publicación registrada exitosamente");
                 }else {
                     MainController.alert(Alert.AlertType.ERROR,

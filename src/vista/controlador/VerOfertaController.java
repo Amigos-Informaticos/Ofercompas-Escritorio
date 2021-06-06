@@ -55,7 +55,7 @@ public class VerOfertaController {
     private List<Comentario> comentarios = new ArrayList<>();
 
     public void initialize() {
-        miembroOfercompas = (MiembroOfercompas) MainController.get("miembro");
+        miembroOfercompas = (MiembroOfercompas) MainController.get("miembroLogeado");
         oferta = (Oferta) MainController.get("oferta");
         mostrarInformacionOferta();
         this.mostrarComentarios();

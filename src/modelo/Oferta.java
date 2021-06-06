@@ -10,7 +10,7 @@ public class Oferta extends Publicacion {
     private String precio;
 
 
-    public Oferta(String titulo, String descripcion, String fechaInicio, String fechaFin, int puntuacion, EstadoPublicacion estado, Categoria categoria, String vinculo, String precio) {
+    public Oferta(String titulo, String descripcion, String fechaInicio, String fechaFin, int puntuacion, EstadoPublicacion estado, int categoria, String vinculo, String precio) {
         super(titulo, descripcion, fechaInicio, fechaFin, puntuacion, estado, categoria);
         this.vinculo = vinculo;
         this.precio = precio;
@@ -55,7 +55,7 @@ public class Oferta extends Publicacion {
         oferta.put("descripcion", this.descripcion);
         oferta.put("fechaCreacion", this.fechaCreacion);
         oferta.put("fechaFin", this.fechaFin);
-        oferta.put("categoria", String.valueOf(this.categoria.getIndice()));
+        oferta.put("categoria", String.valueOf(this.categoria));
         oferta.put("vinculo", this.getVinculo());
         oferta.put("precio", this.precio);
         oferta.put("publicador", String.valueOf(7));
@@ -81,6 +81,7 @@ public class Oferta extends Publicacion {
         oferta.setVinculo(ofertaJson.get("vinculo").getAsString());
         oferta.setPuntuacion(Integer.parseInt(String.valueOf(ofertaJson.get("puntuacion"))));
         oferta.setIdPublicador(Integer.parseInt(String.valueOf(ofertaJson.get("publicador"))));
+        oferta.setCategoria(Integer.parseInt(String.valueOf(ofertaJson.get("categoria"))));
         System.out.println(oferta.getIdPublicador());
         return oferta;
     }
@@ -121,7 +122,7 @@ public class Oferta extends Publicacion {
 
 
     public int actualizar() throws IOException {
-        HashMap respuesta = this.api.connect("PUT", ("ofertas"+this.idPublicacion), null, this.obtenerHashmap());
+        HashMap respuesta = this.api.connect("PUT", ("ofertas/"+this.idPublicacion), null, this.obtenerHashmap());
         return (int) respuesta.get("status");
     }
 }
