@@ -7,8 +7,8 @@ public enum Categoria {
     HOGAR(4),
     MASCOTAS(5),
     VIAJE(6),
-    ENTRETENIMIENTO(7),
-    COMIDABEBIDA(8);
+    COMIDABEBIDA(7),
+    ENTRETENIMIENTO(8);
 
     private int indice;
 

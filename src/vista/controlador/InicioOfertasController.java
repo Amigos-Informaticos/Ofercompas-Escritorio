@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import modelo.Categoria;
 import modelo.MiembroOfercompas;
 import modelo.Oferta;
+import sun.applet.Main;
 import vista.MainController;
 import vista.MyListener;
 
@@ -60,15 +61,9 @@ public class InicioOfertasController {
             }
         };
         llenarPagina();
-        guardaMiembro();
         System.out.println(ofertas.get(1).getIdPublicador());
     }
 
-    public void guardaMiembro() {
-        MiembroOfercompas miembroOfercompas = new MiembroOfercompas();
-        miembroOfercompas.setIdMiembro(7);
-        MainController.save("miembro", miembroOfercompas);
-    }
 
     public void llenarPagina() {
         ofertas.addAll(this.cargarOfertas(pagina, categoria));
@@ -118,7 +113,7 @@ public class InicioOfertasController {
     }
 
     public void clicPublicarOferta() {
-        MainController.activate("PublicarOferta", "Regístrate", MainController.Sizes.MID);
+        MainController.activate("PublicarOferta", "Regístrar oferta", MainController.Sizes.MID);
     }
 
     public void clicPublicarCodigo() {
@@ -197,7 +192,7 @@ public class InicioOfertasController {
     }
 
     public void clicMisOfertas(ActionEvent actionEvent) {
-
+        MainController.activate("InicioMisOfertas", "Mis ofertas", MainController.Sizes.MID);
     }
 
     public void clicMisCodigos(ActionEvent actionEvent) {
