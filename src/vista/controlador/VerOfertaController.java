@@ -120,24 +120,33 @@ public class VerOfertaController {
     }
 
     public void puntuarPositivamente() {
-        MiembroOfercompas miembroOfercompas = (MiembroOfercompas) MainController.get("miembro");
         System.out.println(miembroOfercompas.getIdMiembro());
         try {
-            oferta.puntuar(miembroOfercompas.getIdMiembro(), 1);
+            if(oferta.puntuar(miembroOfercompas.getIdMiembro(), 1) == 200){
+                lblPuntuacion.setText(String.valueOf(oferta.getPuntuacion() + 1));
+            }else{
+                MainController.alert(Alert.AlertType.INFORMATION,
+                        "Ya puntuaste esta oferta",
+                        "Ya has puntuado esta oferta anteriormente");
+            }
         } catch (IOException ioException) {
             System.out.println(ioException);
         }
-        lblPuntuacion.setText(String.valueOf(oferta.getPuntuacion() + 1));
     }
 
     public void puntuarNegativamente() {
-        MiembroOfercompas miembroOfercompas = (MiembroOfercompas) MainController.get("miembro");
+        System.out.println(miembroOfercompas.getIdMiembro());
         try {
-            oferta.puntuar(miembroOfercompas.getIdMiembro(), 0);
+            if(oferta.puntuar(miembroOfercompas.getIdMiembro(), 0) == 200){
+                lblPuntuacion.setText(String.valueOf(oferta.getPuntuacion() - 1));
+            }else{
+                MainController.alert(Alert.AlertType.INFORMATION,
+                        "Ya puntuaste esta oferta",
+                        "Ya has puntuado esta oferta anteriormente");
+            }
         } catch (IOException ioException) {
             System.out.println(ioException);
         }
-        lblPuntuacion.setText(String.valueOf(oferta.getPuntuacion() - 1));
     }
 
     public void clicAtras() {
