@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.PublicarOfertaController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.ActualizarOfertaController">
    <children>
       <TextField fx:id="txtTitulo" layoutX="200.0" layoutY="48.0" prefHeight="25.0" prefWidth="291.0" promptText="¿Qué oferta quieres compartir?" />
       <TextArea fx:id="txtDescripcion" layoutX="200.0" layoutY="87.0" prefHeight="92.0" prefWidth="291.0" promptText="Describe aquí con más detalle de qué se trata" />
@@ -17,11 +17,11 @@
       <ComboBox fx:id="cmbCategoria" layoutX="375.0" layoutY="202.0" prefHeight="25.0" prefWidth="121.0" promptText="Categoria" />
       <DatePicker fx:id="fechaCreacion" layoutX="259.0" layoutY="277.0" promptText="Cuando inicia" />
       <DatePicker fx:id="fechaFin" layoutX="259.0" layoutY="308.0" promptText="Cuando termina" />
-      <Button layoutX="281.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#publicar" prefHeight="25.0" prefWidth="130.0" text="Publicar" />
+      <Button layoutX="281.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#actualizar" prefHeight="25.0" prefWidth="130.0" text="Actualizar" />
       <Button layoutX="33.0" layoutY="144.0" mnemonicParsing="false" text="Buscar Imagen" />
       <Button layoutX="33.0" layoutY="190.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Buscar Video" />
       <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#clicAtras" prefHeight="25.0" prefWidth="76.0" text="Atrás" />
-      <Label layoutX="417.0" layoutY="5.0" text="Publicar Oferta">
+      <Label layoutX="417.0" layoutY="5.0" text="Actualizar Oferta">
          <font>
             <Font name="System Italic" size="24.0" />
          </font>
