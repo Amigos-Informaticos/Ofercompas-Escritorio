@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class testEnvioArchivos {
+public class TestEnvioArchivos {
     @Test
     public void mandarArchivo(){
         String path = "C:\\Users\\griml\\OneDrive\\Escritorio\\Test mandar imagenes\\Blasphemous.png";

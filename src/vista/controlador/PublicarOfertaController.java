@@ -96,8 +96,4 @@ public class PublicarOfertaController {
     public void clicAtras(){
         MainController.activate("InicioOfertas","Inicio",MainController.Sizes.MID);
     }
-
-    public void buscarArchivo(){
-        File archivo = MainController.fileExplorer();
-    }
 }
