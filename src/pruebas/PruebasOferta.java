@@ -23,7 +23,7 @@ public class PruebasOferta {
         ofertaPrueba.setVinculo("ofercompas.shop.com");
         ofertaPrueba.setFechaCreacion("2021-05-17");
         ofertaPrueba.setFechaFin("2021-05-30");
-        ofertaPrueba.setCategoria(Categoria.COMIDABEBIDA);
+        ofertaPrueba.setCategoria(Categoria.COMIDABEBIDA.getIndice());
         ofertaPrueba.setIdPublicacion(7);
     }
 

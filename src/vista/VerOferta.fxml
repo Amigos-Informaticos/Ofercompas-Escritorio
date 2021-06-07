@@ -66,7 +66,7 @@
                   <Image url="@imagenes/delete_btn.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="btnActualizar" fitHeight="30.0" fitWidth="30.0" layoutX="516.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="btnActualizar" fitHeight="30.0" fitWidth="30.0" layoutX="516.0" layoutY="10.0" onMouseClicked="#actualizar" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagenes/edit_btn.png" />
                </image>

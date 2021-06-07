@@ -3,6 +3,7 @@ package vista.controlador;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -110,6 +111,20 @@ public class VerCodigoDescuentoController {
 
     public void clicAtras(){
         MainController.activate("InicioCodigos", "Ver Oferta", MainController.Sizes.MID);
+    }
+
+    public void eliminar(){
+        if (MainController.alert(Alert.AlertType.CONFIRMATION, "¿Está seguro que desea eliminar este código?", "")){
+            try {
+                codigoDescuento.eliminar();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
+    }
+
+    public void actualizar(){
+        MainController.activate("ActualizarCodigoDescuento", "Actualizar Codigo", MainController.Sizes.MID);
     }
 
 

@@ -20,7 +20,7 @@ public abstract class Publicacion {
     @SerializedName("estado")
     protected EstadoPublicacion estado;
     @SerializedName("categria")
-    protected Categoria categoria;
+    protected int categoria = 0;
     @SerializedName("idPublicacion")
     protected int idPublicacion;
 
@@ -103,15 +103,15 @@ public abstract class Publicacion {
         this.estado = estado;
     }
 
-    public Categoria getCategoria() {
+    public int getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(int categoria) {
         this.categoria = categoria;
     }
 
-    public Publicacion(String titulo, String descripcion, String fechaInicio, String fechaFin, int puntuacion, EstadoPublicacion estado, Categoria categoria) {
+    public Publicacion(String titulo, String descripcion, String fechaInicio, String fechaFin, int puntuacion, EstadoPublicacion estado, int categoria) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fechaCreacion = fechaInicio;
@@ -137,37 +137,75 @@ public abstract class Publicacion {
     }
 
     public boolean estaCompleta() {
-        return this.titulo != null && this.descripcion != null && this.fechaCreacion != null && this.fechaFin != null && this.categoria != null;
+        return this.titulo != null && this.descripcion != null && this.fechaCreacion != null && this.fechaFin != null && this.categoria != 0;
     }
 
     public void setCategoriaCmbBox(String categoria) {
         switch (categoria) {
             case "Tecnologia":
-                this.categoria = Categoria.TECNOLOGIA;
+                this.categoria = Categoria.TECNOLOGIA.getIndice();
                 break;
             case "Moda de mujer":
-                this.categoria = Categoria.MODAMUJER;
+                this.categoria = Categoria.MODAMUJER.getIndice();
                 break;
             case "Moda de hombre":
-                this.categoria = Categoria.MODAHOMBRE;
+                this.categoria = Categoria.MODAHOMBRE.getIndice();
                 break;
             case "Hogar":
-                this.categoria = Categoria.HOGAR;
+                this.categoria = Categoria.HOGAR.getIndice();
                 break;
             case "Mascotas":
-                this.categoria = Categoria.MASCOTAS;
+                this.categoria = Categoria.MASCOTAS.getIndice();
                 break;
             case "Viaje":
-                this.categoria = Categoria.VIAJE;
+                this.categoria = Categoria.VIAJE.getIndice();
+                break;
+            case "Entretenimiento":
+                this.categoria = Categoria.COMIDABEBIDA.getIndice();
                 break;
             case "Comida y bebida":
-                this.categoria = Categoria.COMIDABEBIDA;
+                this.categoria = Categoria.COMIDABEBIDA.getIndice();
                 break;
             default:
-                this.categoria = Categoria.TECNOLOGIA;
+                this.categoria = Categoria.TECNOLOGIA.getIndice();
                 break;
         }
 
+    }
+
+    public String deCategoriaACmbBox() {
+        String categoriaString = "";
+        int categoria = this.categoria;
+        switch (categoria) {
+            case 1:
+                categoriaString = "Tecnologia";
+                break;
+            case 2:
+                categoriaString = "Moda de mujer";
+                break;
+            case 3:
+                categoriaString = "Moda de hombre";
+                break;
+            case 4:
+                categoriaString = "Hogar";
+                break;
+            case 5:
+                categoriaString = "Mascotas";
+                break;
+            case 6:
+                categoriaString = "Viaje";
+                break;
+            case 7:
+                categoriaString = "Entretenimiento";
+                break;
+            case 8:
+                categoriaString = "Comida y bebida";
+                break;
+            default:
+                categoriaString = "Tecnologia";
+                break;
+        }
+        return categoriaString;
     }
 
     public int puntuar(int idMiembro, int esPositiva) throws IOException {

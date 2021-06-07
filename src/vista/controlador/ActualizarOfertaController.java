@@ -8,10 +8,10 @@ import modelo.Oferta;
 import utils.LimitadorTextField;
 import vista.MainController;
 
-import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 
-public class PublicarOfertaController {
+public class ActualizarOfertaController {
     @FXML
     private TextField txtTitulo;
     @FXML
@@ -30,8 +30,9 @@ public class PublicarOfertaController {
     private Oferta oferta;
 
     public void initialize() {
-        oferta = new Oferta();
+        this.oferta = (Oferta) MainController.get("oferta");
         llenarComboCategorias();
+        mostrarInformacionOferta();
         limitarTextfields();
     }
 
@@ -44,7 +45,16 @@ public class PublicarOfertaController {
         LimitadorTextField.soloNumeros(txtPrecio);
     }
 
-
+    public void mostrarInformacionOferta() {
+        this.txtTitulo.setText(oferta.getTitulo());
+        this.txtDescripcion.setText(oferta.getDescripcion());
+        this.fechaCreacion.setValue(LocalDate.parse(oferta.getFechaCreacion()));
+        this.fechaFin.setValue(LocalDate.parse(oferta.getFechaFin()));
+        this.txtPrecio.setText(oferta.getPrecio());
+        this.txtVinculo.setText(oferta.getVinculo());
+        this.cmbCategoria.setValue(oferta.deCategoriaACmbBox());
+        System.out.println(oferta.getIdPublicacion());
+    }
 
     public void instanciaOferta() {
         oferta.setTitulo(txtTitulo.getText());
@@ -70,13 +80,13 @@ public class PublicarOfertaController {
         cmbCategoria.setItems(listaCategorias);
     }
 
-    public void publicar() {
+    public void actualizar() {
         instanciaOferta();
         if (oferta.estaCompleta()) {
             try {
-                if(oferta.publicar() == 201) {
+                if(oferta.actualizar() == 200) {
                     MainController.alert(Alert.AlertType.INFORMATION,
-                            "Registro Exitoso",
+                            "Actualización Exitosa",
                             "Publicación registrada exitosamente");
                 }else {
                     MainController.alert(Alert.AlertType.ERROR,

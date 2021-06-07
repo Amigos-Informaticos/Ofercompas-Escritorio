@@ -21,7 +21,7 @@ public class CodigoDescuento extends Publicacion{
         this.codigo = codigo;
     }
 
-    public CodigoDescuento(String titulo, String descripcion, String fechaInicio, String fechaFin, int puntuacion, EstadoPublicacion estado, String codigo, Categoria categoria) {
+    public CodigoDescuento(String titulo, String descripcion, String fechaInicio, String fechaFin, int puntuacion, EstadoPublicacion estado, String codigo, int categoria) {
         super(titulo, descripcion, fechaInicio, fechaFin, puntuacion, estado, categoria);
         this.codigo = codigo;
     }
@@ -37,7 +37,7 @@ public class CodigoDescuento extends Publicacion{
         codigo.put("descripcion", this.descripcion);
         codigo.put("fechaCreacion", this.fechaCreacion);
         codigo.put("fechaFin", this.fechaFin);
-        codigo.put("categoria", String.valueOf(this.categoria.getIndice()));
+        codigo.put("categoria", String.valueOf(this.categoria));
         codigo.put("publicador", String.valueOf(7));
         codigo.put("codigo", this.codigo);
 
@@ -91,5 +91,10 @@ public class CodigoDescuento extends Publicacion{
         codigoDescuento.setFechaFin(String.valueOf(codigoJson.get("fechaFin")));
         codigoDescuento.setCodigo(String.valueOf(codigoJson.get("codigo")));
         return codigoDescuento;
+    }
+
+    public int actualizar() throws IOException {
+        HashMap respuesta = this.api.connect("PUT", ("codigos"+this.idPublicacion), null, this.obtenerHashmap());
+        return (int) respuesta.get("status");
     }
 }
