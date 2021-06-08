@@ -37,8 +37,8 @@ public class Comentario {
 
     public Comentario deJsonAObjeto(JsonObject comentarioJson){
         Comentario comentario = new Comentario();
-        comentario.setContenido(String.valueOf(comentarioJson.get("contenido")));
-        comentario.setNicknameComentador(String.valueOf(comentarioJson.get("nickname")));
+        comentario.setContenido(comentarioJson.get("contenido").getAsString());
+        comentario.setNicknameComentador(comentarioJson.get("nickname").getAsString());
         return comentario;
 
     }
@@ -54,8 +54,10 @@ public class Comentario {
     public Comentario[] obtenerComentarios(int idPublicacion) throws IOException {
         API api = new API();
         HashMap<String, String> parametros = new HashMap();
-        parametros.put("idPublicacion", String.valueOf(idPublicacion));
-        HashMap respuesta = api.connect("GET", "comentarios", parametros, null, null, true);
+        //parametros.put("idPublicacion", String.valueOf(idPublicacion));
+        String url = "ofertas/" + idPublicacion+ "/comentarios";
+        HashMap respuesta = api.connect("GET", url, parametros,
+                null, null, true);
         Comentario[] ComentariosConvertidos = new Comentario[0];
         if (respuesta.get("status").equals(200)) {
             JsonArray ComentariosObtenidos = (JsonArray) respuesta.get("json");

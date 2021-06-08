@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import modelo.MiembroOfercompas;
 import modelo.Oferta;
+import sun.applet.Main;
 import vista.MainController;
 import vista.MyListener;
 
@@ -59,13 +60,14 @@ public class InicioMisOfertasController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        miembroOfercompasLogeado = (MiembroOfercompas) MainController.get("MiembroLogeado");
+        miembroOfercompasLogeado = (MiembroOfercompas) MainController.get("miembroLogeado");
         myListener = new MyListener() {
             @Override
             public void onClickListener(Oferta oferta) {
                 verOferta(oferta);
             }
         };
+        cargarOfertas(pagina);
         llenarPagina();
 
     }
@@ -74,6 +76,15 @@ public class InicioMisOfertasController implements Initializable {
 
     @FXML
     void avanzarPagina(ActionEvent event) {
+        if(cargarOfertas(pagina+1)){
+            this.pagina++;
+            this.ofertas.clear();
+            vbox.getChildren().clear();
+            llenarPagina();
+            this.lblPagina.setText(String.valueOf(this.pagina));
+            System.out.println(pagina);
+            System.out.println(ofertas);
+        }
 
     }
 
@@ -127,8 +138,7 @@ public class InicioMisOfertasController implements Initializable {
 
 
     public void llenarPagina() {
-        ofertas.addAll(this.cargarOfertas(pagina, categoria));
-
+        System.out.println("Ofersas to string: " +  ofertas.toString());
         try {
             for (int i = 0; i < ofertas.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -142,26 +152,37 @@ public class InicioMisOfertasController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
-    public List<Oferta> cargarOfertas(int pagina, int categoria) {
-        List<Oferta> ofertas = new ArrayList<>();
+    public boolean cargarOfertas(int pagina) {
+        boolean ofertasCargadas = false;
+       this.ofertas = new ArrayList<>();
         Oferta oferta = new Oferta();
         Oferta[] ofertasArray = new modelo.Oferta[0];
         try {
+            System.out.println("El id del miembro es:" + miembroOfercompasLogeado.getIdMiembro());
             ofertasArray = oferta.obtenerOfertasPorPublicador(pagina, miembroOfercompasLogeado.getIdMiembro());
+            System.out.println("Las ofertas del publicador son:" + ofertasArray.toString());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Get mesahe "+ e.getMessage());
+            e.printStackTrace();
         }
         for (int i = 0; i < ofertasArray.length; i++) {
             ofertas.add(ofertasArray[i]);
             ofertasArray[i].toString();
         }
-        return ofertas;
+
+        if(ofertasArray.length > 0){
+            ofertasCargadas = true;
+        }
+
+        return ofertasCargadas;
     }
     public void verOferta(Oferta oferta) {
         System.out.println(oferta.toString());
         MainController.save("oferta", oferta);
         MainController.activate("VerOferta", "Ver Oferta", MainController.Sizes.MID);
+        MainController.save("pantallaAnterior", "InicioMisOfertas");
     }
 
 

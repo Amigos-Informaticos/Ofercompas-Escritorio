@@ -124,6 +124,7 @@ public class InicioOfertasController {
         System.out.println(oferta.toString());
         MainController.save("oferta", oferta);
         MainController.activate("VerOferta", "Ver Oferta", MainController.Sizes.MID);
+        MainController.save("pantallaAnterior", "InicioOfertas");
     }
 
     public void avanzarPagina() {

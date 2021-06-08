@@ -150,7 +150,14 @@ public class VerOfertaController {
     }
 
     public void clicAtras() {
-        MainController.activate("InicioOfertas", "Ver Oferta", MainController.Sizes.MID);
+        String pantallaAnterior = (String) MainController.get("pantallaAnterior");
+        if(pantallaAnterior.equals("InicioMisOfertas")){
+            MainController.activate("InicioMisOfertas", "Mis Oferta", MainController.Sizes.MID);
+        }else {
+            MainController.activate("InicioOfertas", "Ofertas", MainController.Sizes.MID);
+        }
+
+
     }
 
     public void soyAutor() {
