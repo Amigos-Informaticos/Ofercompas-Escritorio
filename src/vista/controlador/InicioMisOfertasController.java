@@ -13,7 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import modelo.MiembroOfercompas;
 import modelo.Oferta;
-import sun.applet.Main;
 import vista.MainController;
 import vista.MyListener;
 
