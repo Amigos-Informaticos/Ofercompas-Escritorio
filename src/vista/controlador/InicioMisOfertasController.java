@@ -158,7 +158,7 @@ public class InicioMisOfertasController implements Initializable {
         boolean ofertasCargadas = false;
        this.ofertas = new ArrayList<>();
         Oferta oferta = new Oferta();
-        Oferta[] ofertasArray = new modelo.Oferta[0];
+        Oferta[] ofertasArray = new Oferta[0];
         try {
             System.out.println("El id del miembro es:" + miembroOfercompasLogeado.getIdMiembro());
             ofertasArray = oferta.obtenerOfertasPorPublicador(pagina, miembroOfercompasLogeado.getIdMiembro());

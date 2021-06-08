@@ -1,16 +1,12 @@
 package modelo;
-
 import com.google.gson.JsonObject;
 import datos.API;
 import org.apache.commons.validator.routines.EmailValidator;
-
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 

@@ -7,7 +7,6 @@ import modelo.MiembroOfercompas;
 import vista.MainController;
 
 import java.io.IOException;
-import java.net.ConnectException;
 import java.util.HashMap;
 
 public class LoginController {

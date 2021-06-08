@@ -13,9 +13,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import modelo.Categoria;
-import modelo.MiembroOfercompas;
 import modelo.Oferta;
-import sun.applet.Main;
 import vista.MainController;
 import vista.MyListener;
 
@@ -197,6 +195,7 @@ public class InicioOfertasController {
     }
 
     public void clicMisCodigos(ActionEvent actionEvent) {
+        System.out.println("Mis codigos");
     }
 
     public void clicEditarPerfil(ActionEvent actionEvent) {
@@ -204,5 +203,6 @@ public class InicioOfertasController {
     }
 
     public void clicCerrarSesion(ActionEvent actionEvent) {
+        System.out.println("Cerrar sesion");
     }
 }

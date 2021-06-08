@@ -151,7 +151,7 @@ public class RegistrarMiembroController {
         }
         return nickNameValido;
     }
-    boolean validarContrasenia(){
+    public boolean validarContrasenia(){
         boolean contraseniaValida = false;
         if(MiembroOfercompas.validadarContrasenia(this.txtContrasenia.getText())){
             contraseniaValida = true;

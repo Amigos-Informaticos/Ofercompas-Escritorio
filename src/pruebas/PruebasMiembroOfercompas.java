@@ -10,21 +10,21 @@ public class PruebasMiembroOfercompas {
 
 
     @Test
-    public void email_valido(){
+    public void emailValido(){
         assertTrue(MiembroOfercompas.validarEmail("rendon.luisgerardo@gmail.com"));
     }
 
     @Test
-    public void email_invalido_sindominio(){
+    public void emailInvalidoSinDominio(){
         assertFalse(MiembroOfercompas.validarEmail("rendon.luisgerardo@.com"));
     }
 
     @Test
-    public  void email_invalido_desordenado(){
+    public  void emailInvalidoDesordenado(){
         assertFalse(MiembroOfercompas.validarEmail(".com.rendon@gmail"));
     }
     @Test
-    public  void email_invalido_con_espacios(){
+    public  void emailInvalidoConEspacios(){
         assertFalse(MiembroOfercompas.validarEmail("rendon. luisgerardo@gmail.com"));
     }
 }
