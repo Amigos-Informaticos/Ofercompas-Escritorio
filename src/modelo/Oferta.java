@@ -101,7 +101,7 @@ public class Oferta extends Publicacion {
 
     private Oferta[] getOfertas(HashMap<String, String> parametros) throws IOException {
         HashMap respuesta = this.api.connect("GET", "ofertas", parametros, null, null, true);
-        System.out.println(respuesta);
+        System.out.println("LA RESPUESTA ES:" + respuesta);
         Oferta[] ofertasConvertidas = new Oferta[0];
         if (respuesta.get("status").equals(200)) {
             JsonArray ofertasObtenidas = (JsonArray) respuesta.get("json");

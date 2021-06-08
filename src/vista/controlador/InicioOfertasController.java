@@ -61,13 +61,13 @@ public class InicioOfertasController {
             }
         };
         llenarPagina();
-        System.out.println(ofertas.get(1).getIdPublicador());
+
     }
 
 
     public void llenarPagina() {
         ofertas.addAll(this.cargarOfertas(pagina, categoria));
-
+        System.out.println("Ofersas to string: " +  ofertas.toString());
         try {
             for (int i = 0; i < ofertas.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -90,7 +90,7 @@ public class InicioOfertasController {
         try {
             ofertasArray = oferta.obtenerOfertas(pagina, categoria);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("E GET MESSAGE" +  e.getMessage());
         }
         for (int i = 0; i < ofertasArray.length; i++) {
             ofertas.add(ofertasArray[i]);
