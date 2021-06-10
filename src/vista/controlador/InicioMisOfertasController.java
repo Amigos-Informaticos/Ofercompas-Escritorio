@@ -72,7 +72,7 @@ public class InicioMisOfertasController implements Initializable {
 
 
     @FXML
-    private void avanzarPagina(ActionEvent event) {
+    private void avanzarPagina() {
         if(cargarOfertas(pagina+1)){
             this.pagina++;
             this.ofertas.clear();
@@ -86,7 +86,7 @@ public class InicioMisOfertasController implements Initializable {
     }
 
     @FXML
-    void clicCerrarSesion(ActionEvent event) {
+    private void clicCerrarSesion() {
         MainController.save("miembroLogeado", null);
         MainController.save("token", null);
         MainController.activate("Login", "Login");
