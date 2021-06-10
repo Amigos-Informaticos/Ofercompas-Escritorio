@@ -86,6 +86,6 @@ public class PublicarCodigoController {
     }
 
     public void clicAtras(){
-        MainController.activate("InicioCodigoDescuentos","Inicio",MainController.Sizes.MID);
+        MainController.activate("InicioCodigos","Inicio",MainController.Sizes.MID);
     }
 }

@@ -1,11 +1,15 @@
 package modelo;
-
 import com.google.gson.JsonObject;
 import datos.API;
-
+import org.apache.commons.validator.routines.EmailValidator;
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.regex.Pattern;
+
 
 public class MiembroOfercompas {
     private String email;
@@ -79,14 +83,30 @@ public class MiembroOfercompas {
         API api = new API();
         api.setURL("http://127.0.0.1");
         api.setPort(5000);
+        this.contrasenia = encriptar(this.contrasenia);
 
         HashMap respuesta = api.connect("POST","miembros",null, this.obtenerHashmap());
         return (int) respuesta.get("status");
     }
+    public  int actualizar(String oldEmail, String token) throws IOException{
+        API api = new API();
+        api.setURL("http://127.0.0.1");
+        api.setPort(5000);
+        String recurso = "miembros/" + oldEmail;
+        HashMap headers = new HashMap();
+        headers.put("token", token);
+        System.out.println(obtenerHashmap().toString());
+        HashMap respuesta = api.connect("PUT",recurso, null, this.obtenerHashmap(), headers, false);
+        return (int) respuesta.get("status");
+
+    }
+
     public HashMap logear() throws IOException {
         API api = new API();
         api.setURL("http://127.0.0.1");
         api.setPort(5000);
+        this.contrasenia = encriptar(contrasenia);
+        System.out.println(this.contrasenia);
         HashMap respuesta = api.connect("POST", "login", null, this.obtenerHashmapLogin());
         return respuesta;
     }
@@ -106,6 +126,13 @@ public class MiembroOfercompas {
         miembro.put("nickname",this.nickname);
         miembro.put("contrasenia",this.contrasenia);
 
+        return miembro;
+    }
+    public HashMap obtenerHashmap(String token){
+        HashMap<String ,String> miembro = new HashMap<String, String>();
+        miembro.put("email",this.email);
+        miembro.put("nickname",this.nickname);
+        miembro.put("contrasenia",this.contrasenia);
         return miembro;
     }
 
@@ -133,5 +160,43 @@ public class MiembroOfercompas {
                 ", idMiembro=" + idMiembro +
                 ", tipoMiembro=" + tipoMiembro +
                 '}';
+    }
+    public static boolean validarEmail(String email){
+        boolean emailValido = false;
+        EmailValidator validator = EmailValidator.getInstance();
+        if (validator.isValid(email)) {
+            emailValido = true;
+        }
+        return  emailValido;
+    }
+
+    public  static boolean validarNickname(String nickname){
+        boolean valido = false;
+        if(nickname.length()<= 20 && nickname.length()>=4){
+            valido = true;
+        }
+        return  valido;
+    }
+    public static boolean validadarContrasenia(String contrasenia){
+        boolean valida = false;
+        if(contrasenia.length()>=6 &&  contrasenia.length()<=15){
+            valida = true;
+        }
+        return  valida;
+    }
+    public static String encriptar(String value) {
+        try {
+            String clave = "FooBar1234567890"; // 128 bit
+            byte[] iv = new byte[16];
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
+            SecretKeySpec sks = new SecretKeySpec(clave.getBytes("UTF-8"), "AES");
+            cipher.init(Cipher.ENCRYPT_MODE, sks, new IvParameterSpec(iv));
+
+            byte[] encriptado = cipher.doFinal(value.getBytes());
+            return DatatypeConverter.printBase64Binary(encriptado);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

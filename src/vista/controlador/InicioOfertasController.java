@@ -2,6 +2,7 @@ package vista.controlador;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -12,13 +13,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import modelo.Categoria;
-import modelo.MiembroOfercompas;
 import modelo.Oferta;
 import vista.MainController;
 import vista.MyListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class InicioOfertasController {
@@ -46,7 +47,9 @@ public class InicioOfertasController {
 
     private MyListener myListener;
 
-    private List<Oferta> ofertas = new ArrayList();
+    private  List<Oferta> ofertas = new ArrayList();
+
+    public static HashMap<Integer, List<Oferta>> ofertasRecuperadas = new HashMap<>();
 
 
     public void initialize() {
@@ -58,18 +61,13 @@ public class InicioOfertasController {
             }
         };
         llenarPagina();
-        guardaMiembro();
-        System.out.println(ofertas.get(1).getIdPublicador());
+
     }
 
-    public void guardaMiembro() {
-        MiembroOfercompas miembroOfercompas = new MiembroOfercompas();
-        miembroOfercompas.setIdMiembro(7);
-        MainController.save("miembro", miembroOfercompas);
-    }
 
     public void llenarPagina() {
         ofertas.addAll(this.cargarOfertas(pagina, categoria));
+        System.out.println("Ofersas to string: " +  ofertas.toString());
         try {
             for (int i = 0; i < ofertas.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -92,11 +90,15 @@ public class InicioOfertasController {
         try {
             ofertasArray = oferta.obtenerOfertas(pagina, categoria);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("E GET MESSAGE" +  e.getMessage());
         }
         for (int i = 0; i < ofertasArray.length; i++) {
             ofertas.add(ofertasArray[i]);
             ofertasArray[i].toString();
+        }
+        if(!ofertasRecuperadas.containsKey(pagina)){
+
+            ofertasRecuperadas.put(categoria, ofertas);
         }
         return ofertas;
     }
@@ -115,7 +117,7 @@ public class InicioOfertasController {
     }
 
     public void clicPublicarOferta() {
-        MainController.activate("PublicarOferta", "Regístrate", MainController.Sizes.MID);
+        MainController.activate("PublicarOferta", "Regístrar oferta", MainController.Sizes.MID);
     }
 
     public void clicPublicarCodigo() {
@@ -126,6 +128,7 @@ public class InicioOfertasController {
         System.out.println(oferta.toString());
         MainController.save("oferta", oferta);
         MainController.activate("VerOferta", "Ver Oferta", MainController.Sizes.MID);
+        MainController.save("pantallaAnterior", "InicioOfertas");
     }
 
     public void avanzarPagina() {
@@ -191,5 +194,21 @@ public class InicioOfertasController {
                 this.categoria = Categoria.TECNOLOGIA.getIndice();
                 break;
         }
+    }
+
+    public void clicMisOfertas(ActionEvent actionEvent) {
+        MainController.activate("InicioMisOfertas", "Mis ofertas", MainController.Sizes.MID);
+    }
+
+    public void clicMisCodigos(ActionEvent actionEvent) {
+        System.out.println("Mis codigos");
+    }
+
+    public void clicEditarPerfil(ActionEvent actionEvent) {
+        MainController.activate("Perfil", "Perfil", MainController.Sizes.SMALL);
+    }
+
+    public void clicCerrarSesion(ActionEvent actionEvent) {
+        System.out.println("Cerrar sesion");
     }
 }

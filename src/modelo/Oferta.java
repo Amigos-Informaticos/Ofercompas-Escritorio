@@ -1,6 +1,7 @@
 package modelo;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import datos.API;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -80,7 +81,7 @@ public class Oferta extends Publicacion {
         oferta.setPrecio(ofertaJson.get("precio").getAsString());
         oferta.setVinculo(ofertaJson.get("vinculo").getAsString());
         oferta.setPuntuacion(Integer.parseInt(String.valueOf(ofertaJson.get("puntuacion"))));
-        oferta.setIdPublicador(Integer.parseInt(String.valueOf(ofertaJson.get("publicador"))));
+        oferta.setIdPublicador(Integer.parseInt((ofertaJson.get("publicador").getAsString())));
         oferta.setCategoria(Integer.parseInt(String.valueOf(ofertaJson.get("categoria"))));
         System.out.println(oferta.getIdPublicador());
         return oferta;
@@ -101,7 +102,7 @@ public class Oferta extends Publicacion {
 
     private Oferta[] getOfertas(HashMap<String, String> parametros) throws IOException {
         HashMap respuesta = this.api.connect("GET", "ofertas", parametros, null, null, true);
-        System.out.println(respuesta);
+        System.out.println("LA RESPUESTA ES:" + respuesta);
         Oferta[] ofertasConvertidas = new Oferta[0];
         if (respuesta.get("status").equals(200)) {
             JsonArray ofertasObtenidas = (JsonArray) respuesta.get("json");
@@ -125,4 +126,24 @@ public class Oferta extends Publicacion {
         HashMap respuesta = this.api.connect("PUT", ("ofertas/"+this.idPublicacion), null, this.obtenerHashmap());
         return (int) respuesta.get("status");
     }
+    public  int denunciar(int idDenunciante, String comentario, int motivo) throws IOException {
+        API api = new API();
+        String url = "ofertas/"+ this.idPublicacion +"/denuncias";
+        HashMap<String, String> denuncia = new HashMap<>();
+        denuncia.put("idDenunciante", String.valueOf(idDenunciante));
+        denuncia.put("comentario", comentario);
+        denuncia.put("motivo", String.valueOf(motivo));
+
+        HashMap respuesta = api.connect("POST", url, null, denuncia);
+
+        return (int)respuesta.get("status");
+
+    }
+    /*public HashMap obtenerInteraccion(int idMiembroLogeado){
+        String url = "publicaciones/"+ this.idPublicacion ;
+        HashMap<String, String> payload = new HashMap<>();
+        payload.put("idMiembro", String.valueOf(idMiembroLogeado));
+
+
+    }*/
 }
