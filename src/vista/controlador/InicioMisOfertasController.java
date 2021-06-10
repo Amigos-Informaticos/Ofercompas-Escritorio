@@ -72,7 +72,7 @@ public class InicioMisOfertasController implements Initializable {
 
 
     @FXML
-    void avanzarPagina(ActionEvent event) {
+    private void avanzarPagina(ActionEvent event) {
         if(cargarOfertas(pagina+1)){
             this.pagina++;
             this.ofertas.clear();

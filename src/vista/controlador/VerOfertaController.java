@@ -13,9 +13,7 @@ import javafx.scene.layout.VBox;
 import modelo.Comentario;
 import modelo.MiembroOfercompas;
 import modelo.Oferta;
-import sun.applet.Main;
 import vista.MainController;
-
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
@@ -67,7 +65,7 @@ public class VerOfertaController {
         soyAutor();
     }
     public void obtenerInteraccion(){
-
+        System.out.println("Obteniendo interacción");
     }
 
     public void mostrarInformacionOferta() {
