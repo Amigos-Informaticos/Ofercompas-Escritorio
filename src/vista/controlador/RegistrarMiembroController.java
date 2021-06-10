@@ -40,6 +40,8 @@ public class RegistrarMiembroController {
                     MainController.alert(Alert.AlertType.INFORMATION,
                             "Registro Exitoso",
                             "¡Te has registrado en Ofercompas!");
+                    MainController.activate("Login","Login",MainController.Sizes.SMALL);
+
                 } else if (codigoRespuesta == 409){
                     MainController.alert(Alert.AlertType.ERROR,
                             "Nickname o Email previamente registrado",

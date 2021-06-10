@@ -47,8 +47,6 @@ public class InicioMisOfertasController implements Initializable {
 
     private int pagina = 1;
 
-    private int categoria = -1;
-
     private MyListener myListener;
 
     private List<Oferta> ofertas = new ArrayList();
@@ -111,13 +109,10 @@ public class InicioMisOfertasController implements Initializable {
 
     @FXML
     void clicMisCodigos(ActionEvent event) {
-
+        System.out.println("Mis códigos");
     }
 
-    @FXML
-    void clicMisOfertas(ActionEvent event) {
 
-    }
 
     @FXML
     void clicPublicarCodigo(ActionEvent event) {
@@ -131,7 +126,7 @@ public class InicioMisOfertasController implements Initializable {
 
     @FXML
     void retrcoderPagina(ActionEvent event) {
-
+        System.out.println("Retroceder página");
     }
 
 

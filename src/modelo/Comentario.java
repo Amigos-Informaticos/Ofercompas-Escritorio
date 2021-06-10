@@ -70,4 +70,19 @@ public class Comentario {
 
 
     }
+    public HashMap obtenerHashmap(int idMiembroComentador) {
+        HashMap<String, String> comentario = new HashMap<String, String>();
+        comentario.put("contenido", this.contenido);
+        comentario.put("idMiembro", String.valueOf(idMiembroComentador));
+        System.out.println(comentario.toString());
+        return comentario;
+
+    }
+
+    public int comentarPublicacion(int idPublicacion, int idMiembroComentador ) throws IOException {
+        API api = new API();
+        String url = "ofertas/" + idPublicacion + "/comentarios";
+        HashMap respuesta = api.connect("POST", url, null, this.obtenerHashmap(idMiembroComentador));
+        return  (int) respuesta.get("status");
+    }
 }

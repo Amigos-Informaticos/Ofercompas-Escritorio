@@ -19,6 +19,7 @@ import vista.MyListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class InicioOfertasController {
@@ -48,6 +49,7 @@ public class InicioOfertasController {
 
     private  List<Oferta> ofertas = new ArrayList();
 
+    public static HashMap<Integer, List<Oferta>> ofertasRecuperadas = new HashMap<>();
 
 
     public void initialize() {
@@ -93,6 +95,10 @@ public class InicioOfertasController {
         for (int i = 0; i < ofertasArray.length; i++) {
             ofertas.add(ofertasArray[i]);
             ofertasArray[i].toString();
+        }
+        if(!ofertasRecuperadas.containsKey(pagina)){
+
+            ofertasRecuperadas.put(categoria, ofertas);
         }
         return ofertas;
     }

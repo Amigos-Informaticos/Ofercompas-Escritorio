@@ -1,18 +1,16 @@
 package vista.controlador;
 
 import javafx.fxml.Initializable;
-import modelo.MiembroOfercompas;
-import modelo.Oferta;
-import vista.MainController;
-
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class MisOfertasController implements Initializable {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
-    private List<Oferta> ofertas = new ArrayList();
+    }
+
+    /*private List<Oferta> ofertas = new ArrayList();
     private int pagina = 1;
     private MiembroOfercompas miembroOfercompas;
 
@@ -42,5 +40,5 @@ public class MisOfertasController implements Initializable {
     }
     private void inicializarMiembro(){
         this.miembroOfercompas = (MiembroOfercompas) MainController.get("miembroLogeado");
-    }
+    }*/
 }

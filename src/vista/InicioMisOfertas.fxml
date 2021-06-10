@@ -38,7 +38,6 @@
                   </MenuButton>
                   <MenuButton fx:id="menuPerfil" mnemonicParsing="false" prefWidth="150.0" styleClass="comboBox" text="Mi perfil">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#clicMisOfertas" text="Mis ofertas" />
                         <MenuItem mnemonicParsing="false" onAction="#clicMisCodigos" text="Mis códigos" />
                         <MenuItem mnemonicParsing="false" onAction="#clicEditarPerfil" text="Editar Perfil" />
                         <MenuItem mnemonicParsing="false" onAction="#clicCerrarSesion" text="Cerrar sesión" />
