@@ -9,9 +9,11 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class API {
+    private static CookieManager cookieManager = new CookieManager();
     private String URL = "http://127.0.0.1";
     private int port = 5000;
 
@@ -51,8 +53,22 @@ public class API {
         URL url = new URL(this.buildURL(recurso, params));
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         if (headers != null) {
-            for (Map.Entry<String, String> entry : headers.entrySet()) {
+            for (Map.Entry<String, String> entry: headers.entrySet()) {
                 connection.setRequestProperty(entry.getKey(), entry.getValue());
+            }
+        }
+        if (API.cookieManager.getCookieStore().getCookies().size() > 0) {
+            for (int i = 0; i < API.cookieManager.getCookieStore().getCookies().size(); i++) {
+                String cookieValue = API.cookieManager.getCookieStore().getCookies().get(i).getName()
+                        + "="
+                        + API.cookieManager.getCookieStore().getCookies().get(i).getValue();
+                if (i < API.cookieManager.getCookieStore().getCookies().size() - 1) {
+                    cookieValue += ";";
+                }
+                connection.addRequestProperty(
+                        "Cookie",
+                        cookieValue
+                );
             }
         }
         if (!metodo.equals("GET") && !metodo.equals("get")) {
@@ -70,27 +86,55 @@ public class API {
             }
         }
         resultados.put("status", connection.getResponseCode());
-        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         StringBuilder retorno = new StringBuilder();
-        String salida;
-        while ((salida = reader.readLine()) != null) {
-            retorno.append(salida);
-        }
-        connection.disconnect();
-        if (!retorno.toString().equals("")) {
-            if (!isArray) {
-                HashMap mapaRetorno = new Gson().fromJson(retorno.toString(), HashMap.class);
-                resultados.put("json", mapaRetorno);
-            } else {
-                JsonArray mapaRetorno = new Gson().fromJson(retorno.toString(), JsonArray.class);
-                resultados.put("json", mapaRetorno);
+        if (connection.getResponseCode() >= 200 && connection.getResponseCode() <= 299) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String salida;
+            while ((salida = reader.readLine()) != null) {
+                retorno.append(salida);
             }
+            List<String> cookiesHeader = connection.getHeaderFields().get("Set-Cookie");
+            if (cookiesHeader != null) {
+                for (String cookie: cookiesHeader) {
+                    API.cookieManager.getCookieStore().add(null, HttpCookie.parse(cookie).get(0));
+                }
+            }
+            connection.disconnect();
+            if (!retorno.toString().equals("")) {
+                if (!isArray) {
+                    HashMap mapaRetorno = new Gson().fromJson(retorno.toString(), HashMap.class);
+                    resultados.put("json", mapaRetorno);
+                } else {
+                    JsonArray mapaRetorno = new Gson().fromJson(retorno.toString(), JsonArray.class);
+                    resultados.put("json", mapaRetorno);
+                }
+            }
+        } else {
+            connection.disconnect();
         }
         return resultados;
     }
 
-    public HashMap sendFiles(String metodo, String recurso, HashMap<String, String> params,
-                                             HashMap<String, String> payload, HashMap<String, String> headers, File archivos) throws IOException {
+    public String buildURL(String recurso, HashMap<String, String> parametros) {
+        StringBuilder completeUrl = new StringBuilder(this.URL + ":" + this.port);
+        if (recurso != null) {
+            completeUrl.append("/").append(recurso);
+        }
+        int parametrosSize = 0;
+        if (parametros != null && !parametros.isEmpty()) {
+            completeUrl.append("?");
+            for (Map.Entry<String, String> parametro: parametros.entrySet()) {
+                completeUrl.append(parametro.getKey()).append("=").append(parametro.getValue());
+                if (parametrosSize < parametros.size()) {
+                    completeUrl.append("&");
+                }
+                parametrosSize++;
+            }
+        }
+        return completeUrl.toString();
+    }
+    public HashMap enviarFormulario(String metodo, String recurso, HashMap<String, String> params,
+                             HashMap<String, String> payload, HashMap<String, String> headers, File archivos) throws IOException {
         HashMap<String, Object> resultados = new HashMap();
         URL url = new URL(this.buildURL(recurso, params));
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -110,9 +154,13 @@ public class API {
         ) {
             String saltoLinea = "\r\n";
             printWriter.append("--" + boundary).append(saltoLinea);
-            printWriter.append("Content-Disposition: form-data; name = \"imagenes\"; filename = \"  " + archivos.getName() + "\"").append(saltoLinea);
-            printWriter.append("Content-Type: " + URLConnection.guessContentTypeFromName(archivos.getName())).append(saltoLinea);
-            printWriter.append("Content-Transfer-Encoding: binary").append(saltoLinea);
+            if (archivos!=null) {
+                printWriter.append("Content-Disposition: form-data; name = \"imagenes\"; filename = \"  " + archivos.getName() + "\"").append(saltoLinea);
+                printWriter.append("Content-Type: " + URLConnection.guessContentTypeFromName(archivos.getName())).append(saltoLinea);
+                printWriter.append("Content-Transfer-Encoding: binary").append(saltoLinea);
+                printWriter.append(saltoLinea).flush();
+                Files.copy(archivos.toPath(), outputStream);
+            }
             if (payload!=null) {
                 for (Iterator<Map.Entry<String, String>> iterator = payload.entrySet().iterator(); iterator.hasNext(); ) {
                     Map.Entry<String, String> entrada = iterator.next();
@@ -125,8 +173,7 @@ public class API {
 
                 }
             }
-            printWriter.append(saltoLinea).flush();
-            Files.copy(archivos.toPath(), outputStream);
+
             outputStream.flush();
             printWriter.append(saltoLinea).flush();
             printWriter.append("--" + boundary + "--").append(saltoLinea).flush();
@@ -135,22 +182,4 @@ public class API {
         return resultados;
     }
 
-    public String buildURL(String recurso, HashMap<String, String> parametros) {
-        StringBuilder completeUrl = new StringBuilder(this.URL + ":" + this.port);
-        if (recurso != null) {
-            completeUrl.append("/").append(recurso);
-        }
-        int parametrosSize = 0;
-        if (parametros != null && !parametros.isEmpty()) {
-            completeUrl.append("?");
-            for (Map.Entry<String, String> parametro : parametros.entrySet()) {
-                completeUrl.append(parametro.getKey()).append("=").append(parametro.getValue());
-                if (parametrosSize < parametros.size()) {
-                    completeUrl.append("&");
-                }
-                parametrosSize++;
-            }
-        }
-        return completeUrl.toString();
-    }
 }

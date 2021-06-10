@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.VerOfertaController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.VerOfertaController">
    <children>
       <Label fx:id="lblTitulo" layoutX="252.0" layoutY="54.0" prefHeight="32.0" prefWidth="300.0" text="Titulo">
          <font>
@@ -37,14 +37,14 @@
          </font>
       </Label>
       <Button layoutX="281.0" layoutY="224.0" mnemonicParsing="false" onAction="#irAOferta" prefHeight="25.0" prefWidth="129.0" text="Ir a la oferta" />
-      <Button layoutX="432.0" layoutY="224.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" text="Denunciar Oferta" />
+      <Button layoutX="432.0" layoutY="224.0" mnemonicParsing="false" onAction="#denunciarClic" prefHeight="25.0" prefWidth="129.0" text="Denunciar Oferta" />
       <ScrollPane layoutY="293.0" prefHeight="107.0" prefWidth="336.0">
          <content>
             <VBox fx:id="vbox" prefHeight="160.0" prefWidth="320.0" style="-fx-background-color: #bfbfbf;" />
          </content>
       </ScrollPane>
-      <Button layoutX="348.0" layoutY="322.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Comentar" />
-      <TextField layoutX="348.0" layoutY="293.0" prefHeight="25.0" prefWidth="246.0" promptText="Escribe aquí tu comentario" />
+      <Button layoutX="348.0" layoutY="322.0" mnemonicParsing="false" onAction="#comentarClic" prefHeight="25.0" prefWidth="109.0" text="Comentar" />
+      <TextField fx:id="txtComentario" layoutX="348.0" layoutY="293.0" prefHeight="25.0" prefWidth="246.0" promptText="Escribe aquí tu comentario" />
       <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="206.0" layoutY="221.0" onMouseClicked="#puntuarPositivamente" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@imagenes/like.png" />

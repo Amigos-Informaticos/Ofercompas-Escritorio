@@ -220,4 +220,5 @@ public abstract class Publicacion {
         HashMap respuesta = this.api.connect("DELETE", ("publicaciones/"+this.idPublicacion), null, null);
         return (int) respuesta.get("status");
     }
+
 }

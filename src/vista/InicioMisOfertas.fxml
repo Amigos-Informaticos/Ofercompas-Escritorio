@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
@@ -13,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.InicioOfertasController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.InicioMisOfertasController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -21,7 +20,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Ofercompas" textFill="WHITE">
+                        <Label text="Mis Ofertas" textFill="WHITE">
                            <font>
                               <Font name="System Bold Italic" size="25.0" />
                            </font>
@@ -39,7 +38,6 @@
                   </MenuButton>
                   <MenuButton fx:id="menuPerfil" mnemonicParsing="false" prefWidth="150.0" styleClass="comboBox" text="Mi perfil">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#clicMisOfertas" text="Mis ofertas" />
                         <MenuItem mnemonicParsing="false" onAction="#clicMisCodigos" text="Mis códigos" />
                         <MenuItem mnemonicParsing="false" onAction="#clicEditarPerfil" text="Editar Perfil" />
                         <MenuItem mnemonicParsing="false" onAction="#clicCerrarSesion" text="Cerrar sesión" />
@@ -48,18 +46,14 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </MenuButton>
-                  <Button mnemonicParsing="false" onAction="#cambiarACodigos" prefWidth="150.0" styleClass="add-btn" text="Ir a Códigos">
+                  <Button mnemonicParsing="false" onAction="#clicIrCodigos" prefWidth="150.0" styleClass="add-btn" text="Ir a Códigos">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Button>
-                  <ComboBox fx:id="cmbCategoria" prefWidth="150.0" promptText="Categoría" styleClass="comboBox" stylesheets="@estilo/estilo.css">
+                  <Button mnemonicParsing="false" onAction="#clicIrOfertas" prefWidth="150.0" styleClass="add-btn" text="Ir a Ofertas">
                      <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin></ComboBox>
-                  <Button mnemonicParsing="false" onAction="#buscarPorCategoria" prefWidth="150.0" styleClass="add-btn" text="Aplicar filtro">
-                     <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets top="20.0" />
                      </VBox.margin>
                   </Button>
                </children>
