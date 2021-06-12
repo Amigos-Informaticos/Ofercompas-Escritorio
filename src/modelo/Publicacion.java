@@ -3,8 +3,10 @@ package modelo;
 import com.google.gson.annotations.SerializedName;
 import datos.API;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Objects;
 
 public abstract class Publicacion {
     @SerializedName("titulo")
@@ -23,6 +25,25 @@ public abstract class Publicacion {
     protected int categoria = 0;
     @SerializedName("idPublicacion")
     protected int idPublicacion;
+
+    File foto;
+    File video;
+
+    public File getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String path) {
+        this.foto = new File(path);
+    }
+
+    public File getVideo() {
+        return video;
+    }
+
+    public void setVideo(String path) {
+        this.video = new File(path);
+    }
 
     public int getIdPublicador() {
         return idPublicador;
@@ -217,8 +238,21 @@ public abstract class Publicacion {
     }
 
     public int eliminar() throws IOException {
-        HashMap respuesta = this.api.connect("DELETE", ("publicaciones/"+this.idPublicacion), null, null);
+        HashMap respuesta = this.api.connect("DELETE", ("publicaciones/" + this.idPublicacion), null, null);
         return (int) respuesta.get("status");
     }
 
+    public int publicarFoto() throws IOException {
+        File imagen = this.foto;
+        System.out.println(imagen);
+        API api = new API();
+        HashMap resultados = api.enviarFormulario("POST", "/ofertas/" + this.idPublicacion + "/imagenes", null, null, null, imagen);
+        return (int) resultados.get("status");
+    }
+
+    public int recuperarFoto(){
+        System.out.println("jaja");
+        return 0;
+
+    }
 }

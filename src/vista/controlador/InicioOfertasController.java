@@ -67,7 +67,6 @@ public class InicioOfertasController {
 
     public void llenarPagina() {
         ofertas.addAll(this.cargarOfertas(pagina, categoria));
-        System.out.println("Ofersas to string: " +  ofertas.toString());
         try {
             for (int i = 0; i < ofertas.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();

@@ -11,14 +11,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.VerOfertaController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.VerOfertaController">
    <children>
       <Label fx:id="lblTitulo" layoutX="252.0" layoutY="54.0" prefHeight="32.0" prefWidth="300.0" text="Titulo">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="36.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ivImagen" fitHeight="150.0" fitWidth="200.0" layoutX="36.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@imagenes/img_login.jpg" />
          </image></ImageView>
