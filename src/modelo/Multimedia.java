@@ -6,8 +6,6 @@ public class Multimedia {
     private File archivo;
     private String url;
 
-    public Multimedia(){}
-
     public File getArchivo() {
         return archivo;
     }

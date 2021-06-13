@@ -6,7 +6,6 @@ import datos.API;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Objects;
 
 public abstract class Publicacion {
     @SerializedName("titulo")
