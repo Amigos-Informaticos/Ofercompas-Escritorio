@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -50,6 +51,9 @@ public class VerOfertaController {
     @FXML
     private ImageView btnActualizar;
 
+    @FXML
+    private ImageView ivImagen;
+
     private Oferta oferta;
 
     private MiembroOfercompas miembroOfercompas;
@@ -75,7 +79,12 @@ public class VerOfertaController {
         this.lblFechaFin.setText(oferta.getFechaFin());
         this.lblPrecio.setText("$" + oferta.getPrecio());
         this.lblPuntuacion.setText(String.valueOf(oferta.getPuntuacion()));
+
+        Image imagen = new Image(oferta.getFoto().getUrl());
+        ivImagen.setImage(imagen);
+
         System.out.println(oferta.getIdPublicacion());
+
     }
 
     public void irAOferta() {

@@ -4,8 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import modelo.Multimedia;
 import modelo.Oferta;
 import utils.LimitadorTextField;
+import utils.VerificarArchivo;
 import vista.MainController;
 
 import java.io.File;
@@ -26,6 +28,10 @@ public class PublicarOfertaController {
     private DatePicker fechaFin;
     @FXML
     private ComboBox cmbCategoria;
+    @FXML
+    private Label lblNombreVideo;
+    @FXML
+    private Label lblNombreFoto;
 
     private Oferta oferta;
 
@@ -36,14 +42,13 @@ public class PublicarOfertaController {
     }
 
     public void limitarTextfields() {
-        LimitadorTextField.limitarTamanio(txtTitulo,30);
+        LimitadorTextField.limitarTamanio(txtTitulo, 30);
         LimitadorTextField.limitarTamanioArea(txtDescripcion, 200);
         LimitadorTextField.limitarTamanio(txtPrecio, 6);
         LimitadorTextField.limitarTamanio(txtVinculo, 2048);
 
         LimitadorTextField.soloNumeros(txtPrecio);
     }
-
 
 
     public void instanciaOferta() {
@@ -74,11 +79,11 @@ public class PublicarOfertaController {
         instanciaOferta();
         if (oferta.estaCompleta()) {
             try {
-                if(oferta.publicar() == 201) {
+                if (oferta.publicar() == 201 && oferta.publicarFoto() == 201) {
                     MainController.alert(Alert.AlertType.INFORMATION,
                             "Registro Exitoso",
                             "Publicación registrada exitosamente");
-                }else {
+                } else {
                     MainController.alert(Alert.AlertType.ERROR,
                             "Error del servidor",
                             "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
@@ -93,7 +98,46 @@ public class PublicarOfertaController {
         }
     }
 
-    public void clicAtras(){
-        MainController.activate("InicioOfertas","Inicio",MainController.Sizes.MID);
+    public void clicAtras() {
+        MainController.activate("InicioOfertas", "Inicio", MainController.Sizes.MID);
     }
+
+    public void buscarFoto() {
+        File archivo = new File(String.valueOf(MainController.fileExplorer()));
+        Multimedia foto = new Multimedia();
+        foto.setArchivo(archivo.getPath());
+        if (foto.getArchivo().getName() != null) {
+            VerificarArchivo verificador = new VerificarArchivo();
+            if (verificador.fotoValida(foto.getArchivo().getPath())) {
+                oferta.setFoto(foto);
+                lblNombreFoto.setText(archivo.getName());
+            } else {
+                MainController.alert(
+                        Alert.AlertType.WARNING,
+                        "Formato incorrecto",
+                        "Sube una foto en formato PNG o JPG"
+                );
+            }
+        }
+    }
+
+    public void buscarVideo() {
+        File archivo = new File(String.valueOf(MainController.fileExplorer()));
+        Multimedia video = new Multimedia();
+        video.setArchivo(archivo.getPath());
+        if (video.getArchivo().getName() != null) {
+            VerificarArchivo verificador = new VerificarArchivo();
+            if (verificador.fotoValida(video.getArchivo().getPath())) {
+                oferta.setFoto(video);
+                lblNombreFoto.setText(archivo.getName());
+            } else {
+                MainController.alert(
+                        Alert.AlertType.WARNING,
+                        "Formato incorrecto",
+                        "Sube un video en formato MP4"
+                );
+            }
+        }
+    }
+
 }

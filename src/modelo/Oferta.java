@@ -10,7 +10,6 @@ public class Oferta extends Publicacion {
     private String vinculo;
     private String precio;
 
-
     public Oferta(String titulo, String descripcion, String fechaInicio, String fechaFin, int puntuacion, EstadoPublicacion estado, int categoria, String vinculo, String precio) {
         super(titulo, descripcion, fechaInicio, fechaFin, puntuacion, estado, categoria);
         this.vinculo = vinculo;
@@ -47,6 +46,11 @@ public class Oferta extends Publicacion {
 
     public int publicar() throws IOException {
         HashMap respuesta = this.api.connect("POST", "ofertas", null, this.obtenerHashmap());
+        if (respuesta.get("status").toString().equals("201")){
+            HashMap ofertaRecibida = (HashMap) respuesta.get("json");
+            Double idDouble = (Double) ofertaRecibida.get("idPublicacion");
+            this.idPublicacion = idDouble.intValue();
+        }
         return (int) respuesta.get("status");
     }
 
@@ -83,6 +87,9 @@ public class Oferta extends Publicacion {
         oferta.setPuntuacion(Integer.parseInt(String.valueOf(ofertaJson.get("puntuacion"))));
         oferta.setIdPublicador(Integer.parseInt((ofertaJson.get("publicador").getAsString())));
         oferta.setCategoria(Integer.parseInt(String.valueOf(ofertaJson.get("categoria"))));
+        Multimedia foto = new Multimedia();
+        foto.setUrl(ofertaJson.get("imagen").getAsString());
+        oferta.setFoto(foto);
         System.out.println(oferta.getIdPublicador());
         return oferta;
     }

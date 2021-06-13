@@ -12,13 +12,13 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="330.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="vista.controlador.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.LoginController">
    <children>
       <TextField fx:id="txtEmail" layoutX="55.0" layoutY="214.0" prefHeight="35.0" prefWidth="220.0" promptText="Correo Electrńico" />
       <PasswordField fx:id="txtContrasenia" layoutX="55.0" layoutY="271.0" prefHeight="35.0" prefWidth="220.0" promptText="Contraseña" />
       <Button layoutX="175.0" layoutY="335.0" mnemonicParsing="false" onMouseClicked="#clicIniciarSesion" prefHeight="30.0" prefWidth="130.0" text="Iniciar sesión" />
       <Button layoutX="26.0" layoutY="335.0" mnemonicParsing="false" onMouseClicked="#clicRegistrarse" prefHeight="30.0" prefWidth="130.0" text="Registrarse" />
-      <ImageView fitHeight="218.0" fitWidth="365.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ivImagen" fitHeight="218.0" fitWidth="365.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@imagenes/img_login.jpg" />
          </image>
