@@ -80,7 +80,7 @@ public class VerOfertaController {
         this.lblPrecio.setText("$" + oferta.getPrecio());
         this.lblPuntuacion.setText(String.valueOf(oferta.getPuntuacion()));
 
-        Image imagen = new Image("http://amigosinformaticos.ddns.net:42066/restaurants/10/images/31");
+        Image imagen = new Image(oferta.getFoto().getUrl());
         ivImagen.setImage(imagen);
 
         System.out.println(oferta.getIdPublicacion());

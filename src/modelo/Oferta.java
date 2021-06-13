@@ -10,9 +10,6 @@ public class Oferta extends Publicacion {
     private String vinculo;
     private String precio;
 
-    public String urlFoto;
-
-
     public Oferta(String titulo, String descripcion, String fechaInicio, String fechaFin, int puntuacion, EstadoPublicacion estado, int categoria, String vinculo, String precio) {
         super(titulo, descripcion, fechaInicio, fechaFin, puntuacion, estado, categoria);
         this.vinculo = vinculo;
@@ -90,7 +87,9 @@ public class Oferta extends Publicacion {
         oferta.setPuntuacion(Integer.parseInt(String.valueOf(ofertaJson.get("puntuacion"))));
         oferta.setIdPublicador(Integer.parseInt((ofertaJson.get("publicador").getAsString())));
         oferta.setCategoria(Integer.parseInt(String.valueOf(ofertaJson.get("categoria"))));
-        oferta.urlFoto = ofertaJson.get("imagen").getAsString();
+        Multimedia foto = new Multimedia();
+        foto.setUrl(ofertaJson.get("imagen").getAsString());
+        oferta.setFoto(foto);
         System.out.println(oferta.getIdPublicador());
         return oferta;
     }

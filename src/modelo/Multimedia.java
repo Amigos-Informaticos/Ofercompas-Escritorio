@@ -12,8 +12,8 @@ public class Multimedia {
         return archivo;
     }
 
-    public void setArchivo(File archivo) {
-        this.archivo = archivo;
+    public void setArchivo(String path) {
+        this.archivo = new File(path);
     }
 
     public String getUrl() {

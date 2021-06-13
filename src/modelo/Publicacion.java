@@ -26,23 +26,23 @@ public abstract class Publicacion {
     @SerializedName("idPublicacion")
     protected int idPublicacion;
 
-    File foto;
-    File video;
+    private Multimedia foto;
+    private Multimedia video;
 
-    public File getFoto() {
+    public Multimedia getFoto() {
         return foto;
     }
 
-    public void setFoto(String path) {
-        this.foto = new File(path);
+    public void setFoto(Multimedia foto) {
+        this.foto = foto;
     }
 
-    public File getVideo() {
+    public Multimedia getVideo() {
         return video;
     }
 
-    public void setVideo(String path) {
-        this.video = new File(path);
+    public void setVideo(Multimedia video) {
+        this.video = video;
     }
 
     public int getIdPublicador() {
@@ -243,7 +243,7 @@ public abstract class Publicacion {
     }
 
     public int publicarFoto() throws IOException {
-        File imagen = this.foto;
+        File imagen = this.foto.getArchivo();
         System.out.println(imagen);
         API api = new API();
         HashMap resultados = api.enviarFormulario("POST", "/ofertas/" + this.idPublicacion + "/imagenes", null, null, null, imagen);

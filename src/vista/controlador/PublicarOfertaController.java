@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import modelo.Multimedia;
 import modelo.Oferta;
 import utils.LimitadorTextField;
 import utils.VerificarArchivo;
@@ -103,12 +104,14 @@ public class PublicarOfertaController {
     }
 
     public void buscarFoto() {
-        File foto = new File(String.valueOf(MainController.fileExplorer()));
-        if (foto.getName() != null) {
+        File archivo = new File(String.valueOf(MainController.fileExplorer()));
+        Multimedia foto = new Multimedia();
+        foto.setArchivo(archivo.getPath());
+        if (foto.getArchivo().getName() != null) {
             VerificarArchivo verificador = new VerificarArchivo();
-            if (verificador.fotoValida(foto.getPath())) {
-                oferta.setFoto(foto.getPath());
-                lblNombreFoto.setText(foto.getName());
+            if (verificador.fotoValida(foto.getArchivo().getPath())) {
+                oferta.setFoto(foto);
+                lblNombreFoto.setText(archivo.getName());
             } else {
                 MainController.alert(
                         Alert.AlertType.WARNING,
@@ -120,12 +123,14 @@ public class PublicarOfertaController {
     }
 
     public void buscarVideo() {
-        File video = new File(String.valueOf(MainController.fileExplorer()));
-        if (video.getName() != null) {
+        File archivo = new File(String.valueOf(MainController.fileExplorer()));
+        Multimedia video = new Multimedia();
+        video.setArchivo(archivo.getPath());
+        if (video.getArchivo().getName() != null) {
             VerificarArchivo verificador = new VerificarArchivo();
-            if (verificador.videoValido(video.getPath())) {
-                oferta.setFoto(video.getPath());
-                lblNombreVideo.setText(video.getName());
+            if (verificador.fotoValida(video.getArchivo().getPath())) {
+                oferta.setFoto(video);
+                lblNombreFoto.setText(archivo.getName());
             } else {
                 MainController.alert(
                         Alert.AlertType.WARNING,
