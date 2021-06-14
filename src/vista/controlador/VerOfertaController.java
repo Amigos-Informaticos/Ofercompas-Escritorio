@@ -9,13 +9,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaView;
 import modelo.Comentario;
 import modelo.MiembroOfercompas;
 import modelo.Oferta;
 import vista.MainController;
+
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
@@ -59,6 +62,12 @@ public class VerOfertaController {
 
     @FXML
     private ImageView btnActualizar;
+
+    @FXML
+    private ImageView ivImagen;
+
+    @FXML
+    private MediaView media;
 
     private Oferta oferta;
 
@@ -115,7 +124,17 @@ public class VerOfertaController {
         this.lblFechaFin.setText(oferta.getFechaFin());
         this.lblPrecio.setText("$" + oferta.getPrecio());
         this.lblPuntuacion.setText(String.valueOf(oferta.getPuntuacion()));
+
+        Image imagen = new Image(oferta.getFoto().getUrl());
+        ivImagen.setImage(imagen);
+
+
         System.out.println(oferta.getIdPublicacion());
+
+    }
+
+    public void verVideo(){
+        javafx.application.Application.launch(VerVideo.class);
     }
 
     public void irAOferta() {

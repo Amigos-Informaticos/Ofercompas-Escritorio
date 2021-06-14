@@ -2,6 +2,7 @@ package vista.controlador;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import modelo.Oferta;
@@ -35,5 +36,12 @@ public class ItemOfertasController {
         lblTitulo.setText(oferta.getTitulo());
         lblPrecio.setText("$" + oferta.getPrecio());
         lblPuntuacion.setText(String.valueOf(oferta.getPuntuacion()));
+        //System.out.println("CACA"+oferta.getFoto().getPath();
+        if(!oferta.getFoto().getUrl().equals("")){
+            Image imagen = new Image(oferta.getFoto().getUrl());
+            imgProducto.setImage(imagen);
+        }
+
+
     }
 }

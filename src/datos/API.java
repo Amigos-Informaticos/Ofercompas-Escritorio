@@ -133,8 +133,14 @@ public class API {
         }
         return completeUrl.toString();
     }
+
     public HashMap enviarFormulario(String metodo, String recurso, HashMap<String, String> params,
-                             HashMap<String, String> payload, HashMap<String, String> headers, File archivos) throws IOException {
+                                    HashMap<String, String> payload, HashMap<String, String> headers, File archivos) throws IOException {
+        return this.enviarFormulario(metodo,recurso,params,payload,headers,archivos,false);
+    }
+
+    public HashMap enviarFormulario(String metodo, String recurso, HashMap<String, String> params,
+                             HashMap<String, String> payload, HashMap<String, String> headers, File archivos, boolean isVideo) throws IOException {
         HashMap<String, Object> resultados = new HashMap();
         URL url = new URL(this.buildURL(recurso, params));
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -155,7 +161,7 @@ public class API {
             String saltoLinea = "\r\n";
             printWriter.append("--" + boundary).append(saltoLinea);
             if (archivos!=null) {
-                printWriter.append("Content-Disposition: form-data; name = \"imagenes\"; filename = \"  " + archivos.getName() + "\"").append(saltoLinea);
+                printWriter.append("Content-Disposition: form-data; name = \"imagen\"; filename = \"  " + archivos.getName() + "\"").append(saltoLinea);
                 printWriter.append("Content-Type: " + URLConnection.guessContentTypeFromName(archivos.getName())).append(saltoLinea);
                 printWriter.append("Content-Transfer-Encoding: binary").append(saltoLinea);
                 printWriter.append(saltoLinea).flush();

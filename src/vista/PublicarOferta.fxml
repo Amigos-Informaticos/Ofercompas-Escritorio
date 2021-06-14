@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -18,8 +19,8 @@
       <DatePicker fx:id="fechaCreacion" layoutX="259.0" layoutY="277.0" promptText="Cuando inicia" />
       <DatePicker fx:id="fechaFin" layoutX="259.0" layoutY="308.0" promptText="Cuando termina" />
       <Button layoutX="281.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#publicar" prefHeight="25.0" prefWidth="130.0" text="Publicar" />
-      <Button layoutX="33.0" layoutY="144.0" mnemonicParsing="false" text="Buscar Imagen" />
-      <Button layoutX="33.0" layoutY="190.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Buscar Video" />
+      <Button layoutX="33.0" layoutY="144.0" mnemonicParsing="false" onAction="#buscarFoto" text="Buscar Imagen" />
+      <Button layoutX="33.0" layoutY="201.0" mnemonicParsing="false" onAction="#buscarVideo" prefHeight="25.0" prefWidth="94.0" text="Buscar Video" />
       <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#clicAtras" prefHeight="25.0" prefWidth="76.0" text="Atrás" />
       <Label layoutX="417.0" layoutY="5.0" text="Publicar Oferta">
          <font>
@@ -57,5 +58,8 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <Label fx:id="lblNombreVideo" alignment="TOP_LEFT" layoutX="14.0" layoutY="226.0" prefHeight="20.0" prefWidth="166.0" />
+      <Label fx:id="lblNombreFoto" alignment="TOP_LEFT" layoutX="14.0" layoutY="169.0" prefHeight="20.0" prefWidth="166.0" />
+      <PieChart layoutX="465.0" layoutY="250.0" prefHeight="166.0" prefWidth="220.0" />
    </children>
 </AnchorPane>

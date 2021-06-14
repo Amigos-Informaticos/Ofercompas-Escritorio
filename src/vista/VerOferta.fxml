@@ -9,20 +9,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.VerOfertaController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.VerOfertaController">
    <children>
       <Label fx:id="lblTitulo" layoutX="252.0" layoutY="54.0" prefHeight="32.0" prefWidth="300.0" text="Titulo">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="36.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ivImagen" fitHeight="150.0" fitWidth="200.0" layoutX="36.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@imagenes/img_login.jpg" />
          </image></ImageView>
-      <Label fx:id="lblDescripcion" alignment="TOP_LEFT" layoutX="252.0" layoutY="86.0" prefHeight="91.0" prefWidth="300.0" text="Descripcion">
+      <Label fx:id="lblDescripcion" alignment="TOP_LEFT" layoutX="252.0" layoutY="86.0" prefHeight="91.0" prefWidth="129.0" text="Descripcion">
          <font>
             <Font size="14.0" />
          </font></Label>
@@ -55,7 +56,7 @@
             <Image url="@imagenes/dislike.png" />
          </image>
       </ImageView>
-      <Button layoutX="35.0" layoutY="190.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="200.0" text="Ver Video" />
+      <Button layoutX="35.0" layoutY="190.0" mnemonicParsing="false" onAction="#verVideo" prefHeight="20.0" prefWidth="200.0" text="Ver Video" />
       <Label fx:id="lblFechaInicio" alignment="CENTER" contentDisplay="CENTER" layoutX="284.0" layoutY="194.0" prefHeight="17.0" prefWidth="129.0" text="Inicia: 000-00-00" />
       <Label fx:id="lblFechaFin" alignment="CENTER" contentDisplay="CENTER" layoutX="432.0" layoutY="194.0" prefHeight="17.0" prefWidth="129.0" text="Termina: 000-00-00" />
       <Pane layoutX="4.0" layoutY="4.0" prefHeight="50.0" prefWidth="592.0" style="-fx-background-color: #00AE07;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -73,5 +74,6 @@
             </ImageView>
          </children>
       </Pane>
+      <MediaView fx:id="media" fitHeight="200.0" fitWidth="200.0" layoutX="397.0" layoutY="50.0" />
    </children>
 </AnchorPane>
