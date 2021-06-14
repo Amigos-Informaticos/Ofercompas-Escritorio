@@ -1,10 +1,12 @@
 package vista.controlador;
 
+import com.google.gson.JsonObject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -19,10 +21,18 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class VerOfertaController {
     public TextField txtComentario;
+
+    public ImageView btnPuntuarLike;
+
+    public ImageView btnPuntuarDislike;
+
+    public Button btnDenunciar;
+
     @FXML
     private Label lblTitulo;
 
@@ -61,11 +71,41 @@ public class VerOfertaController {
         oferta = (Oferta) MainController.get("oferta");
         mostrarInformacionOferta();
         this.mostrarComentarios();
-
         soyAutor();
+        obtenerInteraccion();
     }
     public void obtenerInteraccion(){
-        System.out.println("Obteniendo interacción");
+        try {
+            HashMap respuesta = oferta.obtenerInteraccion(miembroOfercompas.getIdMiembro());
+
+            int status = (int) respuesta.get("status");
+            if(status == 200){
+                System.out.println("La respuesta con json es: " + respuesta.toString());
+                HashMap jsonRespuesta = (HashMap) respuesta.get("json");
+
+                System.out.println("La respuesta es: ");
+                System.out.println(jsonRespuesta.toString());
+                boolean denunciada = (boolean) jsonRespuesta .get("denunciada");
+                boolean puntuada = (boolean) jsonRespuesta .get("puntuada");
+                System.out.println("LOS VALORES RECUPERADOS SON");
+
+                System.out.println(denunciada);
+                System.out.println(puntuada);
+                this.btnDenunciar.setDisable(denunciada);
+                this.btnPuntuarDislike.setDisable(puntuada);
+                this.btnPuntuarLike.setDisable(puntuada);
+
+
+
+            }
+
+
+
+
+        } catch (IOException e) {
+            System.out.println("EXCEPCIOOOOON!!!");
+            e.printStackTrace();
+        }
     }
 
     public void mostrarInformacionOferta() {
