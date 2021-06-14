@@ -11,6 +11,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import modelo.Comentario;
 import modelo.MiembroOfercompas;
@@ -18,6 +20,7 @@ import modelo.Oferta;
 import vista.MainController;
 
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -57,7 +60,7 @@ public class VerOfertaController {
     private ImageView ivImagen;
 
     @FXML
-    private MediaView media;
+    private MediaView mediaView;
 
     private Oferta oferta;
 
@@ -70,8 +73,6 @@ public class VerOfertaController {
         oferta = (Oferta) MainController.get("oferta");
         mostrarInformacionOferta();
         this.mostrarComentarios();
-
-
 
         soyAutor();
     }
@@ -96,7 +97,16 @@ public class VerOfertaController {
     }
 
     public void verVideo(){
-        javafx.application.Application.launch(VerVideo.class);
+        //javafx.application.Application.launch(VerVideo.class);
+        System.out.println("OJOOO VIDEO: "+oferta.getVideo().getUrl());
+        String path = oferta.getVideo().getUrl();
+        Media media = new Media(oferta.getVideo().getUrl());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+
+        mediaView = new MediaView(mediaPlayer);
+
+        mediaPlayer.setAutoPlay(true);
+
     }
 
     public void irAOferta() {
