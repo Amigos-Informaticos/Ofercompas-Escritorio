@@ -51,7 +51,6 @@ public class InicioOfertasController {
 
     public static HashMap<Integer, List<Oferta>> ofertasRecuperadas = new HashMap<>();
 
-
     public void initialize() {
         this.llenarComboCategorias();
         myListener = new MyListener() {
@@ -63,7 +62,6 @@ public class InicioOfertasController {
         llenarPagina();
 
     }
-
 
     public void llenarPagina() {
         ofertas.addAll(this.cargarOfertas(pagina, categoria));

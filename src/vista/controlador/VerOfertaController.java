@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -11,8 +13,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
 import modelo.Comentario;
 import modelo.MiembroOfercompas;
+import modelo.Multimedia;
 import modelo.Oferta;
 import vista.MainController;
 import java.awt.*;
@@ -54,6 +61,9 @@ public class VerOfertaController {
     @FXML
     private ImageView ivImagen;
 
+    @FXML
+    private MediaView media;
+
     private Oferta oferta;
 
     private MiembroOfercompas miembroOfercompas;
@@ -65,6 +75,8 @@ public class VerOfertaController {
         oferta = (Oferta) MainController.get("oferta");
         mostrarInformacionOferta();
         this.mostrarComentarios();
+
+
 
         soyAutor();
     }
@@ -83,8 +95,13 @@ public class VerOfertaController {
         Image imagen = new Image(oferta.getFoto().getUrl());
         ivImagen.setImage(imagen);
 
+
         System.out.println(oferta.getIdPublicacion());
 
+    }
+
+    public void verVideo(){
+        javafx.application.Application.launch(VerVideo.class);
     }
 
     public void irAOferta() {
