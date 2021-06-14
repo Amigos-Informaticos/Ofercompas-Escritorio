@@ -11,10 +11,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaView;
 import modelo.Comentario;
 import modelo.MiembroOfercompas;
 import modelo.Oferta;
 import vista.MainController;
+
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
@@ -54,6 +56,9 @@ public class VerOfertaController {
     @FXML
     private ImageView ivImagen;
 
+    @FXML
+    private MediaView media;
+
     private Oferta oferta;
 
     private MiembroOfercompas miembroOfercompas;
@@ -65,6 +70,8 @@ public class VerOfertaController {
         oferta = (Oferta) MainController.get("oferta");
         mostrarInformacionOferta();
         this.mostrarComentarios();
+
+
 
         soyAutor();
     }
@@ -83,8 +90,13 @@ public class VerOfertaController {
         Image imagen = new Image(oferta.getFoto().getUrl());
         ivImagen.setImage(imagen);
 
+
         System.out.println(oferta.getIdPublicacion());
 
+    }
+
+    public void verVideo(){
+        javafx.application.Application.launch(VerVideo.class);
     }
 
     public void irAOferta() {

@@ -245,13 +245,16 @@ public abstract class Publicacion {
         File imagen = this.foto.getArchivo();
         System.out.println(imagen);
         API api = new API();
-        HashMap resultados = api.enviarFormulario("POST", "/ofertas/" + this.idPublicacion + "/imagenes", null, null, null, imagen);
+        HashMap resultados = api.enviarFormulario("POST", "publicaciones/" + this.idPublicacion + "/imagenes", null, null, null, imagen);
         return (int) resultados.get("status");
     }
 
-    public int recuperarFoto(){
-        System.out.println("jaja");
-        return 0;
-
+    public int publicarVideo() throws IOException {
+        File video = this.video.getArchivo();
+        System.out.println(video);
+        API api = new API();
+        HashMap resultados = api.enviarFormulario("POST", "publicaciones/" + this.idPublicacion + "/imagenes", null, null, null, video);
+        return (int) resultados.get("status");
     }
+
 }

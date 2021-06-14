@@ -79,7 +79,7 @@ public class PublicarOfertaController {
         instanciaOferta();
         if (oferta.estaCompleta()) {
             try {
-                if (oferta.publicar() == 201 && oferta.publicarFoto() == 201) {
+                if (oferta.publicar() == 201 && oferta.publicarFoto() == 201 && oferta.publicarVideo() == 201) {
                     MainController.alert(Alert.AlertType.INFORMATION,
                             "Registro Exitoso",
                             "Publicación registrada exitosamente");
@@ -127,14 +127,14 @@ public class PublicarOfertaController {
         video.setArchivo(archivo.getPath());
         if (video.getArchivo().getName() != null) {
             VerificarArchivo verificador = new VerificarArchivo();
-            if (verificador.fotoValida(video.getArchivo().getPath())) {
-                oferta.setFoto(video);
-                lblNombreFoto.setText(archivo.getName());
+            if (verificador.videoValido(video.getArchivo().getPath())) {
+                oferta.setVideo(video);
+                lblNombreVideo.setText(archivo.getName());
             } else {
                 MainController.alert(
                         Alert.AlertType.WARNING,
                         "Formato incorrecto",
-                        "Sube un video en formato MP4"
+                        "Sube una foto en formato PNG o JPG"
                 );
             }
         }
