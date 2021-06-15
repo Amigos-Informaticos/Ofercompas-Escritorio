@@ -90,12 +90,10 @@ public class Oferta extends Publicacion {
         Multimedia foto = new Multimedia();
         foto.setUrl(ofertaJson.get("imagen").getAsString());
         oferta.setFoto(foto);
-/*
         Multimedia video = new Multimedia();
         video.setUrl(ofertaJson.get("video").getAsString());
         oferta.setVideo(video);
 
- */
 
         System.out.println(oferta.getIdPublicador());
         return oferta;

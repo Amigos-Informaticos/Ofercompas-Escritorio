@@ -85,13 +85,16 @@
                   </ScrollPane>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0">
                      <children>
-                        <Button fx:id="retrcoderPagina" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Anterior">
+                        <Button fx:id="retrcoderPagina" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" styleClass="boton-naranja" stylesheets="@estilo/estilo.css" text="Anterior" textFill="WHITE">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
                         </Button>
-                        <Label fx:id="lblPagina" text="1" />
-                        <Button fx:id="avanzarPagina" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Siguiente">
+                        <Label fx:id="lblPagina" text="1">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <Button fx:id="avanzarPagina" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" styleClass="boton-naranja" stylesheets="@estilo/estilo.css" text="Siguiente" textFill="WHITE">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
