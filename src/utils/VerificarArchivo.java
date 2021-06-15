@@ -28,12 +28,16 @@ public class VerificarArchivo {
         String extension = this.getExt(path);
 
         return extension.equals("jpg") ||
-                extension.equals("png");
+                extension.equals("png") ||
+                extension.equals("JPG") ||
+                extension.equals("PNG") ||
+                extension.equals("JPEG") ||
+                extension.equals("jpeg");
     }
 
     public boolean videoValido(String path) {
         String extension = this.getExt(path);
 
-        return extension.equals("mp4");
+        return extension.equals("mp4") || extension.equals("MP4");
     }
 }

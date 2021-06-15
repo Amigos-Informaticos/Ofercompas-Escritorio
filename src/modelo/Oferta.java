@@ -151,18 +151,4 @@ public class Oferta extends Publicacion {
         return (int)respuesta.get("status");
 
     }
-    public HashMap obtenerInteraccion(int idMiembroLogeado) throws IOException {
-        String url = "ofertas/"+ this.idPublicacion + "/interaccion";
-        HashMap<String, String> json = new HashMap<>();
-        json.put("idMiembro", String.valueOf(idMiembroLogeado));
-        //HashMap<String, String> parametros = new HashMap<>();
-        //parametros.put("idMiemrbo", String.valueOf(idMiembroLogeado));
-        API api = new API();
-        System.out.println(json.toString());
-        HashMap respuesta = api.connect("GET", url, null , null, json, false);
-
-
-        return respuesta;
-
-    }
 }
