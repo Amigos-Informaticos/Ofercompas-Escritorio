@@ -64,7 +64,6 @@ public class LoginController {
                             "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
                 }
             } catch (IOException ioException) {
-                ioException.printStackTrace();
                 MainController.alert(Alert.AlertType.ERROR,
                         "Error del servidor ioExcep",
                         "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
