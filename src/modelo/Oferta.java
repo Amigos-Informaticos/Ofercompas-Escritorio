@@ -151,11 +151,4 @@ public class Oferta extends Publicacion {
         return (int)respuesta.get("status");
 
     }
-    /*public HashMap obtenerInteraccion(int idMiembroLogeado){
-        String url = "publicaciones/"+ this.idPublicacion ;
-        HashMap<String, String> payload = new HashMap<>();
-        payload.put("idMiembro", String.valueOf(idMiembroLogeado));
-
-
-    }*/
 }

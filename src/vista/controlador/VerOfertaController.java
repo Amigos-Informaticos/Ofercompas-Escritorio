@@ -5,13 +5,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.MediaView;
 import modelo.Comentario;
 import modelo.MiembroOfercompas;
 import modelo.Oferta;
@@ -20,12 +20,13 @@ import vista.MainController;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class VerOfertaController {
     public TextField txtComentario;
+    public Button btnDenunciar;
     @FXML
     private Label lblTitulo;
 
@@ -57,7 +58,10 @@ public class VerOfertaController {
     private ImageView ivImagen;
 
     @FXML
-    private MediaView mediaView;
+    private ImageView btnPuntuarLike;
+
+    @FXML
+    private ImageView btnPuntuarDislike;
 
     private Oferta oferta;
 
@@ -70,11 +74,40 @@ public class VerOfertaController {
         oferta = (Oferta) MainController.get("oferta");
         mostrarInformacionOferta();
         this.mostrarComentarios();
-
         soyAutor();
+        obtenerInteraccion();
     }
+
     public void obtenerInteraccion(){
-        System.out.println("Obteniendo interacción");
+        try {
+            HashMap respuesta = oferta.obtenerInteraccion(miembroOfercompas.getIdMiembro());
+            System.out.println(respuesta.toString());
+
+            int status = (int) respuesta.get("status");
+            if(status == 200){
+                System.out.println("La respuesta con json es: " + respuesta.toString());
+                HashMap jsonRespuesta = (HashMap) respuesta.get("json");
+
+                System.out.println("La respuesta es: ");
+                System.out.println(jsonRespuesta.toString());
+                boolean denunciada = (boolean) jsonRespuesta.get("denunciada");
+                boolean puntuada = (boolean) jsonRespuesta.get("puntuada");
+                System.out.println("LOS VALORES RECUPERADOS SON");
+
+                System.out.println(denunciada);
+                System.out.println(puntuada);
+                this.btnDenunciar.setDisable(puntuada);
+                this.btnPuntuarDislike.setDisable(puntuada);
+                this.btnPuntuarLike.setDisable(puntuada);
+            }
+
+
+
+
+        } catch (IOException e) {
+            System.out.println("EXCEPCIOOOOON!!!");
+            e.printStackTrace();
+        }
     }
 
     public void mostrarInformacionOferta() {
@@ -108,11 +141,9 @@ public class VerOfertaController {
         System.out.println(oferta.getVinculo());
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
             try {
-                Desktop.getDesktop().browse(new URI("https://www.amazon.com.mx/dp/B07XJ8C8F5?pf_rd_r=PB8ABAXRVKNSEYPPE26D&pf_rd_p=b2217d1b-e925-4541-b5ed-feeb1ff7bf13&pd_rd_r=8d4003d7-60cc-44b3-8ed4-15416742c139&pd_rd_w=TOXPN&pd_rd_wg=LUX7z&ref_=pd_gw_unk"));
+                Desktop.getDesktop().browse(URI.create(oferta.getVinculo()));
             } catch (IOException ioException) {
                 ioException.printStackTrace();
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -167,7 +198,7 @@ public class VerOfertaController {
     public void puntuarPositivamente() {
         System.out.println(miembroOfercompas.getIdMiembro());
         try {
-            if(oferta.puntuar(miembroOfercompas.getIdMiembro(), 1) == 200){
+            if(oferta.puntuar(miembroOfercompas.getIdMiembro(), 1) == 201){
                 lblPuntuacion.setText(String.valueOf(oferta.getPuntuacion() + 1));
             }else{
                 MainController.alert(Alert.AlertType.INFORMATION,
@@ -182,7 +213,7 @@ public class VerOfertaController {
     public void puntuarNegativamente() {
         System.out.println(miembroOfercompas.getIdMiembro());
         try {
-            if(oferta.puntuar(miembroOfercompas.getIdMiembro(), 0) == 200){
+            if(oferta.puntuar(miembroOfercompas.getIdMiembro(), 0) == 201){
                 lblPuntuacion.setText(String.valueOf(oferta.getPuntuacion() - 1));
             }else{
                 MainController.alert(Alert.AlertType.INFORMATION,
@@ -219,7 +250,12 @@ public class VerOfertaController {
     public void eliminar(){
         if (MainController.alert(Alert.AlertType.CONFIRMATION, "¿Está seguro que desea eliminar esta Oferta?", "")){
             try {
-                oferta.eliminar();
+                if (oferta.eliminar() == 200){
+                    MainController.alert(Alert.AlertType.INFORMATION,
+                            "Eliminación Exitosa",
+                            "Publicación eliminada exitosamente");
+                    MainController.activate("InicioOfertas", "Actualizar Oferta", MainController.Sizes.MID);
+                }
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }

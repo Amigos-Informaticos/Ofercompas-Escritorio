@@ -35,11 +35,14 @@ public class VerCodigoDescuentoController {
     @FXML
     private VBox vbox;
 
+    private MiembroOfercompas miembroOfercompas;
+
     private CodigoDescuento codigoDescuento;
 
     private List<Comentario> comentarios = new ArrayList<>();
 
     public void initialize() {
+        miembroOfercompas = (MiembroOfercompas) MainController.get("miembroLogeado");
         mostrarInformacionOferta();
         this.mostrarComentarios();
     }
@@ -89,24 +92,33 @@ public class VerCodigoDescuentoController {
     }
 
     public void puntuarPositivamente() {
-        MiembroOfercompas miembroOfercompas = (MiembroOfercompas) MainController.get("miembro");
         System.out.println(miembroOfercompas.getIdMiembro());
         try {
-            codigoDescuento.puntuar(miembroOfercompas.getIdMiembro(),1);
+            if(codigoDescuento.puntuar(miembroOfercompas.getIdMiembro(), 1) == 201){
+                lblPuntuacion.setText(String.valueOf(codigoDescuento.getPuntuacion() + 1));
+            }else{
+                MainController.alert(Alert.AlertType.INFORMATION,
+                        "Ya puntuaste esta oferta",
+                        "Ya has puntuado esta oferta anteriormente");
+            }
         } catch (IOException ioException) {
             System.out.println(ioException);
         }
-        lblPuntuacion.setText(String.valueOf(codigoDescuento.getPuntuacion() + 1));
     }
 
     public void puntuarNegativamente() {
-        MiembroOfercompas miembroOfercompas = (MiembroOfercompas) MainController.get("miembro");
+        System.out.println(miembroOfercompas.getIdMiembro());
         try {
-            codigoDescuento.puntuar(miembroOfercompas.getIdMiembro(),0);
+            if(codigoDescuento.puntuar(miembroOfercompas.getIdMiembro(), 0) == 201){
+                lblPuntuacion.setText(String.valueOf(codigoDescuento.getPuntuacion() - 1));
+            }else{
+                MainController.alert(Alert.AlertType.INFORMATION,
+                        "Ya puntuaste esta oferta",
+                        "Ya has puntuado esta oferta anteriormente");
+            }
         } catch (IOException ioException) {
             System.out.println(ioException);
         }
-        lblPuntuacion.setText(String.valueOf(codigoDescuento.getPuntuacion() - 1));
     }
 
     public void clicAtras(){
@@ -116,7 +128,11 @@ public class VerCodigoDescuentoController {
     public void eliminar(){
         if (MainController.alert(Alert.AlertType.CONFIRMATION, "¿Está seguro que desea eliminar este código?", "")){
             try {
-                codigoDescuento.eliminar();
+                if (codigoDescuento.eliminar() == 200){
+                    MainController.alert(Alert.AlertType.INFORMATION,
+                            "Eliminación Exitosa",
+                            "Publicación eliminada exitosamente");
+                }
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
