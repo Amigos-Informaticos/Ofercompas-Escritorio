@@ -57,7 +57,7 @@ public class VerOfertaController {
     private ImageView ivImagen;
 
     @FXML
-    private MediaView media;
+    private MediaView mediaView;
 
     private Oferta oferta;
 
@@ -70,8 +70,6 @@ public class VerOfertaController {
         oferta = (Oferta) MainController.get("oferta");
         mostrarInformacionOferta();
         this.mostrarComentarios();
-
-
 
         soyAutor();
     }
@@ -96,7 +94,14 @@ public class VerOfertaController {
     }
 
     public void verVideo(){
-        javafx.application.Application.launch(VerVideo.class);
+        System.out.println(oferta.getVinculo());
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            try {
+                Desktop.getDesktop().browse(URI.create(oferta.getVideo().getUrl()));
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
     }
 
     public void irAOferta() {

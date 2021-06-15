@@ -161,36 +161,38 @@ public abstract class Publicacion {
     }
 
     public void setCategoriaCmbBox(String categoria) {
-        switch (categoria) {
-            case "Tecnologia":
-                this.categoria = Categoria.TECNOLOGIA.getIndice();
-                break;
-            case "Moda de mujer":
-                this.categoria = Categoria.MODAMUJER.getIndice();
-                break;
-            case "Moda de hombre":
-                this.categoria = Categoria.MODAHOMBRE.getIndice();
-                break;
-            case "Hogar":
-                this.categoria = Categoria.HOGAR.getIndice();
-                break;
-            case "Mascotas":
-                this.categoria = Categoria.MASCOTAS.getIndice();
-                break;
-            case "Viaje":
-                this.categoria = Categoria.VIAJE.getIndice();
-                break;
-            case "Entretenimiento":
-                this.categoria = Categoria.COMIDABEBIDA.getIndice();
-                break;
-            case "Comida y bebida":
-                this.categoria = Categoria.COMIDABEBIDA.getIndice();
-                break;
-            default:
-                this.categoria = Categoria.TECNOLOGIA.getIndice();
-                break;
+        System.out.println("CATEGORIA: " + categoria);
+        if (categoria != null){
+            switch (categoria) {
+                case "Tecnologia":
+                    this.categoria = Categoria.TECNOLOGIA.getIndice();
+                    break;
+                case "Moda de mujer":
+                    this.categoria = Categoria.MODAMUJER.getIndice();
+                    break;
+                case "Moda de hombre":
+                    this.categoria = Categoria.MODAHOMBRE.getIndice();
+                    break;
+                case "Hogar":
+                    this.categoria = Categoria.HOGAR.getIndice();
+                    break;
+                case "Mascotas":
+                    this.categoria = Categoria.MASCOTAS.getIndice();
+                    break;
+                case "Viaje":
+                    this.categoria = Categoria.VIAJE.getIndice();
+                    break;
+                case "Entretenimiento":
+                    this.categoria = Categoria.COMIDABEBIDA.getIndice();
+                    break;
+                case "Comida y bebida":
+                    this.categoria = Categoria.COMIDABEBIDA.getIndice();
+                    break;
+                default:
+                    this.categoria = Categoria.TECNOLOGIA.getIndice();
+                    break;
+            }
         }
-
     }
 
     public String deCategoriaACmbBox() {
@@ -245,7 +247,7 @@ public abstract class Publicacion {
         File imagen = this.foto.getArchivo();
         System.out.println(imagen);
         API api = new API();
-        HashMap resultados = api.enviarFormulario("POST", "publicaciones/" + this.idPublicacion + "/imagenes", null, null, null, imagen);
+        HashMap resultados = api.enviarFormulario("POST", "publicaciones/" + this.idPublicacion + "/multimedia", null, null, null, imagen);
         return (int) resultados.get("status");
     }
 
@@ -253,7 +255,7 @@ public abstract class Publicacion {
         File video = this.video.getArchivo();
         System.out.println(video);
         API api = new API();
-        HashMap resultados = api.enviarFormulario("POST", "publicaciones/" + this.idPublicacion + "/imagenes", null, null, null, video);
+        HashMap resultados = api.enviarFormulario("POST", "publicaciones/" + this.idPublicacion + "/multimedia", null, null, null, video);
         return (int) resultados.get("status");
     }
 

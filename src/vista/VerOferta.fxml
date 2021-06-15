@@ -9,21 +9,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.VerOfertaController">
    <children>
-      <Label fx:id="lblTitulo" layoutX="252.0" layoutY="54.0" prefHeight="32.0" prefWidth="300.0" text="Titulo">
+      <Label fx:id="lblTitulo" alignment="CENTER" layoutX="252.0" layoutY="54.0" prefHeight="32.0" prefWidth="300.0" text="Titulo">
          <font>
-            <Font size="22.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ImageView fx:id="ivImagen" fitHeight="150.0" fitWidth="200.0" layoutX="36.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ivImagen" fitHeight="150.0" fitWidth="200.0" layoutX="36.0" layoutY="54.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@imagenes/img_login.jpg" />
          </image></ImageView>
-      <Label fx:id="lblDescripcion" alignment="TOP_LEFT" layoutX="252.0" layoutY="86.0" prefHeight="91.0" prefWidth="129.0" text="Descripcion">
+      <Label fx:id="lblDescripcion" alignment="TOP_LEFT" layoutX="252.0" layoutY="86.0" prefHeight="91.0" prefWidth="312.0" text="Descripcion">
          <font>
             <Font size="14.0" />
          </font></Label>
@@ -37,14 +36,23 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button layoutX="281.0" layoutY="224.0" mnemonicParsing="false" onAction="#irAOferta" prefHeight="25.0" prefWidth="129.0" text="Ir a la oferta" />
-      <Button layoutX="432.0" layoutY="224.0" mnemonicParsing="false" onAction="#denunciarClic" prefHeight="25.0" prefWidth="129.0" text="Denunciar Oferta" />
+      <Button layoutX="281.0" layoutY="224.0" mnemonicParsing="false" onAction="#irAOferta" prefHeight="25.0" prefWidth="129.0" styleClass="boton-verde" stylesheets="@estilo/estilo.css" text="Ir a la oferta" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button layoutX="432.0" layoutY="224.0" mnemonicParsing="false" onAction="#denunciarClic" prefHeight="25.0" prefWidth="129.0" styleClass="boton-verde" stylesheets="@estilo/estilo.css" text="Denunciar Oferta" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
       <ScrollPane layoutY="293.0" prefHeight="107.0" prefWidth="336.0">
          <content>
             <VBox fx:id="vbox" prefHeight="160.0" prefWidth="320.0" style="-fx-background-color: #bfbfbf;" />
          </content>
       </ScrollPane>
-      <Button layoutX="348.0" layoutY="322.0" mnemonicParsing="false" onAction="#comentarClic" prefHeight="25.0" prefWidth="109.0" text="Comentar" />
+      <Button layoutX="348.0" layoutY="322.0" mnemonicParsing="false" onAction="#comentarClic" prefHeight="25.0" prefWidth="109.0" styleClass="boton-verde" stylesheets="@estilo/estilo.css" text="Comentar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
       <TextField fx:id="txtComentario" layoutX="348.0" layoutY="293.0" prefHeight="25.0" prefWidth="246.0" promptText="Escribe aquí tu comentario" />
       <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="206.0" layoutY="221.0" onMouseClicked="#puntuarPositivamente" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -56,12 +64,21 @@
             <Image url="@imagenes/dislike.png" />
          </image>
       </ImageView>
-      <Button layoutX="35.0" layoutY="190.0" mnemonicParsing="false" onAction="#verVideo" prefHeight="20.0" prefWidth="200.0" text="Ver Video" />
-      <Label fx:id="lblFechaInicio" alignment="CENTER" contentDisplay="CENTER" layoutX="284.0" layoutY="194.0" prefHeight="17.0" prefWidth="129.0" text="Inicia: 000-00-00" />
-      <Label fx:id="lblFechaFin" alignment="CENTER" contentDisplay="CENTER" layoutX="432.0" layoutY="194.0" prefHeight="17.0" prefWidth="129.0" text="Termina: 000-00-00" />
+      <Button layoutX="35.0" layoutY="190.0" mnemonicParsing="false" onAction="#verVideo" prefHeight="20.0" prefWidth="200.0" styleClass="boton-verde" stylesheets="@estilo/estilo.css" text="Ver Video" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Label fx:id="lblFechaInicio" alignment="CENTER" contentDisplay="CENTER" layoutX="284.0" layoutY="194.0" prefHeight="17.0" prefWidth="129.0" text="Inicia: 000-00-00" textFill="#004dff">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblFechaFin" alignment="CENTER" contentDisplay="CENTER" layoutX="432.0" layoutY="194.0" prefHeight="17.0" prefWidth="129.0" text="Termina: 000-00-00" textFill="#004dff">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></Label>
       <Pane layoutX="4.0" layoutY="4.0" prefHeight="50.0" prefWidth="592.0" style="-fx-background-color: #00AE07;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#clicAtras" text="Atrás" />
+            <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#clicAtras" styleClass="add-btn" stylesheets="@estilo/estilo.css" text="Atrás" />
             <ImageView fx:id="btnEliminar" fitHeight="30.0" fitWidth="30.0" layoutX="556.0" layoutY="10.0" onMouseClicked="#eliminar" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagenes/delete_btn.png" />
@@ -74,6 +91,5 @@
             </ImageView>
          </children>
       </Pane>
-      <MediaView fx:id="media" fitHeight="200.0" fitWidth="200.0" layoutX="397.0" layoutY="50.0" />
    </children>
 </AnchorPane>

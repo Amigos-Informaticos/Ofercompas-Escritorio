@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.PublicarCodigoController">
@@ -16,44 +17,51 @@
          <font>
             <Font size="14.0" />
          </font></TextArea>
-      <ComboBox fx:id="cmbCategoria" layoutX="221.0" layoutY="290.0" prefHeight="25.0" prefWidth="121.0" promptText="Categoria" />
+      <ComboBox fx:id="cmbCategoria" layoutX="221.0" layoutY="290.0" prefHeight="25.0" prefWidth="121.0" promptText="Categoria" styleClass="combo-naranja" stylesheets="@estilo/estilo.css" />
       <DatePicker fx:id="fechaCreacion" layoutX="123.0" layoutY="252.0" prefHeight="25.0" prefWidth="152.0" promptText="Cuando inicia" />
       <DatePicker fx:id="fechaFin" layoutX="360.0" layoutY="252.0" prefWidth="150.0" promptText="Cuando termina" />
-      <Button layoutX="185.0" layoutY="338.0" mnemonicParsing="false" onMouseClicked="#publicar" prefHeight="35.0" prefWidth="193.0" text="Publicar" />
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#clicAtras" prefHeight="25.0" prefWidth="76.0" text="Atrás" />
-      <Label layoutX="417.0" layoutY="5.0" text="Publicar Código">
+      <Button layoutX="185.0" layoutY="338.0" mnemonicParsing="false" onMouseClicked="#publicar" prefHeight="35.0" prefWidth="193.0" styleClass="boton-naranja" stylesheets="@estilo/estilo.css" text="Publicar" textFill="WHITE">
          <font>
-            <Font name="System Italic" size="24.0" />
-         </font>
-      </Label>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
       <TextField fx:id="txtCodigo" alignment="CENTER" layoutX="140.0" layoutY="194.0" prefHeight="35.0" prefWidth="291.0" promptText="Pega el Código aquí">
          <font>
             <Font size="18.0" />
          </font></TextField>
       <Label layoutX="98.0" layoutY="51.0" text="Título:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <Label layoutX="60.0" layoutY="87.0" text="Descripción:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <Label layoutX="83.0" layoutY="204.0" text="Código:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="26.0" layoutY="255.0" text="Fecha de Inicio:">
+      <Label layoutX="20.0" layoutY="255.0" text="Fecha de Inicio:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <Label layoutX="294.0" layoutY="256.0" text="Fecha fin:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
+      <Pane layoutX="11.0" layoutY="-77.0" prefHeight="39.0" prefWidth="600.0" style="-fx-background-color: #f5aa42;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="406.0" layoutY="2.0" text="Publicar Código" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Label>
+            <Button layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#clicAtras" prefHeight="25.0" prefWidth="76.0" styleClass="add-btn" stylesheets="@estilo/estilo.css" text="Atrás" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

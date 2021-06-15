@@ -35,7 +35,7 @@ public class PublicarCodigoController {
     public void limitarTextfields() {
         LimitadorTextField.limitarTamanio(txtTitulo,30);
         LimitadorTextField.limitarTamanioArea(txtDescripcion, 200);
-        LimitadorTextField.limitarTamanio(txtCodigo, 100);
+        LimitadorTextField.limitarTamanio(txtCodigo, 50);
 
     }
 

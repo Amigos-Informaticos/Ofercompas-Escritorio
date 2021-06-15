@@ -8,58 +8,72 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.PublicarOfertaController">
    <children>
-      <TextField fx:id="txtTitulo" layoutX="200.0" layoutY="48.0" prefHeight="25.0" prefWidth="291.0" promptText="¿Qué oferta quieres compartir?" />
-      <TextArea fx:id="txtDescripcion" layoutX="200.0" layoutY="87.0" prefHeight="92.0" prefWidth="291.0" promptText="Describe aquí con más detalle de qué se trata" />
-      <TextField fx:id="txtPrecio" layoutX="199.0" layoutY="202.0" prefHeight="25.0" prefWidth="121.0" promptText="Precio" />
-      <ComboBox fx:id="cmbCategoria" layoutX="375.0" layoutY="202.0" prefHeight="25.0" prefWidth="121.0" promptText="Categoria" />
-      <DatePicker fx:id="fechaCreacion" layoutX="259.0" layoutY="277.0" promptText="Cuando inicia" />
-      <DatePicker fx:id="fechaFin" layoutX="259.0" layoutY="308.0" promptText="Cuando termina" />
-      <Button layoutX="281.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#publicar" prefHeight="25.0" prefWidth="130.0" text="Publicar" />
-      <Button layoutX="33.0" layoutY="144.0" mnemonicParsing="false" onAction="#buscarFoto" text="Buscar Imagen" />
-      <Button layoutX="33.0" layoutY="201.0" mnemonicParsing="false" onAction="#buscarVideo" prefHeight="25.0" prefWidth="94.0" text="Buscar Video" />
-      <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#clicAtras" prefHeight="25.0" prefWidth="76.0" text="Atrás" />
-      <Label layoutX="417.0" layoutY="5.0" text="Publicar Oferta">
+      <TextField fx:id="txtTitulo" layoutX="200.0" layoutY="48.0" prefHeight="25.0" prefWidth="291.0" promptText="¿Qué oferta quieres compartir?" stylesheets="@estilo/estilo.css" />
+      <TextArea fx:id="txtDescripcion" layoutX="200.0" layoutY="87.0" prefHeight="92.0" prefWidth="291.0" promptText="Describe aquí con más detalle de qué se trata" stylesheets="@estilo/estilo.css" />
+      <TextField fx:id="txtPrecio" layoutX="199.0" layoutY="202.0" prefHeight="25.0" prefWidth="121.0" promptText="Precio" stylesheets="@estilo/estilo.css" />
+      <ComboBox fx:id="cmbCategoria" layoutX="375.0" layoutY="202.0" prefHeight="25.0" prefWidth="121.0" promptText="Categoria" styleClass="combo-verde" stylesheets="@estilo/estilo.css" />
+      <DatePicker fx:id="fechaCreacion" layoutX="259.0" layoutY="277.0" promptText="Cuando inicia" stylesheets="@estilo/estilo.css" />
+      <DatePicker fx:id="fechaFin" layoutX="259.0" layoutY="308.0" promptText="Cuando termina" stylesheets="@estilo/estilo.css" />
+      <Button layoutX="281.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#publicar" prefHeight="25.0" prefWidth="130.0" styleClass="boton-verde" stylesheets="@estilo/estilo.css" text="Publicar" textFill="WHITE">
          <font>
-            <Font name="System Italic" size="24.0" />
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button layoutX="33.0" layoutY="144.0" mnemonicParsing="false" onAction="#buscarFoto" styleClass="boton-verde" stylesheets="@estilo/estilo.css" text="Buscar Imagen" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button layoutX="33.0" layoutY="201.0" mnemonicParsing="false" onAction="#buscarVideo" prefHeight="25.0" prefWidth="94.0" styleClass="boton-verde" stylesheets="@estilo/estilo.css" text="Buscar Video" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <TextField fx:id="txtVinculo" layoutX="236.0" layoutY="243.0" prefHeight="25.0" prefWidth="220.0" promptText="Pega aquí el link de la oferta" stylesheets="@estilo/estilo.css" />
+      <Label layoutX="150.0" layoutY="51.0" text="Título:">
+         <font>
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtVinculo" layoutX="236.0" layoutY="243.0" prefHeight="25.0" prefWidth="220.0" promptText="Pega aquí el link de la oferta" />
-      <Label layoutX="156.0" layoutY="51.0" text="Título:">
+      <Label layoutX="112.0" layoutY="87.0" text="Descripción:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="118.0" layoutY="87.0" text="Descripción:">
+      <Label layoutX="184.0" layoutY="205.0" text="\$">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="190.0" layoutY="205.0" text="\$">
+      <Label layoutX="180.0" layoutY="246.0" text="Vínculo:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="186.0" layoutY="246.0" text="Vínculo:">
+      <Label layoutX="157.0" layoutY="280.0" text="Fecha de Inicio:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="163.0" layoutY="280.0" text="Fecha de Inicio:">
+      <Label layoutX="193.0" layoutY="311.0" text="Fecha fin:">
          <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="199.0" layoutY="311.0" text="Fecha fin:">
-         <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <Label fx:id="lblNombreVideo" alignment="TOP_LEFT" layoutX="14.0" layoutY="226.0" prefHeight="20.0" prefWidth="166.0" />
       <Label fx:id="lblNombreFoto" alignment="TOP_LEFT" layoutX="14.0" layoutY="169.0" prefHeight="20.0" prefWidth="166.0" />
       <PieChart layoutX="465.0" layoutY="250.0" prefHeight="166.0" prefWidth="220.0" />
+      <Pane layoutY="7.0" prefHeight="41.0" prefWidth="685.0" style="-fx-background-color: #00AE07;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="422.0" layoutY="3.0" text="Publicar Oferta" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Label>
+            <Button layoutX="19.0" layoutY="8.0" mnemonicParsing="false" onAction="#clicAtras" prefHeight="25.0" prefWidth="76.0" styleClass="add-btn" stylesheets="@estilo/estilo.css" text="Atrás" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

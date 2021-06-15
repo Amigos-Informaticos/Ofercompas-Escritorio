@@ -37,6 +37,7 @@ public class ItemOfertasController {
         lblPrecio.setText("$" + oferta.getPrecio());
         lblPuntuacion.setText(String.valueOf(oferta.getPuntuacion()));
         //System.out.println("CACA"+oferta.getFoto().getPath();
+
         if(!oferta.getFoto().getUrl().equals("")){
             Image imagen = new Image(oferta.getFoto().getUrl());
             imgProducto.setImage(imagen);
