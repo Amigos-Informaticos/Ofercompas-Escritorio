@@ -97,16 +97,28 @@ public class VerOfertaController {
     }
 
     public void verVideo(){
+        System.out.println(oferta.getVinculo());
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            try {
+                Desktop.getDesktop().browse(URI.create(oferta.getVideo().getUrl()));
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
+
+
+        /*
         //javafx.application.Application.launch(VerVideo.class);
         System.out.println("OJOOO VIDEO: "+oferta.getVideo().getUrl());
         String path = oferta.getVideo().getUrl();
         Media media = new Media(oferta.getVideo().getUrl());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
 
-        mediaView = new MediaView(mediaPlayer);
-
         mediaPlayer.setAutoPlay(true);
 
+        this.mediaView = new MediaView(mediaPlayer);
+
+         */
     }
 
     public void irAOferta() {

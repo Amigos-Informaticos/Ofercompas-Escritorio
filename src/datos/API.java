@@ -52,6 +52,7 @@ public class API {
         HashMap<String, Object> resultados = new HashMap();
         URL url = new URL(this.buildURL(recurso, params));
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setConnectTimeout(20000);
         if (headers != null) {
             for (Map.Entry<String, String> entry: headers.entrySet()) {
                 connection.setRequestProperty(entry.getKey(), entry.getValue());

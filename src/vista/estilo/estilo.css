@@ -39,6 +39,17 @@
     -fx-background-radius: 100;
 }
 
+.boton-verde {
+    -fx-background-color: #00AE07;
+    -fx-background-radius: 100;
+    -fx-effect: dropShadow(three-pass-box, rgba(0, 0, 0, 0.1), 10.0, 0.0, 0.0, 10.0);
+}
+
+.boton-naranja {
+    -fx-background-color: #f5aa42;
+    -fx-background-radius: 100;
+}
+
 .free-delivery-card {
     -fx-background-color: #D3D3D3;
     -fx-background-radius: 30;
@@ -62,3 +73,16 @@
 .image {
     -fx-background-radius: 30;
 }
+
+.combo-verde {
+    -fx-background-color: #3be841;
+    -fx-background-radius: 10;
+    -fx-effect: dropShadow(three-pass-box, rgba(0, 0, 0, 0.1), 10.0, 0.0, 0.0, 10.0);
+}
+
+.combo-naranja {
+    -fx-background-color: #f5aa42;
+    -fx-background-radius: 10;
+    -fx-effect: dropShadow(three-pass-box, rgba(0, 0, 0, 0.1), 10.0, 0.0, 0.0, 10.0);
+}
+
