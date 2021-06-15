@@ -79,10 +79,12 @@ public class PublicarOfertaController {
         instanciaOferta();
         if (oferta.estaCompleta()) {
             try {
-                if (oferta.publicar() == 201 && oferta.publicarFoto() == 201 && oferta.publicarVideo() == 201) {
-                    MainController.alert(Alert.AlertType.INFORMATION,
-                            "Registro Exitoso",
-                            "Publicación registrada exitosamente");
+                if (oferta.publicar() == 201 && oferta.publicarFoto() == 201) {
+                    if (oferta.getVideo() != null && oferta.publicarVideo() == 201){
+                        MainController.alert(Alert.AlertType.INFORMATION,
+                                "Registro Exitoso",
+                                "Publicación registrada exitosamente");
+                    }
                 } else {
                     MainController.alert(Alert.AlertType.ERROR,
                             "Error del servidor",

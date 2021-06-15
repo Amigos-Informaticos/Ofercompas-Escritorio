@@ -157,7 +157,8 @@ public abstract class Publicacion {
     }
 
     public boolean estaCompleta() {
-        return this.titulo != null && this.descripcion != null && this.fechaCreacion != null && this.fechaFin != null && this.categoria != 0;
+        return this.titulo != null && this.descripcion != null && this.fechaCreacion != null && this.fechaFin != null && this.categoria != 0 &&
+                this.foto != null;
     }
 
     public void setCategoriaCmbBox(String categoria) {
@@ -240,6 +241,7 @@ public abstract class Publicacion {
 
     public int eliminar() throws IOException {
         HashMap respuesta = this.api.connect("DELETE", ("publicaciones/" + this.idPublicacion), null, null);
+        System.out.println("ELIMINAR"+ respuesta.get("status"));
         return (int) respuesta.get("status");
     }
 
@@ -257,6 +259,19 @@ public abstract class Publicacion {
         API api = new API();
         HashMap resultados = api.enviarFormulario("POST", "publicaciones/" + this.idPublicacion + "/multimedia", null, null, null, video);
         return (int) resultados.get("status");
+    }
+
+    public HashMap obtenerInteraccion(int idMiembroLogeado) throws IOException {
+        String url = "publicaciones/"+ this.idPublicacion + "/interaccion";
+        HashMap<String, String> json = new HashMap<>();
+        json.put("idMiembro", String.valueOf(idMiembroLogeado));
+        API api = new API();
+        System.out.println(json.toString());
+        HashMap respuesta = api.connect("GET", url, null , null, json, false);
+
+
+        return respuesta;
+
     }
 
 }
