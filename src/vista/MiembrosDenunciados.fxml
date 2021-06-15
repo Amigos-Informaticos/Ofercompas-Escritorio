@@ -11,12 +11,11 @@
    <children>
       <TableView fx:id="tablaMiembros" layoutX="29.0" layoutY="78.0" prefHeight="200.0" prefWidth="544.0">
         <columns>
-          <TableColumn prefWidth="110.0" text="Nickname" />
-          <TableColumn prefWidth="203.0" text="No. publicaciones denunciadas" />
-            <TableColumn minWidth="0.0" prefWidth="230.0" text="No. publicaciones prohibidas" />
+          <TableColumn fx:id="columnaNickname" prefWidth="339.0" text="Nickname" />
+          <TableColumn fx:id="columnaNoDenuncias" prefWidth="204.0" text="No. publicaciones denunciadas" />
         </columns>
       </TableView>
-      <Label layoutX="75.0" layoutY="27.0" text="Los 10 MiembrosOfercompas con más denuncias">
+      <Label layoutX="75.0" layoutY="27.0" text="Top 10 MiembrosOfercompas con más denuncias">
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font>
