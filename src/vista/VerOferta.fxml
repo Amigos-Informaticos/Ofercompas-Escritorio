@@ -18,7 +18,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ImageView fx:id="ivImagen" fitHeight="150.0" fitWidth="200.0" layoutX="36.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ivImagen" fitHeight="150.0" fitWidth="200.0" layoutX="36.0" layoutY="54.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@imagenes/img_login.jpg" />
          </image></ImageView>
