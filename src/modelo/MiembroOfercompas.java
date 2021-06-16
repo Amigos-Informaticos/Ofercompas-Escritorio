@@ -219,4 +219,11 @@ public class MiembroOfercompas {
         return  miembrosRetorno;
 
     }
+
+    public  static HashMap prohibir(int idMiembroParam) throws IOException {
+        API api = new API();
+        String url = "miembros/"+ idMiembroParam + "/expulsion";
+        HashMap respuesta = api.connect("PUT", url);
+        return respuesta;
+    }
 }

@@ -10,6 +10,16 @@ public class MiembroDetalleDenuncias {
     private String nickname;
     private int idMiembro;
     private  int numeroDePublicacionesDenunciadas;
+    private  int publicacionesPositivas;
+
+
+    public int getPublicacionesPositivas() {
+        return publicacionesPositivas;
+    }
+
+    public void setPublicacionesPositivas(int publicacionesPositivas) {
+        this.publicacionesPositivas = publicacionesPositivas;
+    }
 
     public String getNickname() {
         return nickname;
