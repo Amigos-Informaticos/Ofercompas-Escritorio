@@ -218,7 +218,7 @@ public class InicioOfertasController {
     }
 
     public void clicCerrarSesion(ActionEvent actionEvent) {
-        System.out.println("Cerrar sesion");
+        MainController.activate("Login", "Login", MainController.Sizes.SMALL);
     }
 
     public void clicVerReporteUsuarios(ActionEvent actionEvent) {

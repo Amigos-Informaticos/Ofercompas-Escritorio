@@ -211,7 +211,7 @@ public class MiembroOfercompas {
         if (respuesta.get("status").equals(200)){
             JsonArray  miembrosObtenidos = (JsonArray) respuesta.get("json");
             for (int i =0; i< miembrosObtenidos.size(); i++){
-                MiembroDetalleDenuncias miembroAux =MiembroDetalleDenuncias.deJsonAobjeto((JsonObject) respuesta.get(i));
+                MiembroDetalleDenuncias miembroAux =MiembroDetalleDenuncias.deJsonAobjeto((JsonObject) miembrosObtenidos.get(i));
                 miembrosRetorno.add(miembroAux);
             }
         }

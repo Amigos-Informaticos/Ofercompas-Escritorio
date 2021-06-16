@@ -1,6 +1,10 @@
 package modelo;
 
 import com.google.gson.JsonObject;
+import datos.API;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 public class MiembroDetalleDenuncias {
     private String nickname;
@@ -35,10 +39,19 @@ public class MiembroDetalleDenuncias {
     }
 
     public static MiembroDetalleDenuncias deJsonAobjeto(JsonObject jsonMimebro){
+        System.out.println("El json es:" + jsonMimebro.toString());
+
         MiembroDetalleDenuncias miembroAux = new MiembroDetalleDenuncias();
-        miembroAux.setIdMiembro(jsonMimebro.get("idMiembro").getAsInt());
-        miembroAux.setNumeroDePublicacionesDenunciadas(jsonMimebro.get("denuncias").getAsInt());
+        miembroAux.setIdMiembro(Integer.parseInt((String.valueOf(jsonMimebro.get("idMiembro")))));
+        miembroAux.setNumeroDePublicacionesDenunciadas(Integer.parseInt(String.valueOf(jsonMimebro.get("denuncias"))));
         miembroAux.setNickname(jsonMimebro.get("nickname").getAsString());
         return  miembroAux;
+    }
+
+    public HashMap obtenerReporte() throws IOException {
+        API api = new API();
+        String url = "miembros/"+this.idMiembro+ "/reporte";
+        HashMap respuesta = api.connect("GET", url);
+        return respuesta;
     }
 }

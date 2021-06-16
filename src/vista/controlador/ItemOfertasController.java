@@ -38,9 +38,14 @@ public class ItemOfertasController {
         lblPuntuacion.setText(String.valueOf(oferta.getPuntuacion()));
         //System.out.println("CACA"+oferta.getFoto().getPath();
 
-        if(!oferta.getFoto().getUrl().equals("")){
-            Image imagen = new Image(oferta.getFoto().getUrl());
-            imgProducto.setImage(imagen);
+        try {
+            if(!oferta.getFoto().getUrl().equals("")){
+                Image imagen = new Image(oferta.getFoto().getUrl());
+                imgProducto.setImage(imagen);
+            }
+
+        }catch (Exception e){
+
         }
 
 

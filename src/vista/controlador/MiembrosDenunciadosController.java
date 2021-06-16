@@ -20,12 +20,22 @@ public class MiembrosDenunciadosController implements Initializable {
     public TableColumn columnaNickname;
     public TableColumn columnaNoDenuncias;
     private ObservableList<MiembroDetalleDenuncias> miembrosTabla;
+    private MiembroDetalleDenuncias miembroDetalleDenuncias;
 
 
     public void clicVerReporte(ActionEvent actionEvent) {
+        this.miembroDetalleDenuncias = (MiembroDetalleDenuncias) tablaMiembros.getSelectionModel().getSelectedItem();
+        if(miembroDetalleDenuncias != null){
+            MainController.save("miembroDetalleDenuncias", miembroDetalleDenuncias);
+            MainController.activate("ReporteMiembroOfercompas", "Reporte Miembro Ofercompas", MainController.Sizes.LARGE);
+        }else {
+            MainController.alert(Alert.AlertType.ERROR, "No ha seleccionado nada",
+                    "Por favor, seleccione un miembro");
+        }
     }
 
     public void clicAtras(ActionEvent actionEvent) {
+        MainController.activate("InicioOfertas", "Inicio Ofertas", MainController.Sizes.MID);
     }
 
     @Override

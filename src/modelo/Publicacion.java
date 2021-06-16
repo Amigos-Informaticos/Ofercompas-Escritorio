@@ -273,5 +273,18 @@ public abstract class Publicacion {
         return respuesta;
 
     }
+    public  int denunciar(int idDenunciante, String comentario, int motivo) throws IOException {
+        API api = new API();
+        String url = "publicaciones/"+ this.idPublicacion +"/denuncias";
+        HashMap<String, String> denuncia = new HashMap<>();
+        denuncia.put("idDenunciante", String.valueOf(idDenunciante));
+        denuncia.put("comentario", comentario);
+        denuncia.put("motivo", String.valueOf(motivo));
+
+        HashMap respuesta = api.connect("POST", url, null, denuncia);
+
+        return (int)respuesta.get("status");
+
+    }
 
 }

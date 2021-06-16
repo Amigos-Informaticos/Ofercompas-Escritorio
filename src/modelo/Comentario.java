@@ -55,7 +55,7 @@ public class Comentario {
         API api = new API();
         HashMap<String, String> parametros = new HashMap();
         //parametros.put("idPublicacion", String.valueOf(idPublicacion));
-        String url = "ofertas/" + idPublicacion+ "/comentarios";
+        String url = "publicaciones/" + idPublicacion+ "/comentarios";
         HashMap respuesta = api.connect("GET", url, parametros,
                 null, null, true);
         Comentario[] ComentariosConvertidos = new Comentario[0];
@@ -81,7 +81,7 @@ public class Comentario {
 
     public int comentarPublicacion(int idPublicacion, int idMiembroComentador ) throws IOException {
         API api = new API();
-        String url = "ofertas/" + idPublicacion + "/comentarios";
+        String url = "publicaciones/" + idPublicacion + "/comentarios";
         HashMap respuesta = api.connect("POST", url, null, this.obtenerHashmap(idMiembroComentador));
         return  (int) respuesta.get("status");
     }
