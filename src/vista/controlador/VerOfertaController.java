@@ -96,7 +96,7 @@ public class VerOfertaController {
 
                 System.out.println(denunciada);
                 System.out.println(puntuada);
-                this.btnDenunciar.setDisable(puntuada);
+                this.btnDenunciar.setDisable(denunciada);
                 this.btnPuntuarDislike.setDisable(puntuada);
                 this.btnPuntuarLike.setDisable(puntuada);
             }

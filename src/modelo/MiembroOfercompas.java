@@ -1,6 +1,9 @@
 package modelo;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import datos.API;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.apache.commons.validator.routines.EmailValidator;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -198,5 +201,22 @@ public class MiembroOfercompas {
             e.printStackTrace();
         }
         return null;
+    }
+    public  static ObservableList<MiembroDetalleDenuncias> obtenerMiembrosConDenuncias() throws IOException {
+        ObservableList<MiembroDetalleDenuncias> miembrosRetorno = FXCollections.observableArrayList();
+        API api = new API();
+        HashMap respuesta = api.connect("GET", "miembros/reportes", null, null, null, true);
+        System.out.println("LA RESPUESTA ES:" + respuesta);
+
+        if (respuesta.get("status").equals(200)){
+            JsonArray  miembrosObtenidos = (JsonArray) respuesta.get("json");
+            for (int i =0; i< miembrosObtenidos.size(); i++){
+                MiembroDetalleDenuncias miembroAux =MiembroDetalleDenuncias.deJsonAobjeto((JsonObject) miembrosObtenidos.get(i));
+                miembrosRetorno.add(miembroAux);
+            }
+        }
+
+        return  miembrosRetorno;
+
     }
 }

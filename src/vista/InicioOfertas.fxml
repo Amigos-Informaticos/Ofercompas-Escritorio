@@ -62,6 +62,11 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Button>
+                  <Button fx:id="btnReporteUsuarios" mnemonicParsing="false" onAction="#clicVerReporteUsuarios" prefWidth="150.0" styleClass="add-btn" text="Ver reporte de usuarios">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
             </VBox>
          </left>

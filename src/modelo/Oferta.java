@@ -138,17 +138,5 @@ public class Oferta extends Publicacion {
         HashMap respuesta = this.api.connect("PUT", ("ofertas/"+this.idPublicacion), null, this.obtenerHashmap());
         return (int) respuesta.get("status");
     }
-    public  int denunciar(int idDenunciante, String comentario, int motivo) throws IOException {
-        API api = new API();
-        String url = "ofertas/"+ this.idPublicacion +"/denuncias";
-        HashMap<String, String> denuncia = new HashMap<>();
-        denuncia.put("idDenunciante", String.valueOf(idDenunciante));
-        denuncia.put("comentario", comentario);
-        denuncia.put("motivo", String.valueOf(motivo));
 
-        HashMap respuesta = api.connect("POST", url, null, denuncia);
-
-        return (int)respuesta.get("status");
-
-    }
 }
