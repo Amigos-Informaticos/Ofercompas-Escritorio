@@ -71,7 +71,8 @@ public class Oferta extends Publicacion {
     }
 
     public boolean estaCompleta() {
-        return super.estaCompleta() && this.vinculo != null && this.precio != null;
+        return super.estaCompleta() && this.vinculo != null && this.precio != null&&
+                this.foto != null;
     }
 
 

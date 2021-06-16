@@ -18,8 +18,8 @@
       <DatePicker fx:id="fechaCreacion" layoutX="259.0" layoutY="277.0" promptText="Cuando inicia" />
       <DatePicker fx:id="fechaFin" layoutX="259.0" layoutY="308.0" promptText="Cuando termina" />
       <Button layoutX="281.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#actualizar" prefHeight="25.0" prefWidth="130.0" text="Actualizar" />
-      <Button layoutX="33.0" layoutY="144.0" mnemonicParsing="false" text="Buscar Imagen" />
-      <Button layoutX="33.0" layoutY="190.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Buscar Video" />
+      <Button layoutX="33.0" layoutY="144.0" mnemonicParsing="false" onAction="#buscarFoto" text="Buscar Imagen" />
+      <Button layoutX="33.0" layoutY="190.0" mnemonicParsing="false" onAction="#buscarVideo" prefHeight="25.0" prefWidth="94.0" text="Buscar Video" />
       <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#clicAtras" prefHeight="25.0" prefWidth="76.0" text="Atrás" />
       <Label layoutX="417.0" layoutY="5.0" text="Actualizar Oferta">
          <font>
@@ -57,5 +57,7 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <Label fx:id="lblNombreFoto" layoutX="14.0" layoutY="171.0" prefHeight="17.0" prefWidth="146.0" text="Actualiza imagen" />
+      <Label fx:id="lblNombreVideo" layoutX="14.0" layoutY="217.0" prefHeight="17.0" prefWidth="146.0" text="Actualiza video" />
    </children>
 </AnchorPane>

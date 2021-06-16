@@ -4,10 +4,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import modelo.Multimedia;
 import modelo.Oferta;
 import utils.LimitadorTextField;
+import utils.VerificarArchivo;
 import vista.MainController;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -26,6 +29,11 @@ public class ActualizarOfertaController {
     private DatePicker fechaFin;
     @FXML
     private ComboBox cmbCategoria;
+    @FXML
+    private Label lblNombreFoto;
+
+    @FXML
+    private Label lblNombreVideo;
 
     private Oferta oferta;
 
@@ -85,6 +93,12 @@ public class ActualizarOfertaController {
         if (oferta.estaCompleta()) {
             try {
                 if(oferta.actualizar() == 200) {
+                    if (lblNombreFoto.getText().equals("Actualiza imagen")){
+                        oferta.getFoto().actualizar(oferta.getIdPublicacion());
+                    }
+                    if (lblNombreVideo.getText().equals("Actualiza video")){
+                        oferta.getVideo().actualizar(oferta.getIdPublicacion());
+                    }
                     MainController.alert(Alert.AlertType.INFORMATION,
                             "Actualización Exitosa",
                             "Publicación registrada exitosamente");
@@ -105,5 +119,43 @@ public class ActualizarOfertaController {
 
     public void clicAtras(){
         MainController.activate("InicioOfertas","Inicio",MainController.Sizes.MID);
+    }
+
+    public void buscarFoto() {
+        File archivo = new File(String.valueOf(MainController.fileExplorer()));
+        Multimedia foto = new Multimedia();
+        foto.setArchivo(archivo.getPath());
+        if (foto.getArchivo().getName() != null) {
+            VerificarArchivo verificador = new VerificarArchivo();
+            if (verificador.fotoValida(foto.getArchivo().getPath())) {
+                oferta.setFoto(foto);
+                lblNombreFoto.setText(archivo.getName());
+            } else {
+                MainController.alert(
+                        Alert.AlertType.WARNING,
+                        "Formato incorrecto",
+                        "Sube una foto en formato PNG o JPG"
+                );
+            }
+        }
+    }
+
+    public void buscarVideo() {
+        File archivo = new File(String.valueOf(MainController.fileExplorer()));
+        Multimedia video = new Multimedia();
+        video.setArchivo(archivo.getPath());
+        if (video.getArchivo().getName() != null) {
+            VerificarArchivo verificador = new VerificarArchivo();
+            if (verificador.videoValido(video.getArchivo().getPath())) {
+                oferta.setVideo(video);
+                lblNombreVideo.setText(archivo.getName());
+            } else {
+                MainController.alert(
+                        Alert.AlertType.WARNING,
+                        "Formato incorrecto",
+                        "Sube una foto en formato PNG o JPG"
+                );
+            }
+        }
     }
 }
