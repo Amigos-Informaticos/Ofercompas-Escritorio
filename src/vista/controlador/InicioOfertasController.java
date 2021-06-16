@@ -50,8 +50,6 @@ public class InicioOfertasController {
 
     public static HashMap<Integer, List<Oferta>> ofertasRecuperadas = new HashMap<>();
 
-    private MiembroOfercompas miembroOfercompas;
-
 
     public void initialize() {
         this.llenarComboCategorias();
@@ -68,7 +66,7 @@ public class InicioOfertasController {
 
 
     public void validarTipoUsuario(){
-        miembroOfercompas = (MiembroOfercompas) MainController.get("miembroLogeado");
+        MiembroOfercompas miembroOfercompas = (MiembroOfercompas) MainController.get("miembroLogeado");
         if(miembroOfercompas.getTipoMiembro() == 1){
             this.btnReporteUsuarios.setVisible(false);
         }

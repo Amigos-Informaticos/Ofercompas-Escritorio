@@ -1,6 +1,5 @@
 package vista.controlador;
 
-import com.google.gson.JsonObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,10 +10,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import modelo.MiembroDetalleDenuncias;
-import modelo.MiembroOfercompas;
 import vista.MainController;
-
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -59,6 +55,7 @@ public class ReporteMiembroOfercompasController implements Initializable {
                 this.numueroOfertasTotales = numeroOfertas.intValue();
                 this.puntuacionTotal = puntuacionTotalDb.intValue();
                 this.numeroOfertasSinDenuncias = this.numueroOfertasTotales - this.numeroOfertasDenunciadas;
+                System.out.println(puntuacionTotal);
 
             }
             System.out.println(reporte.toString());

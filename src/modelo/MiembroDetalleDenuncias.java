@@ -11,9 +11,6 @@ public class MiembroDetalleDenuncias {
     private int idMiembro;
     private  int numeroDePublicacionesDenunciadas;
 
-    public MiembroDetalleDenuncias() {
-    }
-
     public String getNickname() {
         return nickname;
     }
