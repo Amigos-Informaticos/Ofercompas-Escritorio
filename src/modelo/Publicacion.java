@@ -5,6 +5,7 @@ import datos.API;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 public abstract class Publicacion {
@@ -25,8 +26,8 @@ public abstract class Publicacion {
     @SerializedName("idPublicacion")
     protected int idPublicacion;
 
-    private Multimedia foto;
-    private Multimedia video;
+    protected Multimedia foto;
+    protected Multimedia video;
 
     public Multimedia getFoto() {
         return foto;
@@ -157,8 +158,7 @@ public abstract class Publicacion {
     }
 
     public boolean estaCompleta() {
-        return this.titulo != null && this.descripcion != null && this.fechaCreacion != null && this.fechaFin != null && this.categoria != 0 &&
-                this.foto != null;
+        return this.titulo != null && this.descripcion != null && this.fechaCreacion != null && this.fechaFin != null && this.categoria != 0;
     }
 
     public void setCategoriaCmbBox(String categoria) {
@@ -245,22 +245,6 @@ public abstract class Publicacion {
         return (int) respuesta.get("status");
     }
 
-    public int publicarFoto() throws IOException {
-        File imagen = this.foto.getArchivo();
-        System.out.println(imagen);
-        API api = new API();
-        HashMap resultados = api.enviarFormulario("POST", "publicaciones/" + this.idPublicacion + "/multimedia", null, null, null, imagen);
-        return (int) resultados.get("status");
-    }
-
-    public int publicarVideo() throws IOException {
-        File video = this.video.getArchivo();
-        System.out.println(video);
-        API api = new API();
-        HashMap resultados = api.enviarFormulario("POST", "publicaciones/" + this.idPublicacion + "/multimedia", null, null, null, video);
-        return (int) resultados.get("status");
-    }
-
     public HashMap obtenerInteraccion(int idMiembroLogeado) throws IOException {
         String url = "publicaciones/"+ this.idPublicacion + "/interaccion";
         HashMap<String, String> json = new HashMap<>();
@@ -285,6 +269,12 @@ public abstract class Publicacion {
 
         return (int)respuesta.get("status");
 
+    }
+
+    public boolean validarFechas() {
+        LocalDate fechaInicial = LocalDate.parse(fechaCreacion);
+        LocalDate fechaFinal = LocalDate.parse(fechaFin);
+        return fechaFinal.isAfter(fechaInicial);
     }
 
 }

@@ -24,10 +24,10 @@ public class PublicarCodigoController {
     @FXML
     private TextField txtCodigo;
 
-    private CodigoDescuento CodigoDescuento;
+    private CodigoDescuento codigoDescuento;
 
     public void initialize() {
-        CodigoDescuento = new CodigoDescuento();
+        codigoDescuento = new CodigoDescuento();
         llenarComboCategorias();
         limitarTextfields();
     }
@@ -40,13 +40,13 @@ public class PublicarCodigoController {
     }
 
     public void instanciaCodigoDescuento() {
-        CodigoDescuento.setTitulo(txtTitulo.getText());
-        CodigoDescuento.setDescripcion(txtDescripcion.getText());
-        CodigoDescuento.setFechaCreacion(String.valueOf(fechaCreacion.getValue()));
-        CodigoDescuento.setFechaFin(String.valueOf(fechaFin.getValue()));
-        CodigoDescuento.setCategoriaCmbBox((String) cmbCategoria.getValue());
-        CodigoDescuento.setCodigo(txtCodigo.getText());
-        System.out.println(CodigoDescuento.toString());
+        codigoDescuento.setTitulo(txtTitulo.getText());
+        codigoDescuento.setDescripcion(txtDescripcion.getText());
+        codigoDescuento.setFechaCreacion(String.valueOf(fechaCreacion.getValue()));
+        codigoDescuento.setFechaFin(String.valueOf(fechaFin.getValue()));
+        codigoDescuento.setCategoriaCmbBox((String) cmbCategoria.getValue());
+        codigoDescuento.setCodigo(txtCodigo.getText());
+        System.out.println(codigoDescuento.toString());
     }
 
     public void llenarComboCategorias() {
@@ -64,19 +64,21 @@ public class PublicarCodigoController {
 
     public void publicar() {
         instanciaCodigoDescuento();
-        if (CodigoDescuento.estaCompleta()) {
-            try {
-                if(CodigoDescuento.publicar() == 201) {
-                    MainController.alert(Alert.AlertType.INFORMATION,
-                            "Registro Exitoso",
-                            "Publicación registrada exitosamente");
-                }else {
-                    MainController.alert(Alert.AlertType.ERROR,
-                            "Error del servidor",
-                            "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
+        if (codigoDescuento.estaCompleta()) {
+            if (codigoDescuento.validarFechas()){
+                try {
+                    if(codigoDescuento.publicar() == 201) {
+                        MainController.alert(Alert.AlertType.INFORMATION,
+                                "Registro Exitoso",
+                                "Publicación registrada exitosamente");
+                    }else {
+                        MainController.alert(Alert.AlertType.ERROR,
+                                "Error del servidor",
+                                "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
+                    }
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
                 }
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
             }
         } else {
             MainController.alert(Alert.AlertType.WARNING,
