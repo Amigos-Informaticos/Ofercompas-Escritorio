@@ -6,13 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import modelo.Categoria;
+import modelo.MiembroOfercompas;
 import modelo.Oferta;
 import vista.MainController;
 import vista.MyListener;
@@ -23,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class InicioOfertasController {
+    public Button btnReporteUsuarios;
     @FXML
     private ComboBox<String> cmbCategoria;
 
@@ -51,6 +50,7 @@ public class InicioOfertasController {
 
     public static HashMap<Integer, List<Oferta>> ofertasRecuperadas = new HashMap<>();
 
+
     public void initialize() {
         this.llenarComboCategorias();
         myListener = new MyListener() {
@@ -60,11 +60,21 @@ public class InicioOfertasController {
             }
         };
         llenarPagina();
+        validarTipoUsuario();
 
+    }
+
+
+    public void validarTipoUsuario(){
+        MiembroOfercompas miembroOfercompas = (MiembroOfercompas) MainController.get("miembroLogeado");
+        if(miembroOfercompas.getTipoMiembro() == 1){
+            this.btnReporteUsuarios.setVisible(false);
+        }
     }
 
     public void llenarPagina() {
         ofertas.addAll(this.cargarOfertas(pagina, categoria));
+        System.out.println("Ofersas to string: " +  ofertas.toString());
         try {
             for (int i = 0; i < ofertas.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -206,6 +216,10 @@ public class InicioOfertasController {
     }
 
     public void clicCerrarSesion(ActionEvent actionEvent) {
-        System.out.println("Cerrar sesion");
+        MainController.activate("Login", "Login", MainController.Sizes.SMALL);
+    }
+
+    public void clicVerReporteUsuarios(ActionEvent actionEvent) {
+        MainController.activate("MiembrosDenunciados", "Miembros denunciados", MainController.Sizes.MID);
     }
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="760.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.ReporteMiembroOfercompasController">
+   <children>
+      <Label layoutX="252.0" layoutY="27.0" />
+      <PieChart fx:id="graficoPastel" layoutX="192.0" layoutY="86.0" prefHeight="260.0" prefWidth="367.0" />
+      <Label layoutX="166.0" layoutY="23.0" text="Reporte del MiembroOfercompas:">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelNickname" layoutX="439.0" layoutY="23.0" text="Label">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <BarChart fx:id="graficaDeBarras" layoutX="192.0" layoutY="380.0" prefHeight="260.0" prefWidth="367.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+   </children>
+</AnchorPane>
