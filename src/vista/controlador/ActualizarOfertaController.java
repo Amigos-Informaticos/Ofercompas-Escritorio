@@ -93,10 +93,10 @@ public class ActualizarOfertaController {
         if (oferta.estaCompleta()) {
             try {
                 if(oferta.actualizar() == 200) {
-                    if (lblNombreFoto.getText().equals("Actualiza imagen")){
+                    if (!lblNombreFoto.getText().equals("Actualiza imagen")){
                         oferta.getFoto().actualizar(oferta.getIdPublicacion());
                     }
-                    if (lblNombreVideo.getText().equals("Actualiza video")){
+                    if (!lblNombreVideo.getText().equals("Actualiza video")){
                         oferta.getVideo().actualizar(oferta.getIdPublicacion());
                     }
                     MainController.alert(Alert.AlertType.INFORMATION,
