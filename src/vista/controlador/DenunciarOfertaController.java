@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import modelo.CodigoDescuento;
 import modelo.MiembroOfercompas;
 import modelo.Oferta;
 import vista.MainController;
@@ -27,10 +28,21 @@ public class DenunciarOfertaController implements Initializable {
     private MiembroOfercompas miembroOfercompas;
     private Oferta oferta;
     private ObservableList<String> listaMotivos;
+    private boolean vieneDePantallaOfertas;
+    private CodigoDescuento codigoDescuento;
 
     private void cargarDatos(){
-        this.miembroOfercompas = (MiembroOfercompas) MainController.get("miembroLogeado");
-        this.oferta = (Oferta) MainController.get("ofertaDenunciar");
+        String pantallaAnterior = (String)MainController.get("pantallaAnterior");
+        this.vieneDePantallaOfertas = "ofertas".equals(pantallaAnterior) ;
+
+        if(this.vieneDePantallaOfertas){
+            this.miembroOfercompas = (MiembroOfercompas) MainController.get("miembroLogeado");
+            this.oferta = (Oferta) MainController.get("ofertaDenunciar");
+        }else{
+            this.miembroOfercompas = (MiembroOfercompas) MainController.get("miembroLogeado");
+            this.codigoDescuento = (CodigoDescuento) MainController.get("codigoDescuento");
+        }
+
     }
 
     @Override
@@ -41,7 +53,13 @@ public class DenunciarOfertaController implements Initializable {
 
 
     private void inicializarVista(){
-        this.labelTituloOferta.setText(oferta.getTitulo());
+        if(this.vieneDePantallaOfertas){
+            this.labelTituloOferta.setText(oferta.getTitulo());
+        }else{
+            this.labelTituloOferta.setText(codigoDescuento.getTitulo());
+        }
+
+
         this.listaMotivos = FXCollections.observableArrayList();
         listaMotivos.add("Drogas");
         listaMotivos.add("Armas");
@@ -63,19 +81,38 @@ public class DenunciarOfertaController implements Initializable {
             String motivo = (String) this.comboMotivo.getValue();
             int indexMotivo = this.listaMotivos.indexOf(motivo) + 1;
 
-            try {
-                int status = this.oferta.denunciar(miembroOfercompas.getIdMiembro(), comentario, indexMotivo);
-                if(status == 201){
-                    MainController.alert(Alert.AlertType.INFORMATION, "Denuncia exitosa", "Denuncia " +
-                            "enviada exitosamente");
-                }else {
-                    MainController.alert(Alert.AlertType.INFORMATION, "Denuncia no registrada", "Es" +
-                            " posible que la publicación ya no exista");
+            if(vieneDePantallaOfertas){
+                try {
+                    int status = this.oferta.denunciar(miembroOfercompas.getIdMiembro(), comentario, indexMotivo);
+                    if(status == 201){
+                        MainController.alert(Alert.AlertType.INFORMATION, "Denuncia exitosa", "Denuncia " +
+                                "enviada exitosamente");
+                    }else {
+                        MainController.alert(Alert.AlertType.INFORMATION, "Denuncia no registrada", "Es" +
+                                " posible que la publicación ya no exista");
+                    }
+                } catch (IOException e) {
+                    MainController.alert(Alert.AlertType.ERROR, "Error de conexión", "Erro al conectar con" +
+                            " el servidor, por favor, intente denunciar más tarde");
                 }
-            } catch (IOException e) {
-                MainController.alert(Alert.AlertType.ERROR, "Error de conexión", "Erro al conectar con" +
-                        " el servidor, por favor, intente denunciar más tarde");
+
+            }else{
+                try {
+                    System.out.println(codigoDescuento);
+                    int status = this.codigoDescuento.denunciar(miembroOfercompas.getIdMiembro(), comentario, indexMotivo);
+                    if(status == 201){
+                        MainController.alert(Alert.AlertType.INFORMATION, "Denuncia exitosa", "Denuncia " +
+                                "enviada exitosamente");
+                    }else {
+                        MainController.alert(Alert.AlertType.INFORMATION, "Denuncia no registrada", "Es" +
+                                " posible que la publicación ya no exista");
+                    }
+                } catch (IOException e) {
+                    MainController.alert(Alert.AlertType.ERROR, "Error de conexión", "Erro al conectar con" +
+                            " el servidor, por favor, intente denunciar más tarde");
+                }
             }
+
             volvelPantallaAnterior();
 
         }
@@ -107,14 +144,11 @@ public class DenunciarOfertaController implements Initializable {
         volvelPantallaAnterior();
     }
     private void volvelPantallaAnterior(){
-        MainController.activate("VerOferta", "Ver oferta", MainController.Sizes.MID);
-
-        /*String pantallaAnterior = (String) MainController.get("pantallaAnteriorDenunciar");
-        if(pantallaAnterior.equals("InicioMisOfertas")){
-            MainController.activate("InicioMisOfertas", "Mis Ofertas", MainController.Sizes.MID);
+        if(vieneDePantallaOfertas){
+            MainController.activate("VerOferta", "Ver oferta", MainController.Sizes.MID);
         }else{
-            MainController.activate("InicioOfertas", "Inicio Oferas", MainController.Sizes.MID);
-        }*/
+            MainController.activate("VerCodigoDescuento", "Ver codigo descuento", MainController.Sizes.MID);
+        }
     }
 
 

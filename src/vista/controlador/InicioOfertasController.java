@@ -74,7 +74,6 @@ public class InicioOfertasController {
 
     public void llenarPagina() {
         ofertas.addAll(this.cargarOfertas(pagina, categoria));
-        System.out.println("Ofersas to string: " +  ofertas.toString());
         try {
             for (int i = 0; i < ofertas.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -144,8 +143,6 @@ public class InicioOfertasController {
         vbox.getChildren().clear();
         llenarPagina();
         this.lblPagina.setText(String.valueOf(this.pagina));
-        System.out.println(pagina);
-        System.out.println(ofertas);
     }
 
     public void retrcoderPagina() {
@@ -168,8 +165,6 @@ public class InicioOfertasController {
             vbox.getChildren().clear();
             llenarPagina();
             this.lblPagina.setText(String.valueOf(1));
-            System.out.println(pagina);
-            System.out.println(ofertas);
         }
     }
 

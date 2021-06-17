@@ -1,10 +1,14 @@
 package vista.controlador;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import modelo.CodigoDescuento;
@@ -14,9 +18,16 @@ import vista.MainController;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class VerCodigoDescuentoController {
+    public TextField txtComentario;
+    public ImageView btnPuntuarDislike;
+    public ImageView btnPuntuarLike;
+    public ImageView btnEliminar;
+    public ImageView btnActualizar;
+    public Button btnDenunciar;
     @FXML
     private Label lblTitulo;
 
@@ -45,6 +56,35 @@ public class VerCodigoDescuentoController {
         miembroOfercompas = (MiembroOfercompas) MainController.get("miembroLogeado");
         mostrarInformacionOferta();
         this.mostrarComentarios();
+        obtenerInteraccion();
+    }
+    public void obtenerInteraccion(){
+        try {
+            HashMap respuesta = codigoDescuento.obtenerInteraccion(miembroOfercompas.getIdMiembro());
+            System.out.println(respuesta.toString());
+
+            int status = (int) respuesta.get("status");
+            if(status == 200){
+                System.out.println("La respuesta con json es: " + respuesta.toString());
+                HashMap jsonRespuesta = (HashMap) respuesta.get("json");
+
+                System.out.println("La respuesta es: ");
+                System.out.println(jsonRespuesta.toString());
+                boolean denunciada = (boolean) jsonRespuesta.get("denunciada");
+                boolean puntuada = (boolean) jsonRespuesta.get("puntuada");
+                System.out.println("LOS VALORES RECUPERADOS SON");
+
+                System.out.println(denunciada);
+                System.out.println(puntuada);
+                this.btnDenunciar.setDisable(denunciada);
+                this.btnPuntuarDislike.setDisable(puntuada);
+                this.btnPuntuarLike.setDisable(puntuada);
+            }
+
+        } catch (IOException e) {
+            System.out.println("EXCEPCIOOOOON!!!");
+            e.printStackTrace();
+        }
     }
 
     public void mostrarInformacionOferta() {
@@ -102,7 +142,7 @@ public class VerCodigoDescuentoController {
                         "Ya has puntuado esta oferta anteriormente");
             }
         } catch (IOException ioException) {
-            System.out.println(ioException);
+            MainController.alert(Alert.AlertType.ERROR, "Si conexión con el servidor", "Intente más tarde");
         }
     }
 
@@ -117,7 +157,7 @@ public class VerCodigoDescuentoController {
                         "Ya has puntuado esta oferta anteriormente");
             }
         } catch (IOException ioException) {
-            System.out.println(ioException);
+            MainController.alert(Alert.AlertType.ERROR, "Si conexión con el servidor", "Intente más tarde");
         }
     }
 
@@ -142,6 +182,67 @@ public class VerCodigoDescuentoController {
     public void actualizar(){
         MainController.activate("ActualizarCodigoDescuento", "Actualizar Codigo", MainController.Sizes.MID);
     }
+    public void addComenterio(Comentario comentario){
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/vista/Comentario.fxml"));
+        AnchorPane anchorPane = null;
+        try {
+            anchorPane = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ComentarioController comentarioController = fxmlLoader.getController();
+        comentarioController.setData(comentario);
+        vbox.getChildren().add(anchorPane);
+        VBox.setMargin(anchorPane, new Insets(10));
+    }
 
 
+    public void clicDenunciar(ActionEvent actionEvent) {
+        MainController.save("pantallaAnterior", "codigos");
+        MainController.save("codigoDescuento", this.codigoDescuento);
+        MainController.activate("DenunciarOferta", "Denunciar Codigo", MainController.Sizes.MID);
+    }
+
+    public void clicComentar(ActionEvent actionEvent) {
+        if(this.comentarioValido()){
+            Comentario comentario = new Comentario();
+            comentario.setContenido(this.txtComentario.getText());
+            try {
+                System.out.println(codigoDescuento.toString());
+                int status = comentario.comentarPublicacion(codigoDescuento.getIdPublicacion(), miembroOfercompas.getIdMiembro());
+                if(status == 201){
+                    MainController.alert(Alert.AlertType.INFORMATION, "Comentario exitoso", "El " +
+                            "comentario ha sido guardado con éxito");
+                    comentario.setNicknameComentador(miembroOfercompas.getNickname());
+                    this.addComenterio(comentario);
+                    this.txtComentario.setText("");
+                }else {
+                    MainController.alert(Alert.AlertType.ERROR, "Error al guardar el comentario", "No se " +
+                            "pudo registrar su comentario, inténtelo más tarde");
+                }
+
+            } catch (IOException e) {
+                MainController.alert(Alert.AlertType.ERROR, "Error de conexión", "No se pudo conectar " +
+                        "el servidor");
+            }
+        }
+    }
+    private  boolean comentarioValido(){
+        boolean valido = false;
+        if(this.txtComentario.getText() != null ){
+            int longitudComentario =this.txtComentario.getText().length();
+            if(longitudComentario>4 && longitudComentario<=50){
+                valido = true;
+            }else{
+                MainController.alert(Alert.AlertType.ERROR, "Comentario inválido", "El comentario debe " +
+                        "tener entre 5 y 50 caracteres");
+            }
+
+        }else {
+            MainController.alert(Alert.AlertType.ERROR, "Campo vacío", "Ingresa un comentario por favor");
+        }
+
+        return  valido;
+    }
 }

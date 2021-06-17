@@ -241,7 +241,10 @@ public abstract class Publicacion {
 
     public int eliminar() throws IOException {
         HashMap respuesta = this.api.connect("DELETE", ("publicaciones/" + this.idPublicacion), null, null);
-        System.out.println("ELIMINAR"+ respuesta.get("status"));
+        return (int) respuesta.get("status");
+    }
+    public int prohibir() throws IOException {
+        HashMap respuesta = this.api.connect("DELETE", ("publicaciones/" + this.idPublicacion +"/prohibir"), null, null);
         return (int) respuesta.get("status");
     }
 

@@ -2,6 +2,7 @@ package datos;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import vista.MainController;
 
 import java.io.*;
 import java.net.*;
@@ -49,6 +50,17 @@ public class API {
     public HashMap connect(String metodo, String recurso, HashMap<String, String> params,
                            HashMap<String, String> payload, HashMap<String, String> headers, boolean isArray)
             throws IOException {
+        if(headers != null){
+            if( (String) MainController.get("token") != null){
+                headers.put("token", (String) MainController.get("token"));
+            }
+        }else {
+            headers = new HashMap<>();
+            if( (String) MainController.get("token") != null){
+                headers.put("token", (String) MainController.get("token"));
+            }
+        }
+
         HashMap<String, Object> resultados = new HashMap();
         URL url = new URL(this.buildURL(recurso, params));
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

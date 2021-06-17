@@ -36,7 +36,6 @@ public class ItemOfertasController {
         lblTitulo.setText(oferta.getTitulo());
         lblPrecio.setText("$" + oferta.getPrecio());
         lblPuntuacion.setText(String.valueOf(oferta.getPuntuacion()));
-        //System.out.println("CACA"+oferta.getFoto().getPath();
 
         try {
             if(!oferta.getFoto().getUrl().equals("")){
