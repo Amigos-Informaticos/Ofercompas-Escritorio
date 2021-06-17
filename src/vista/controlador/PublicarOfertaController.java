@@ -78,20 +78,27 @@ public class PublicarOfertaController {
     public void publicar() {
         instanciaOferta();
         if (oferta.estaCompleta()) {
-            try {
-                if (oferta.publicar() == 201 && oferta.publicarFoto() == 201) {
-                    if (oferta.getVideo() != null && oferta.publicarVideo() == 201){
+            if (oferta.validarFechas()) {
+                try {
+                    if (oferta.publicar() == 201 && oferta.getFoto().publicarArchivo(oferta.getIdPublicacion()) == 201) {
+                        if (oferta.getVideo() != null){
+                            oferta.getVideo().publicarArchivo(oferta.getIdPublicacion());
+                        }
                         MainController.alert(Alert.AlertType.INFORMATION,
                                 "Registro Exitoso",
                                 "Publicación registrada exitosamente");
+                    } else {
+                        MainController.alert(Alert.AlertType.ERROR,
+                                "Error del servidor",
+                                "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
                     }
-                } else {
-                    MainController.alert(Alert.AlertType.ERROR,
-                            "Error del servidor",
-                            "No se pudo establecer conexión con el servidor. Inténtalo más tarde");
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
                 }
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
+            } else {
+                MainController.alert(Alert.AlertType.WARNING,
+                        "Información Incorrecta",
+                        "La fecha Final no puede estar antes de la fecha de inicio");
             }
         } else {
             MainController.alert(Alert.AlertType.WARNING,

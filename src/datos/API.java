@@ -174,7 +174,7 @@ public class API {
             String saltoLinea = "\r\n";
             printWriter.append("--" + boundary).append(saltoLinea);
             if (archivos!=null) {
-                printWriter.append("Content-Disposition: form-data; name = \"imagen\"; filename = \"  " + archivos.getName() + "\"").append(saltoLinea);
+                printWriter.append("Content-Disposition: form-data; name = \"archivo\"; filename = \"  " + archivos.getName() + "\"").append(saltoLinea);
                 printWriter.append("Content-Type: " + URLConnection.guessContentTypeFromName(archivos.getName())).append(saltoLinea);
                 printWriter.append("Content-Transfer-Encoding: binary").append(saltoLinea);
                 printWriter.append(saltoLinea).flush();
