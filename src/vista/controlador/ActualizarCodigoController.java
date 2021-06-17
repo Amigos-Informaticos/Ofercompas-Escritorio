@@ -77,7 +77,7 @@ public class ActualizarCodigoController {
         instanciaCodigoDescuento();
         if (codigoDescuento.estaCompleta()) {
             try {
-                if(codigoDescuento.actualizar() == 201) {
+                if(codigoDescuento.actualizar() == 200) {
                     MainController.alert(Alert.AlertType.INFORMATION,
                             "Registro Exitoso",
                             "Publicación registrada exitosamente");
