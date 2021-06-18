@@ -2,6 +2,7 @@ package modelo;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import datos.API;
+import vista.MainController;
 
 
 import java.io.IOException;
@@ -59,6 +60,7 @@ public class Oferta extends Publicacion {
     }
 
     public HashMap obtenerHashmap() {
+        MiembroOfercompas miembro = (MiembroOfercompas) MainController.get("miembroLogeado");
         HashMap<String, String> oferta = new HashMap<String, String>();
         oferta.put("titulo", this.titulo);
         oferta.put("descripcion", this.descripcion);
@@ -67,7 +69,7 @@ public class Oferta extends Publicacion {
         oferta.put("categoria", String.valueOf(this.categoria));
         oferta.put("vinculo", this.getVinculo());
         oferta.put("precio", this.precio);
-        oferta.put("publicador", String.valueOf(7));
+        oferta.put("publicador", String.valueOf(miembro.getIdMiembro()));
         System.out.println(oferta.toString());
 
         return oferta;

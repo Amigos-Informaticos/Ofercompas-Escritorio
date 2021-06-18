@@ -6,7 +6,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import modelo.MiembroOfercompas;
-import sun.applet.Main;
 import vista.MainController;
 
 import java.io.IOException;
@@ -30,17 +29,17 @@ public class LoginController {
         API api = new API();
         try {
             String recursoPuerto = "ofercompas/puertosa";
-            String recursoApi = "ofercompas/urlapi";
+            String recursoApi = "ofercompas/urllocal";
             HashMap configuracion = api.connect("GET", recursoPuerto);
             HashMap jsonPuerto = (HashMap) configuracion.get("json");
             String puerto = (String) jsonPuerto.get("puertosa");
             System.out.println(puerto);
             configuracion = api.connect("GET", recursoApi);
             HashMap jsonApi = (HashMap) configuracion.get("json");
-            String urlApi = (String)jsonApi.get("urlapi");
+            String urlApi = (String)jsonApi.get("urllocal");
             System.out.println(urlApi);
-            //API.setPort(Integer.parseInt(puerto));
-            //API.setURL(urlApi);
+            API.setPort(Integer.parseInt(puerto));
+            API.setURL(urlApi);
             //MainController.save("urlApi", urlApi);
             //MainController.save("puerto", puerto);
 
