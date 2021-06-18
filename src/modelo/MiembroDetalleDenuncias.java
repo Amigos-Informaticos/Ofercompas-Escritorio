@@ -58,7 +58,7 @@ public class MiembroDetalleDenuncias {
     public HashMap obtenerReporte() throws IOException {
         API api = new API();
         String url = "miembros/"+this.idMiembro+ "/reporte";
-        HashMap respuesta = api.connect("GET", url);
+        HashMap respuesta = api.connect("GET", url, null, null, API.getToken(), false);
         return respuesta;
     }
 }

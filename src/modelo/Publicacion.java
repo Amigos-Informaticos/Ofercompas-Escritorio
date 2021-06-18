@@ -235,16 +235,16 @@ public abstract class Publicacion {
         HashMap<String, String> parametros = new HashMap<>();
         parametros.put("idMiembro", String.valueOf(idMiembro));
         parametros.put("esPositiva", String.valueOf(esPositiva));
-        HashMap respuesta = api.connect("POST", ("publicaciones/" + this.idPublicacion + "/puntuaciones"), null, parametros);
+        HashMap respuesta = api.connect("POST", ("publicaciones/" + this.idPublicacion + "/puntuaciones"), null, parametros, API.getToken(), false );
         return (int) respuesta.get("status");
     }
 
     public int eliminar() throws IOException {
-        HashMap respuesta = this.api.connect("DELETE", ("publicaciones/" + this.idPublicacion), null, null);
+        HashMap respuesta = this.api.connect("DELETE", ("publicaciones/" + this.idPublicacion), null, null, API.getToken(), false);
         return (int) respuesta.get("status");
     }
     public int prohibir() throws IOException {
-        HashMap respuesta = this.api.connect("DELETE", ("publicaciones/" + this.idPublicacion +"/prohibir"), null, null);
+        HashMap respuesta = this.api.connect("DELETE", ("publicaciones/" + this.idPublicacion +"/prohibir"), null, null, API.getToken(), false);
         return (int) respuesta.get("status");
     }
 
@@ -268,7 +268,7 @@ public abstract class Publicacion {
         denuncia.put("comentario", comentario);
         denuncia.put("motivo", String.valueOf(motivo));
 
-        HashMap respuesta = api.connect("POST", url, null, denuncia);
+        HashMap respuesta = api.connect("POST", url, null, denuncia, API.getToken(), false);
 
         return (int)respuesta.get("status");
 

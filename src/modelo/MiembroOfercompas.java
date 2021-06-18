@@ -88,18 +88,16 @@ public class MiembroOfercompas {
         api.setPort(5000);
         this.contrasenia = encriptar(this.contrasenia);
 
-        HashMap respuesta = api.connect("POST","miembros",null, this.obtenerHashmap());
+        HashMap respuesta = api.connect("POST","miembros",null, this.obtenerHashmap(), API.getToken(), false);
         return (int) respuesta.get("status");
     }
-    public  int actualizar(String oldEmail, String token) throws IOException{
+    public  int actualizar(String oldEmail) throws IOException{
         API api = new API();
         api.setURL("http://127.0.0.1");
         api.setPort(5000);
         String recurso = "miembros/" + oldEmail;
-        HashMap headers = new HashMap();
-        headers.put("token", token);
         System.out.println(obtenerHashmap().toString());
-        HashMap respuesta = api.connect("PUT",recurso, null, this.obtenerHashmap(), headers, false);
+        HashMap respuesta = api.connect("PUT",recurso, null, this.obtenerHashmap(), API.getToken(), false);
         return (int) respuesta.get("status");
 
     }
@@ -110,7 +108,7 @@ public class MiembroOfercompas {
         api.setPort(5000);
         this.contrasenia = encriptar(contrasenia);
         System.out.println(this.contrasenia);
-        HashMap respuesta = api.connect("POST", "login", null, this.obtenerHashmapLogin());
+        HashMap respuesta = api.connect("POST", "login", null, this.obtenerHashmapLogin(), API.getToken(), false);
         return respuesta;
     }
 
@@ -223,7 +221,7 @@ public class MiembroOfercompas {
     public  static HashMap prohibir(int idMiembroParam) throws IOException {
         API api = new API();
         String url = "miembros/"+ idMiembroParam + "/expulsion";
-        HashMap respuesta = api.connect("PUT", url);
+        HashMap respuesta = api.connect("PUT", url,null, null, API.getToken(), false);
         return respuesta;
     }
 }

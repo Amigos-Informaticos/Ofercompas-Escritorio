@@ -55,7 +55,7 @@ public class PerfilController implements Initializable {
         int status = 0;
         try {
             System.out.println("El token es: " + this.token);
-            status= this.miembroOfercompasActualizado.actualizar(miembroOfercompasRecuperado.getEmail(), this.token);
+            status= this.miembroOfercompasActualizado.actualizar(miembroOfercompasRecuperado.getEmail());
 
             if(status==200){
                 MainController.alert(Alert.AlertType.WARNING, "Exito", "Información actualizada" +

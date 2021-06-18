@@ -2,6 +2,7 @@ package modelo;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import datos.API;
+import vista.MainController;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -36,6 +37,7 @@ public class Oferta extends Publicacion {
         this.precio = precio;
     }
 
+
     @Override
     public String toString() {
         return super.toString() + "Oferta{" +
@@ -44,8 +46,10 @@ public class Oferta extends Publicacion {
                 '}';
     }
 
+
+
     public int publicar() throws IOException {
-        HashMap respuesta = this.api.connect("POST", "ofertas", null, this.obtenerHashmap());
+        HashMap respuesta = this.api.connect("POST", "ofertas", null, this.obtenerHashmap(), API.getToken(), false);
         if (respuesta.get("status").toString().equals("201")){
             HashMap ofertaRecibida = (HashMap) respuesta.get("json");
             Double idDouble = (Double) ofertaRecibida.get("idPublicacion");
@@ -114,7 +118,7 @@ public class Oferta extends Publicacion {
     }
 
     private Oferta[] getOfertas(HashMap<String, String> parametros) throws IOException {
-        HashMap respuesta = this.api.connect("GET", "ofertas", parametros, null, null, true);
+        HashMap respuesta = this.api.connect("GET", "ofertas", parametros, null, API.getToken(), true);
         System.out.println("LA RESPUESTA ES:" + respuesta);
         Oferta[] ofertasConvertidas = new Oferta[0];
         if (respuesta.get("status").equals(200)) {
@@ -136,7 +140,7 @@ public class Oferta extends Publicacion {
 
 
     public int actualizar() throws IOException {
-        HashMap respuesta = this.api.connect("PUT", ("ofertas/"+this.idPublicacion), null, this.obtenerHashmap());
+        HashMap respuesta = this.api.connect("PUT", ("ofertas/"+this.idPublicacion), null, this.obtenerHashmap(), API.getToken(), false);
         return (int) respuesta.get("status");
     }
 

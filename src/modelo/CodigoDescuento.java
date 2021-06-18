@@ -2,6 +2,7 @@ package modelo;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import datos.API;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -27,7 +28,7 @@ public class CodigoDescuento extends Publicacion{
     }
 
     public int publicar() throws IOException {
-        HashMap respuesta = this.api.connect("POST", "codigos", null, this.obtenerHashmap());
+        HashMap respuesta = this.api.connect("POST", "codigos", null, this.obtenerHashmap(), API.getToken(), false);
         return (int) respuesta.get("status");
     }
 
@@ -94,7 +95,7 @@ public class CodigoDescuento extends Publicacion{
     }
 
     public int actualizar() throws IOException {
-        HashMap respuesta = this.api.connect("PUT", ("codigos"+this.idPublicacion), null, this.obtenerHashmap());
+        HashMap respuesta = this.api.connect("PUT", ("codigos"+this.idPublicacion), null, this.obtenerHashmap(),API.getToken(), false);
         return (int) respuesta.get("status");
     }
 }

@@ -2,6 +2,7 @@ package datos;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import sun.applet.Main;
 import vista.MainController;
 
 import java.io.*;
@@ -50,16 +51,6 @@ public class API {
     public HashMap connect(String metodo, String recurso, HashMap<String, String> params,
                            HashMap<String, String> payload, HashMap<String, String> headers, boolean isArray)
             throws IOException {
-        if(headers != null){
-            if( (String) MainController.get("token") != null){
-                headers.put("token", (String) MainController.get("token"));
-            }
-        }else {
-            headers = new HashMap<>();
-            if( (String) MainController.get("token") != null){
-                headers.put("token", (String) MainController.get("token"));
-            }
-        }
 
         HashMap<String, Object> resultados = new HashMap();
         URL url = new URL(this.buildURL(recurso, params));
@@ -71,6 +62,7 @@ public class API {
             }
         }
         if (API.cookieManager.getCookieStore().getCookies().size() > 0) {
+            System.out.println("Las verdaderas coockies son" + API.cookieManager.getCookieStore().getCookies().toString());
             for (int i = 0; i < API.cookieManager.getCookieStore().getCookies().size(); i++) {
                 String cookieValue = API.cookieManager.getCookieStore().getCookies().get(i).getName()
                         + "="
@@ -78,10 +70,11 @@ public class API {
                 if (i < API.cookieManager.getCookieStore().getCookies().size() - 1) {
                     cookieValue += ";";
                 }
-                connection.addRequestProperty(
+                connection.setRequestProperty(
                         "Cookie",
                         cookieValue
                 );
+                System.out.println("LAS COOCKIES SON: " + cookieValue);
             }
         }
         if (!metodo.equals("GET") && !metodo.equals("get")) {
@@ -98,6 +91,7 @@ public class API {
                 stream.write(output);
             }
         }
+        connection.connect();
         resultados.put("status", connection.getResponseCode());
         StringBuilder retorno = new StringBuilder();
         if (connection.getResponseCode() >= 200 && connection.getResponseCode() <= 299) {
@@ -199,6 +193,14 @@ public class API {
         }
         resultados.put("status",connection.getResponseCode());
         return resultados;
+    }
+
+    public  static HashMap<String, String> getToken(){
+        HashMap<String, String> token = new HashMap<>();
+        String tokenString = (String) MainController.get("token");
+        System.out.println("El token es:" + tokenString);
+        token.put("token", tokenString);
+        return token;
     }
 
 }
