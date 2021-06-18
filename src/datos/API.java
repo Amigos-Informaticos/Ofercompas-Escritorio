@@ -2,7 +2,6 @@ package datos;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import sun.applet.Main;
 import vista.MainController;
 
 import java.io.*;

@@ -296,8 +296,9 @@ public class VerOfertaController {
 
     public void denunciarClic(ActionEvent actionEvent) {
         MainController.save("ofertaDenunciar", this.oferta);
-        MainController.activate("DenunciarOferta", "Denunciar Oferta", MainController.Sizes.SMALL);
         MainController.save("pantallaAnterior", "ofertas");
+        MainController.activate("DenunciarOferta", "Denunciar Oferta", MainController.Sizes.SMALL);
+
     }
     public void actualizarComentarios(){
         this.comentarios.clear();

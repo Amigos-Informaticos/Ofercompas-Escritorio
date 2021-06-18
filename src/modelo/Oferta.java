@@ -2,7 +2,7 @@ package modelo;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import datos.API;
-import vista.MainController;
+
 
 import java.io.IOException;
 import java.util.HashMap;
