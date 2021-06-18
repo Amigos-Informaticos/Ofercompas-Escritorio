@@ -65,14 +65,14 @@ public abstract class Publicacion {
     public void setIdPublicacion(int idPublicacion) {
         this.idPublicacion = idPublicacion;
         api = new API();
-        this.api.setURL("http://127.0.0.1");
-        api.setPort(5000);
+        //this.api.setURL("http://127.0.0.1");
+        //api.setPort(5000);
     }
 
     public Publicacion() {
         api = new API();
-        this.api.setURL("http://127.0.0.1");
-        api.setPort(5000);
+        //this.api.setURL("http://127.0.0.1");
+        //api.setPort(5000);
 
     }
 

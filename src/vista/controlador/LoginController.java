@@ -1,10 +1,12 @@
 package vista.controlador;
 
+import datos.API;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import modelo.MiembroOfercompas;
+import sun.applet.Main;
 import vista.MainController;
 
 import java.io.IOException;
@@ -21,7 +23,34 @@ public class LoginController {
     private MiembroOfercompas miembroOfercompas;
 
     public void initialize() {
+        //this.obtenerConfiguracion();
 
+    }
+    void obtenerConfiguracion(){
+        API api = new API();
+        try {
+            String recursoPuerto = "ofercompas/puertosa";
+            String recursoApi = "ofercompas/urlapi";
+            HashMap configuracion = api.connect("GET", recursoPuerto);
+            HashMap jsonPuerto = (HashMap) configuracion.get("json");
+            String puerto = (String) jsonPuerto.get("puertosa");
+            System.out.println(puerto);
+            configuracion = api.connect("GET", recursoApi);
+            HashMap jsonApi = (HashMap) configuracion.get("json");
+            String urlApi = (String)jsonApi.get("urlapi");
+            System.out.println(urlApi);
+            //API.setPort(Integer.parseInt(puerto));
+            //API.setURL(urlApi);
+            //MainController.save("urlApi", urlApi);
+            //MainController.save("puerto", puerto);
+
+
+            System.out.println(configuracion.toString());
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void clicRegistrarse() {

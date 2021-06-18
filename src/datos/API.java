@@ -15,23 +15,26 @@ import java.util.Map;
 
 public class API {
     private static CookieManager cookieManager = new CookieManager();
-    private String URL = "http://127.0.0.1";
-    private int port = 5000;
+    //private static String URL = "http://ofercompas.ddns.net";
+    //private static int port = 42100;
+    private static String URL = "http://127.0.0.1";
+    private static int port = 42777;
 
-    public String getURL() {
+
+    public static String getURL() {
         return URL;
     }
 
-    public void setURL(String URL) {
-        this.URL = URL;
+    public static void setURL(String URL) {
+        API.URL = URL;
     }
 
-    public int getPort() {
+    public static int getPort() {
         return port;
     }
 
-    public void setPort(int port) {
-        this.port = port;
+    public static void setPort(int port) {
+        API.port = port;
     }
 
     public HashMap connect(String metodo, String recurso) throws IOException {
@@ -122,7 +125,7 @@ public class API {
     }
 
     public String buildURL(String recurso, HashMap<String, String> parametros) {
-        StringBuilder completeUrl = new StringBuilder(this.URL + ":" + this.port);
+        StringBuilder completeUrl = new StringBuilder(API.URL + ":" + API.port);
         if (recurso != null) {
             completeUrl.append("/").append(recurso);
         }
