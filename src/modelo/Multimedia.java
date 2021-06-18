@@ -30,7 +30,7 @@ public class Multimedia {
         File archivo = this.archivo;
         System.out.println(archivo);
         API api = new API();
-        HashMap resultados = api.enviarFormulario("PUT", "publicaciones/" + idPublicacion + "/multimedia", null, null, null, archivo);
+        HashMap resultados = api.enviarFormulario("POST", "publicaciones/" + idPublicacion + "/multimedia", null, null, null, archivo);
         return (int) resultados.get("status");
     }
 
