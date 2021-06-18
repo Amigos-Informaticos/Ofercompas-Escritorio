@@ -2,6 +2,7 @@ package datos;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import vista.MainController;
 
 import java.io.*;
 import java.net.*;
@@ -14,23 +15,26 @@ import java.util.Map;
 
 public class API {
     private static CookieManager cookieManager = new CookieManager();
-    private String URL = "http://127.0.0.1";
-    private int port = 5000;
+    //private static String URL = "http://ofercompas.ddns.net";
+    //private static int port = 42100;
+    private static String URL = "http://127.0.0.1";
+    private static int port = 42777;
 
-    public String getURL() {
+
+    public static String getURL() {
         return URL;
     }
 
-    public void setURL(String URL) {
-        this.URL = URL;
+    public static void setURL(String URL) {
+        API.URL = URL;
     }
 
-    public int getPort() {
+    public static int getPort() {
         return port;
     }
 
-    public void setPort(int port) {
-        this.port = port;
+    public static void setPort(int port) {
+        API.port = port;
     }
 
     public HashMap connect(String metodo, String recurso) throws IOException {
@@ -49,6 +53,7 @@ public class API {
     public HashMap connect(String metodo, String recurso, HashMap<String, String> params,
                            HashMap<String, String> payload, HashMap<String, String> headers, boolean isArray)
             throws IOException {
+
         HashMap<String, Object> resultados = new HashMap();
         URL url = new URL(this.buildURL(recurso, params));
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -59,6 +64,7 @@ public class API {
             }
         }
         if (API.cookieManager.getCookieStore().getCookies().size() > 0) {
+            System.out.println("Las verdaderas coockies son" + API.cookieManager.getCookieStore().getCookies().toString());
             for (int i = 0; i < API.cookieManager.getCookieStore().getCookies().size(); i++) {
                 String cookieValue = API.cookieManager.getCookieStore().getCookies().get(i).getName()
                         + "="
@@ -66,10 +72,11 @@ public class API {
                 if (i < API.cookieManager.getCookieStore().getCookies().size() - 1) {
                     cookieValue += ";";
                 }
-                connection.addRequestProperty(
+                connection.setRequestProperty(
                         "Cookie",
                         cookieValue
                 );
+                System.out.println("LAS COOCKIES SON: " + cookieValue);
             }
         }
         if (!metodo.equals("GET") && !metodo.equals("get")) {
@@ -86,6 +93,7 @@ public class API {
                 stream.write(output);
             }
         }
+        connection.connect();
         resultados.put("status", connection.getResponseCode());
         StringBuilder retorno = new StringBuilder();
         if (connection.getResponseCode() >= 200 && connection.getResponseCode() <= 299) {
@@ -117,7 +125,7 @@ public class API {
     }
 
     public String buildURL(String recurso, HashMap<String, String> parametros) {
-        StringBuilder completeUrl = new StringBuilder(this.URL + ":" + this.port);
+        StringBuilder completeUrl = new StringBuilder(API.URL + ":" + API.port);
         if (recurso != null) {
             completeUrl.append("/").append(recurso);
         }
@@ -187,6 +195,14 @@ public class API {
         }
         resultados.put("status",connection.getResponseCode());
         return resultados;
+    }
+
+    public  static HashMap<String, String> getToken(){
+        HashMap<String, String> token = new HashMap<>();
+        String tokenString = (String) MainController.get("token");
+        System.out.println("El token es:" + tokenString);
+        token.put("token", tokenString);
+        return token;
     }
 
 }

@@ -82,7 +82,7 @@ public class Comentario {
     public int comentarPublicacion(int idPublicacion, int idMiembroComentador ) throws IOException {
         API api = new API();
         String url = "publicaciones/" + idPublicacion + "/comentarios";
-        HashMap respuesta = api.connect("POST", url, null, this.obtenerHashmap(idMiembroComentador));
+        HashMap respuesta = api.connect("POST", url, null, this.obtenerHashmap(idMiembroComentador), API.getToken(), false);
         return  (int) respuesta.get("status");
     }
 }

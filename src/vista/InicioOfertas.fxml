@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.InicioOfertasController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.controlador.InicioOfertasController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -40,7 +40,6 @@
                   <MenuButton fx:id="menuPerfil" mnemonicParsing="false" prefWidth="150.0" styleClass="comboBox" text="Mi perfil">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#clicMisOfertas" text="Mis ofertas" />
-                        <MenuItem mnemonicParsing="false" onAction="#clicMisCodigos" text="Mis códigos" />
                         <MenuItem mnemonicParsing="false" onAction="#clicEditarPerfil" text="Editar Perfil" />
                         <MenuItem mnemonicParsing="false" onAction="#clicCerrarSesion" text="Cerrar sesión" />
                      </items>

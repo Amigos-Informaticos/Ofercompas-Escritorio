@@ -67,6 +67,8 @@ public class VerOfertaController {
 
     private MiembroOfercompas miembroOfercompas;
 
+    private boolean esModeradorNoAutor;
+
     private List<Comentario> comentarios = new ArrayList<>();
 
     public void initialize() {
@@ -206,7 +208,7 @@ public class VerOfertaController {
                         "Ya has puntuado esta oferta anteriormente");
             }
         } catch (IOException ioException) {
-            System.out.println(ioException);
+            MainController.alert(Alert.AlertType.ERROR, "Si conexión con el servidor", "Intente más tarde");
         }
     }
 
@@ -221,7 +223,7 @@ public class VerOfertaController {
                         "Ya has puntuado esta oferta anteriormente");
             }
         } catch (IOException ioException) {
-            System.out.println(ioException);
+            MainController.alert(Alert.AlertType.ERROR, "Si conexión con el servidor", "Intente más tarde");
         }
     }
 
@@ -237,11 +239,14 @@ public class VerOfertaController {
     }
 
     public void soyAutor() {
-        System.out.println("Miembro: " + miembroOfercompas.getIdMiembro() + " Oferta: " + oferta.getIdPublicador());
         if (miembroOfercompas.getIdMiembro() == oferta.getIdPublicador()) {
             btnEliminar.setVisible(true);
             btnActualizar.setVisible(true);
-        } else {
+        }else if(miembroOfercompas.getTipoMiembro() == 2){
+            btnEliminar.setVisible(true);
+            btnActualizar.setVisible(false);
+            this.esModeradorNoAutor = true;
+        }else {
             btnEliminar.setVisible(false);
             btnActualizar.setVisible(false);
         }
@@ -250,12 +255,34 @@ public class VerOfertaController {
     public void eliminar(){
         if (MainController.alert(Alert.AlertType.CONFIRMATION, "¿Está seguro que desea eliminar esta Oferta?", "")){
             try {
-                if (oferta.eliminar() == 200){
-                    MainController.alert(Alert.AlertType.INFORMATION,
-                            "Eliminación Exitosa",
-                            "Publicación eliminada exitosamente");
-                    MainController.activate("InicioOfertas", "Actualizar Oferta", MainController.Sizes.MID);
+
+                if(!this.esModeradorNoAutor){
+                    if (oferta.eliminar() == 200){
+                        MainController.alert(Alert.AlertType.INFORMATION,
+                                "Eliminación Exitosa",
+                                "Publicación eliminada exitosamente");
+                        MainController.activate("InicioOfertas", "Actualizar Oferta", MainController.Sizes.MID);
+                    }else{
+                        MainController.alert(Alert.AlertType.INFORMATION,
+                                "Eliminación sin éxito",
+                                "Intenta más tarde");
+                        MainController.activate("InicioOfertas", "Actualizar Oferta", MainController.Sizes.MID);
+                    }
+                }else{
+                    if(oferta.prohibir() == 200){
+                        MainController.alert(Alert.AlertType.INFORMATION,
+                                "Prohibicion Exitosa",
+                                "Publicación prohibida exitosamente");
+                        MainController.activate("InicioOfertas", "Actualizar Oferta", MainController.Sizes.MID);
+                    }else{
+                        MainController.alert(Alert.AlertType.INFORMATION,
+                                "Eliminación sin éxito",
+                                "Intenta más tarde");
+                        MainController.activate("InicioOfertas", "Actualizar Oferta", MainController.Sizes.MID);
+                    }
                 }
+
+
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -269,7 +296,9 @@ public class VerOfertaController {
 
     public void denunciarClic(ActionEvent actionEvent) {
         MainController.save("ofertaDenunciar", this.oferta);
+        MainController.save("pantallaAnterior", "ofertas");
         MainController.activate("DenunciarOferta", "Denunciar Oferta", MainController.Sizes.SMALL);
+
     }
     public void actualizarComentarios(){
         this.comentarios.clear();
