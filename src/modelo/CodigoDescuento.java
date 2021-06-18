@@ -86,6 +86,7 @@ public class CodigoDescuento extends Publicacion{
 
     public CodigoDescuento deJsonAObjeto(JsonObject codigoJson) {
         CodigoDescuento codigoDescuento = new CodigoDescuento();
+        codigoDescuento.setIdPublicacion(codigoJson.get("idPublicacion").getAsInt());
         codigoDescuento.setTitulo(codigoJson.get("titulo").getAsString());
         codigoDescuento.setDescripcion(codigoJson.get("descripcion").getAsString());
         codigoDescuento.setFechaCreacion(codigoJson.get("fechaCreacion").getAsString());

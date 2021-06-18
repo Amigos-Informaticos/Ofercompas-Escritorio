@@ -15,10 +15,21 @@ import java.util.Map;
 
 public class API {
     private static CookieManager cookieManager = new CookieManager();
+    //Servidor configuracion
     //private static String URL = "http://ofercompas.ddns.net";
     //private static int port = 42100;
+
+    //Pycharm
+    private static int port = 5000;
     private static String URL = "http://127.0.0.1";
-    private static int port = 42777;
+
+    //Contenedor
+   //private static int port = 42777;
+    //private static String URL = "http://127.0.0.1";
+
+
+
+
 
 
     public static String getURL() {
